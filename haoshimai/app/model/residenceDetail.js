@@ -34,7 +34,6 @@ Model.residenceDetail = function(exports){
 			{name:'rentRange',type:'string'},
 			{name:'annualPriceIncreasement',type:'string'},
 			{name:'volumnRate',type:'number'}
-
             ]
     };
 };

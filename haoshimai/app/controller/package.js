@@ -1,9 +1,8 @@
 sumeru.packages(
-    'itworks.js',
-    'news.js',
     'mapSell.js',
-	'residentSearch.js',
+	'residenceSearch.js',
 	'residenceOnSell.js',
-	'residenceOnSellDetail.js'
+	'residenceDetail.js',
+	'test.js'
 )
 

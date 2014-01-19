@@ -1,3 +1,4 @@
+//地图出售房首页，现在也是默认页
 sumeru.router.add({
 	pattern: '/mapSell',
 	action: 'App.mapSell'
@@ -5,9 +6,15 @@ sumeru.router.add({
 
 sumeru.router.setDefault('App.mapSell');
 
+//定义几个全局变量
+host = sumeru.config.get("dataServerHost");//host地址
+appCode = 'app_test_code';
+clientUId = '';//客户端ID
+
 App.mapSell = sumeru.controller.create(function(env, session){
+		clientUId = env['clientId'];
+		
 		var view = 'mapSell';
-		var host = sumeru.config.get("dataServerHost");
 
 		env.onrender = function(doRender){
 			doRender(view,['shake','left']);
@@ -18,8 +25,12 @@ App.mapSell = sumeru.controller.create(function(env, session){
 			var mapObj,toolBar,myLocation,marker,centerPosition,previousFlag,nowFlag;//高德地图、地图工具、我的位置、标记、中心点、上一个标记，现在的标记
 			var markerContents = [];//为了不重复加载点坐标
 
+			var markers = new Array();//marker数组
+
+			var tabFlag = "annualPriceIncreasement";//初始的tab选项
+
 			var createMarkerFlag = function(residenceName, residencePara){//创建小标记
-				var div = document.createElement("div");//总体
+				var div = document.createElement("div");
                 /*div.style.color = "white"
 				div.style.height = "40px";
 				div.style.width = "auto";
@@ -88,19 +99,22 @@ App.mapSell = sumeru.controller.create(function(env, session){
                 div.appendChild(markerSpan);
 				div.appendChild(markerPic);
                 div.onclick = function(){
-					env.redirect("/residenceOnSell",{'residenceId':residenceId,'residenceName':residenceName,'onSaleCount':onSaleCount});
+					env.redirect("/residenceOnSell",{'residenceId':residenceId},true);
                 }
                 return div;	
 			};
+
+
 			var loadFlag = function(lat,lng){//加载点坐标
-				var url = host + '/server/plate/nearBy.controller?appCode=app_test_code&lat=' + lat + '&lng=' + lng;
+				
+				var url = host + '/server/plate/nearBy.controller?appCode=' + appCode + '&lat=' + lat + '&lng=' + lng;
                 var getCallback = function(data){
                     var oriData = JSON.parse(data);
                     $('#locationPlate').html(oriData["data"]["name"]);
                 };
                 sumeru.external.get(url, getCallback);
 
-                var url = host + "/server/house/residenceSale/mapSearchNew.controller?appCode=app_test_code&lat="+lat+"&lng="+lng+"&range=2000&pageIndex=1&pageSize=35&clientUId=74E1B63AF0661";
+                var url = host + "/server/house/residenceSale/mapSearchNew.controller?appCode=" + appCode + "&lat="+lat+"&lng="+lng+"&range=2000&pageIndex=1&pageSize=35&clientUId=" + clientUId;
                 var getCallback = function(data){
                     var myData = JSON.parse(data);
                     oriData = myData['data'];
@@ -112,10 +126,15 @@ App.mapSell = sumeru.controller.create(function(env, session){
 						if(Library.arrayOpt.addElement(markerContents,contentStr)){
 
 							marker=new AMap.Marker({
-								content:createMarkerFlag(oriData[i]['residenceName'], oriData[i]['price']),
+								content:createMarkerFlag(oriData[i]['residenceName'], oriData[i][tabFlag]),
 								position:new AMap.LngLat(lng,lat)
 							});
 							marker.setMap(mapObj);
+							var flagObj = new Object();
+							flagObj.marker = marker;
+							flagObj.data = oriData[i];
+
+							markers.push(flagObj);//添加到数组
 							AMap.event.addListener(marker,'click',function callback(e){
 								mapObj.panTo(this.getPosition());
 								this.hide();
@@ -144,8 +163,21 @@ App.mapSell = sumeru.controller.create(function(env, session){
                 sumeru.external.get(url, getCallback);
 			};
 
+			var updateFlag = function(){//按照tab更新flag内容
+				if (nowFlag != null){
+					previousFlag.show();
+					nowFlag.setMap(null);
+					previousFlag=null;
+					nowFlag = null;
+				}
+				for (var i=0;i<markers.length;i++){
+					markers[i].marker.setContent(createMarkerFlag(markers[i].data['residenceName'],markers[i].data[tabFlag]));
+				}
+
+			};
+
 			var mapInit = function(){//地图初始化
-				var url = host + '/server/position.controller?appCode=app_test_code&cityId=1&positionId=1&type=1';
+				var url = host + '/server/position.controller?appCode=' + appCode + '&cityId=1&positionId=1&type=1';
 				var lng;
 				var lat;
 				var getCallback = function(data){
@@ -179,45 +211,51 @@ App.mapSell = sumeru.controller.create(function(env, session){
 			session.eventMap('#nearbyButton',{//定位我的位置
 				'click':function(e){
 					toolBar.doLocation();
+					loadFlag(mapObj.getCenter()['lat'],mapObj.getCenter()['lng']);
 				}
 			});
 			session.eventMap("#searchButton",{
 				'click':function(e){
-					env.redirect("/residentSearch");
+					env.redirect("/residenceSearch");
 				}
 			});
             
-			var tabSwitch = function(tab){
+			var tabSwitch = function(tab){//切换tab的操作
 				var price = 'price';
 				var annualPriceIncreasement = 'annualPriceIncreasement';
 				var annualTurnoverRate = 'annualTurnoverRate';
 				var rentRevenue = 'rentRevenue';
 				switch(tab){
 					case price:
+					tabFlag = 'price';
 					document.getElementById("price").style.color="#f47c00";
 					document.getElementById("annualPriceIncreasement").style.color="white";
 					document.getElementById("annualTurnoverRate").style.color="white";
 					document.getElementById("rentRevenue").style.color="white";
 					break;
 					case annualPriceIncreasement:
+					tabFlag = 'annualPriceIncreasement';
 					document.getElementById("price").style.color="white";
                     document.getElementById("annualPriceIncreasement").style.color="#f47c00";
                     document.getElementById("annualTurnoverRate").style.color="white";
                     document.getElementById("rentRevenue").style.color="white";
                     break;
 					case annualTurnoverRate:
+					tabFlag = 'annualTurnoverRate';
 					document.getElementById("price").style.color="white";
                     document.getElementById("annualPriceIncreasement").style.color="white";
                     document.getElementById("annualTurnoverRate").style.color="#f47c00";
                     document.getElementById("rentRevenue").style.color="white";
 					break;
 					case rentRevenue:
+					tabFlag = 'rentRevenue';
                     document.getElementById("price").style.color="white";
                     document.getElementById("annualPriceIncreasement").style.color="white";
                     document.getElementById("annualTurnoverRate").style.color="white";
                     document.getElementById("rentRevenue").style.color="#f47c00";
 					break;
 					}
+					updateFlag();
 
 			};
 
