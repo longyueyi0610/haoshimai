@@ -1,0 +1,37 @@
+<div id="residence-onsell-header">
+	<a class="back"><img src="../assets/img/reback_icon.png"/></a>
+	小区在售房
+	<a id="house-detail-icon"><img src="../assets/img/house_detail_icon.png"/></a>
+</div>
+
+<block tpl-id="residence-name">
+<div id="residence-onsell-total">
+    {{data.residenceName}}({{data.onSaleCount}})
+</div>
+<!--<div class="banner" style="position:absolute;top:120px;width:100%;overflow:auto;">
+    <ul>
+	<li style="background-image: url('http://housemart.qiniudn.com/MGExOTFjNWYxZTQ1MDdkMDRjMjYzNF9jb25ldzE._1388392009950.jpg?imageMogr/v2/thumbnail/!640x300r/quality/60');"></li>
+	<li style="background-image: url('http://housemart.qiniudn.com/MGExOTFjNWYxZTQ1MDdkMDRjMjYzNF9jb25ldzE._1388392009950.jpg?imageMogr/v2/thumbnail/!640x300r/quality/60');"></li>
+	<li style="background-image: url('http://housemart.qiniudn.com/MGExOTFjNWYxZTQ1MDdkMDRjMjYzNF9jb25ldzE._1388392009950.jpg?imageMogr/v2/thumbnail/!640x300r/quality/60');"></li>
+    </ul>
+</div>-->
+{{#each data.picURL}}
+	{{this}}
+{{/each}}
+</block>
+
+<block tpl-id="houselist-container">
+<div style="position:fixed; top:200px;">
+{{#each houseList}}
+<div class="house" data-id="{{this.id}}">{{this.picURL}}</div>
+{{/each}}
+</div>
+<div><button id="sort" style="width:100%;position:fixed;bottom:0">排序</button></div>
+<div id="allsorts">
+<button id="sort-time" style="width:100%;">时间</button>
+<button id="sort-total" style="width:100%">总价</button>
+<button id="sort-per" style="width:100%">单价</button>
+<button id="sort-area" style="width:100%">面积</button>
+<button id="sort-cancel" style="width:100%">取消</button>
+<div>
+</block>
