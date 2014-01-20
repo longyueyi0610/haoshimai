@@ -99,7 +99,7 @@ App.mapSell = sumeru.controller.create(function(env, session){
                 div.appendChild(markerSpan);
 				div.appendChild(markerPic);
                 div.onclick = function(){
-					env.redirect("/residenceOnSell",{'residenceId':residenceId},true);
+					env.redirect("/residenceOnSell",{'residenceId':residenceId,'clientUId':clientUId},true);
                 }
                 return div;	
 			};

@@ -23,8 +23,15 @@
 <block tpl-id="houselist-container">
 <div style="position:fixed; top:200px;">
 {{#each houseList}}
-<div>{{this.picURL}}</div>
+<div class="house" data-id="{{this.id}}">{{this.picURL}}</div>
 {{/each}}
 </div>
-</block>
 <div><button id="sort" style="width:100%;position:fixed;bottom:0">排序</button></div>
+<div id="allsorts">
+<button id="sort-time" style="width:100%;">时间</button>
+<button id="sort-total" style="width:100%">总价</button>
+<button id="sort-per" style="width:100%">单价</button>
+<button id="sort-area" style="width:100%">面积</button>
+<button id="sort-cancel" style="width:100%">取消</button>
+<div>
+</block>
