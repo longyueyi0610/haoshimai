@@ -96,26 +96,6 @@ App.residenceOnSell = sumeru.controller.create(function(env, session, param){
 					env.redirect('/houseDetail',{'houseId':houseId},true);
 				});
 			});
-			
-
 		});
-
-		session.event('hose',function(){
-			if(window.chrome) {
-								$('.banner li').css('background-size', '100% 100%');
-											}
-			$('.banner').unslider({
-				dots:true
-			});
-			
-		});
-
-		$('.banner').unslider({
-			speed: 500,
-			dots: true,
-			fluid:false
-		});
-		
-    };
-
+	};
 });
