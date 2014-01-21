@@ -46,8 +46,8 @@
   "homepage": "https://github.com/tongyao/sumeru",
   "_id": "sumeru@0.8.20",
   "dist": {
-    "shasum": "4388030ef78737b2c4b626c87d42a2ed5798fafd"
+    "shasum": "9457f7218a46898ab30b0c8a1bd8e649d9d8a72a"
   },
-  "_from": "sumeru@",
+  "_from": "sumeru@0.8",
   "_resolved": "https://registry.npmjs.org/sumeru/-/sumeru-0.8.20.tgz"
 }

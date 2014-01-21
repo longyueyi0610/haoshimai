@@ -1,0 +1,13 @@
+<input id="searchResidenceInput" placeholder="搜索小区名称" />
+<button id="cancel">取消</button>
+<block tpl-id="list">
+{{#compare data.length 0}}
+对不起，没有收到
+{{else}}
+{{#each data}}
+<div>{{this.picURL.[0]}} {{this.residenceName}}{{this.price}}{{this.onSaleCount}}{{this.lastMonthDealCount}}</div>
+
+
+{{/each}}
+{{/compare}}
+</block>
