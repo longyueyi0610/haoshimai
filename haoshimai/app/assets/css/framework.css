@@ -15,17 +15,19 @@ html, body{
 	background:url('../img/title.png') 100% 100%;
     width:100%;
     height:70px;
+    padding: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, .4);
 }
 
 #header .map-title img {
-    width:50px;
-    height:50px;
+	display: block;
+	max-height: 100%;
+	margin-right: 10px;
     float:left;
-    padding:10px 20px 10px 20px;
 }
 
 #header .map-title #haoshimai {
-    line-height:70px;
+    line-height:50px;
 	color:#31363c;
     font-size:40px;
     float:left;
@@ -34,14 +36,14 @@ html, body{
 #header .map-title #area {
 	color:#31363c;
     padding-left:20px;
-    line-height:70px;
+    line-height:60px;
     font-size:32px;
     float:left;
 }
 
 #header .map-title #on-sale {
     padding-right:20px;
-    line-height:70px;
+    line-height:50px;
     font-size:32px;
 	color:#31363c;
     float:right;
@@ -61,9 +63,9 @@ html, body{
     margin:0px;
 }
 
-#header .map-tab  ul li{
+#header .map-tab  ul li a {
 	font-size:20px;
-	color:white;
+	color: white;
     text-align:center;
     width:25%;
     float:left;
@@ -88,27 +90,36 @@ html, body{
 
 #locationPlate{
 	position:fixed;
+	display: block;
 	bottom:30px;
 	left:100px;
-	height:20px;
+	height: 30px;
+	min-width: 100px;
+	line-height: 20px;
+	padding: 5px 12px;
+	color: #fff;
 	width:auto;
+	border-radius: 15px;
+	background: rgba(0, 0, 0, .6);
+	box-shadow: 0px 3px 5px rgba(0, 0, 0, .3);
 }
 
 #nearbyButton{
 	position:fixed;
-	bottom:0;
+	bottom: 20px;
+	left: 20px;
 }
 
 #searchButton{
 	position:fixed;
-	bottom:0;
-	right:0;
+	bottom: 20px;
+	right: 20px;
 }
 
 #enquiry-history-button{
 	position:fixed;
-	bottom:100px;
-	right:0;
+	bottom: 100px;
+	right: 20px;
 }
 
 #searchResidentInput{
@@ -210,3 +221,94 @@ html, body{
 	display:none;
 }
 
+.content-marker {
+	padding: 20px;
+	background: url(../img/openning_detail_back.png);
+	background-size: 100% 100%;
+	width: 432px;
+	height: 200px;
+	color: #fff;
+}
+
+.content-marker img {
+	display: block;
+	width: 70px;
+	height: 70px;
+	margin-right: 10px;
+	border-radius: 7px;
+}
+
+.content-marker img,
+.content-marker .info {
+	float: left;
+}
+
+.content-marker .info p {
+	margin-bottom: 5px;
+}
+
+.marker-wrap {
+	position: absolute;
+}
+
+.marker-wrap::after {
+	background: url(../img/flag_arrow.png) top center transparent;
+	content: '';
+	width: 14px;
+	height: 24px;
+	display: block;
+	position: relative;
+	left: 30px;
+	margin-top: -8px;
+}
+
+.marker-wrap .marker {
+	color: #fff;
+	white-space: nowrap;
+}
+
+.marker-wrap .marker .content,
+.marker-wrap .marker::after,
+.marker-wrap .marker::before {
+	box-sizing: border-box;
+	display: inline-block;
+	vertical-align: top;
+	height: 50px;
+}
+
+.marker-wrap .marker .content {
+	padding: 5px 0px;
+	white-space: nowrap;
+	background: url(../img/flag_middle.png) top center transparent;
+}
+
+.marker-wrap .marker .content span {
+	display: inline-block;	
+	line-height: 32px;
+}
+
+.marker-wrap .marker .content .name {
+	border-right: 1px solid #7fb3ed;
+	padding-right: 5px;
+}
+
+.marker-wrap .marker .content .para {
+	border-left: 2px solid #548ecd;
+	padding-left: 5px;
+}
+
+.marker-wrap .marker::after,
+.marker-wrap .marker::before {
+	content: '';
+	width: 9px;
+}
+
+.marker-wrap .marker::before {
+	background: url(../img/flag_left.png) top center transparent;
+}
+
+.marker-wrap .marker::after {
+	content: '';
+	width: 9px;
+	background: url(../img/flag_right.png) top center transparent;
+}

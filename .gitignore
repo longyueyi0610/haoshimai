@@ -1,5 +1,6 @@
 *.py[cod]
 node_modules
+bower_components
 
 # C extensions
 *.so
