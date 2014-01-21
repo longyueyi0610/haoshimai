@@ -83,12 +83,13 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 				count: 0
 			});
 
-			el.onclick = function() {
+			var $el = $(el).click(function() {
 				env.redirect("/residenceOnSell", {
 					'residenceId': residenceId,
 				}, true);
-			}
-			return el;
+			});
+
+			return $el[0];
 		};
 
 
@@ -211,42 +212,10 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 		});
 
 		var tabSwitch = function(tab) { //切换tab的操作
-			var price = 'price';
-			var annualPriceIncreasement = 'annualPriceIncreasement';
-			var annualTurnoverRate = 'annualTurnoverRate';
-			var rentRevenue = 'rentRevenue';
-			switch (tab) {
-				case price:
-					tabFlag = 'price';
-					document.getElementById("price").style.color = "#f47c00";
-					document.getElementById("annualPriceIncreasement").style.color = "white";
-					document.getElementById("annualTurnoverRate").style.color = "white";
-					document.getElementById("rentRevenue").style.color = "white";
-					break;
-				case annualPriceIncreasement:
-					tabFlag = 'annualPriceIncreasement';
-					document.getElementById("price").style.color = "white";
-					document.getElementById("annualPriceIncreasement").style.color = "#f47c00";
-					document.getElementById("annualTurnoverRate").style.color = "white";
-					document.getElementById("rentRevenue").style.color = "white";
-					break;
-				case annualTurnoverRate:
-					tabFlag = 'annualTurnoverRate';
-					document.getElementById("price").style.color = "white";
-					document.getElementById("annualPriceIncreasement").style.color = "white";
-					document.getElementById("annualTurnoverRate").style.color = "#f47c00";
-					document.getElementById("rentRevenue").style.color = "white";
-					break;
-				case rentRevenue:
-					tabFlag = 'rentRevenue';
-					document.getElementById("price").style.color = "white";
-					document.getElementById("annualPriceIncreasement").style.color = "white";
-					document.getElementById("annualTurnoverRate").style.color = "white";
-					document.getElementById("rentRevenue").style.color = "#f47c00";
-					break;
-			}
+			$(".map-tab li.active").removeClass("active");
+			$("#" + tab).parent().addClass("active");
+			tabFlag = tab;
 			updateFlag();
-
 		};
 
 		session.eventMap("#price", { //price tab
