@@ -19,6 +19,18 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 
 	var view = 'mapSell';
 
+    var getDetails = function(){
+        env.subscribe('pubunreadCounts',clientUId,function(unreadCountscollection){
+            session.bind('count', {
+                count:unreadCountsCollection.find()['count'],
+            }); 
+        }); 
+    };  
+
+    env.onload = function(){
+        return [getDetails];
+    }; 
+
 	env.onrender = function(doRender) {
 		doRender(view, ['shake', 'left']);
 	};
@@ -210,6 +222,11 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 				env.redirect("/residenceSearch");
 			}
 		});
+        session.eventMap('#enquiry-history-button', {
+            'click':function(e) {
+                env.redirect("/enquiryHistory",{'clientUId':clientUId},true);
+            }
+        });
 
 		var tabSwitch = function(tab) { //切换tab的操作
 			$(".map-tab li.active").removeClass("active");

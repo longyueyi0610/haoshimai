@@ -7,7 +7,6 @@ sumeru.router.add(
 
 );
 
-//sumeru.router.setDefault('App.itworks');
 
 
 App.itworks = sumeru.controller.create(function(env, session){
