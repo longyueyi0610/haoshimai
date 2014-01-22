@@ -1,3 +1,4 @@
+@import "../../../bower_components/bootstrap/less/variables.less";
 @import "../../../bower_components/bootstrap/less/mixins.less";
 @import "base.less";
 
@@ -29,17 +30,53 @@
 		position: absolute;
 		top: 110px;
 	}
-
-	#allsorts {
-		width: 100%;
-		background-color: #494c56;
-		z-index: 999;
+	
+	.sortbar {
+		text-align: center;
+		background: url(../img/sortbar.png) left top transparent;
+		box-shadow: inset 0px 1px 1px rgba(0, 0, 0, .4);
 		position: fixed;
 		bottom: 0px;
-		height: 200px;
+		width: 100%;
+		padding: 5px 0px;
+		cursor: pointer;
+
+		span {
+			color: #fff;
+			background: url(../img/ordericon.png) center center no-repeat transparent;
+			padding-left: 40px;
+		}
+	}
+	
+	#allsorts {
+		@sort-btn-height: 25px;
+		padding: 0px 20px 20px;
+		width: 100%;
+		background-color: rgba(0, 0, 0, .6);
+		z-index: 1001;
+		bottom: 0px;
+		position: fixed;
+
+		h3 {
+			color: #fff;
+			font-weight: normal;
+			text-align: center;
+			font-size: @font-size-base;
+			margin-top: 5px;
+		}
 
 		button {
+			margin-bottom: 5px;
+			border: none;
+			display: block;
 			width: 100%;
+			line-height: @sort-btn-height;
+			height: @sort-btn-height;
+			#gradient > .vertical(#fff, #e9e9e9);
 		}	
+
+		button::last-child {
+			margin-bottom: 0px;
+		}
 	}
 }

@@ -3,25 +3,25 @@ sumeru.router.add({
 	action: 'App.residenceOnSell'
 });
 
-App.residenceOnSell = sumeru.controller.create(function(env, session, param){
-	var view = 'residenceOnSell';	
-	var residenceId = param['residenceId'];//小区id
-	var orderType = 1;//默认1
+App.residenceOnSell = sumeru.controller.create(function(env, session, param) {
+	var view = 'residenceOnSell';
+	var residenceId = param['residenceId']; //小区id
+	var orderType = 1; //默认1
 	var pageSize = 35;
 	var pageIndex = 1;
 	var clientUId = param['clientUId'];
 
-	var getDetails = function(){
-        env.subscribe('pubresidenceDetail',residenceId,function(residenceDetailCollection){
-            session.bind('residence-name', {
-                data:residenceDetailCollection.find()[0],
-            });
-            session.bind('residence-images', {
-                data:residenceDetailCollection.find()[0],
-            });
-        });
+	var getDetails = function() {
+		env.subscribe('pubresidenceDetail', residenceId, function(residenceDetailCollection) {
+			session.bind('residence-name', {
+				data: residenceDetailCollection.find()[0],
+			});
+			session.bind('residence-images', {
+				data: residenceDetailCollection.find()[0],
+			});
+		});
 
-		session.set('orderType',orderType);
+		session.set('orderType', orderType);
 
 		var args = new Array();
 		args[0] = residenceId;
@@ -30,74 +30,81 @@ App.residenceOnSell = sumeru.controller.create(function(env, session, param){
 		args[3] = pageSize;
 		args[4] = clientUId;
 
-		session.houseListCollection = env.subscribe('pubresidenceOnSell',args,function(houseListCollection){
-            session.bind('houselist-container', {
-                houseList:houseListCollection.find()
-            });
-        });
-    };
+		session.houseListCollection = env.subscribe('pubresidenceOnSell', args, function(houseListCollection) {
+			session.bind('houselist-container', {
+				houseList: houseListCollection.find()
+			});
+		});
+	};
 
-    env.onload = function(){
-        return [getDetails];
-    };	
+	env.onload = function() {
+		return [getDetails];
+	};
 
-	env.onrender = function(doRender){
-        doRender("residenceOnSell", ['push','right']);
-    };
+	env.onrender = function(doRender) {
+		doRender("residenceOnSell", ['push', 'right']);
+	};
 
-    env.onready = function(){
-		
-		$('.back').click(function(){
+	env.onready = function() {
+
+		var $root = $("#residenceOnSell");
+
+		$('.back').click(function() {
 			history.back();
 		});
 
 		//$("#residence-onsell-houses").carousel();
 
-		$('#house-detail-icon').click(function(){
-			env.redirect('/residenceDetail',{'residenceId':residenceId},true);
+		$('#house-detail-icon').click(function() {
+			env.redirect('/residenceDetail', {
+				'residenceId': residenceId
+			}, true);
 		});
 
-		session.event('houselist-container',function(){
-			$('#sort').click(function(){
-          		$('#allsorts').slideToggle('slow');
-        	});
+		session.event('houselist-container', function() {
 
-        	$('#sort-cancel').click(function(){
-            	$('#allsorts').slideToggle('slow');
-        	});
+			$("#residenceOnSell .sortbar").click(function() {
+				$('#allsorts').slideToggle();
+			});
 
-        	$('#sort-total').click(function(){
-				$('#allsorts').slideToggle('slow');
-            	orderType = 2;
-				session.set('orderType',orderType);
-            	session.commit();
-        	});
+			$('#sort-cancel').click(function() {
+				$('#allsorts').slideToggle();
+			});
 
-			$('#sort-per').click(function(){
-                $('#allsorts').slideToggle('slow');
-                orderType = 3;
-				session.set('orderType',orderType);
-                session.commit();
-            });
-	
-			$('#sort-area').click(function(){
-                $('#allsorts').slideToggle('slow');
-                orderType = 4;
-				session.set('orderType',orderType);
-                session.commit();
-            });
+			$('#sort-total').click(function() {
+				$('#allsorts').slideToggle();
+				orderType = 2;
+				session.set('orderType', orderType);
+				session.commit();
+			});
 
-			$('#sort-time').click(function(){
-                $('#allsorts').slideToggle('slow');
-                orderType = '1';
-                session.set('orderType',orderType);
-                session.commit();
-            });
+			$('#sort-per').click(function() {
+				$('#allsorts').slideToggle();
+				orderType = 3;
+				session.set('orderType', orderType);
+				session.commit();
+			});
 
-			$('div.house').each(function(){
-				$(this).click(function(){
+			$('#sort-area').click(function() {
+				$('#allsorts').slideToggle();
+				orderType = 4;
+				session.set('orderType', orderType);
+				session.commit();
+			});
+
+			$('#sort-time').click(function() {
+				$('#allsorts').slideToggle();
+				orderType = '1';
+				session.set('orderType', orderType);
+				session.commit();
+			});
+
+			$('div.house').each(function() {
+				$(this).click(function() {
 					var houseId = $(this).attr("data-id");
-					env.redirect('/houseDetail',{'houseId':houseId},true);
+					env.redirect('/houseDetail', {
+						'houseId': houseId
+					}, true);
 				});
 			});
 		});
