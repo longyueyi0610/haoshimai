@@ -1,7 +1,52 @@
+<div id="houseDetail">
+
 <block tpl-id="house-detail">
-<div>我是房源详情页</div>
-{{data.picURL}}
-<a id='house-address' lng='{{data.lng}}' lat='{{data.lat}}'>{{data.address}}</a>
-<a id='house-residence' data-id='{{data.residenceId}}'>{{data.residenceName}}<a>
+	<div id="house-detail-header">
+		<div class="header">
+			<a class="back pull-left">
+				<img src="../assets/img/reback_icon.png"/>
+			</a>
+			房屋详情
+		</div>
+	</div>
+	<div id="content">
+		<div id="house-detail-images" class="carousel slide" 
+			data-ride="carousel">
+			<ol class="carousel-indicators">
+				{{#each data.picURLWithSize}}
+				{{#if this.first}}
+    			<li data-target="#residence-onsell-houses" 
+    				data-slide-to="{{this.index}}" class="active"></li>
+    			{{else}}
+    			<li data-target="#residence-onsell-houses" 
+    				data-slide-to="{{this.index}}"></li>
+    			{{/if}}
+				{{/each}}
+			</ol>
+
+			<div class="carousel-inner">
+				{{#each data.picURLWithSize}}
+					{{#if this.first}}
+    				<div class="item active"><img src="{{this.url}}"></div>
+    				{{else}}
+    				<div class="item"><img src="{{this.url}}"></div>
+    				{{/if}}
+				{{/each}}
+  			</div>
+		</div>
+		<div class="title">
+			{{data.title}}
+		</div>
+		<div class="important-info">
+			<div class='price'>{{data.price}}</div>
+			<div class="area">{{data.area}}</div>
+			<div class="type">{{data.roomType}}</div>
+		</div>
+
+		<a id='house-address' lng='{{data.lng}}' lat='{{data.lat}}'>{{data.address}}</a>
+		<a id='house-residence' data-id='{{data.residenceId}}'>{{data.residenceName}}</a>
+	</div>
 </block>
 <button id="askButton" style="width:100%;position:absolute;bottom:0;">问询</button>
+
+</div>

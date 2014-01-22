@@ -1,0 +1,64 @@
+@import "../../../bower_components/bootstrap/less/variables.less";
+@import "../../../bower_components/bootstrap/less/mixins.less";
+@import "base.less";
+
+
+#houseDetail {
+	min-height: 100%;
+	background-color: #fff;
+
+	#house-detail-header {
+		.haoshimai-banner();
+
+		.header {
+			.haoshimai-banner > .header();
+			font-size: @font-size-large;
+			text-align: center;
+
+			.back img, #house-detail-icon img{
+				.haoshimai-banner > .header > .nav-btn();
+			}
+		}
+	}
+
+
+	#content {
+		top: @banner-header-height;
+		position: absolute;
+
+		#house-detail-images {
+			img {
+				display: block;
+				height: 240px;
+				width: 100%;
+			}
+
+		}
+
+		.title {
+			.box-shadow(inset 0px 2px 3px rgba(0, 0, 0, .6));
+			background-color: @bg-color;
+			padding: 5px 12px;
+			color: #fff;
+		}
+
+		.important-info {
+			overflow: hidden;
+			padding: 8px 12px;
+
+			.price {
+				float: left;
+				font-size: @font-size-large;
+				line-height: @line-height-base;
+				color: @brand-primary;
+			}
+
+			.type, .area {
+				float: right;
+				padding-right: 30px;
+				line-height: @line-height-base * @font-size-large;
+			}
+		}
+	}
+}
+

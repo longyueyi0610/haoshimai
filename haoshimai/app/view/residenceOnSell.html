@@ -1,4 +1,4 @@
-<div id="residenceOnSell" style="padding-top: 110px">
+<div id="residenceOnSell">
 
 <block tpl-id="residence-name">
 	<div id="residence-onsell-header">
@@ -17,46 +17,83 @@
 	</div>
 </block>
 
-<block tpl-id="residence-images">
-	<div id="residence-onsell-houses" class="carousel slide">
+
+<block tpl-id="residence-container">
+<div id="onsell-content">
+	<div id="residence-onsell-houses" class="carousel slide" 
+			data-ride="carousel">
 		<ol class="carousel-indicators">
-			{{#each data.picURL}}
-    		<li data-target="#residence-onsell-houses">
-    		</li>
+			{{#each data.picURLWithSize}}
+			{{#if this.first}}
+    		<li data-target="#residence-onsell-houses" 
+    			data-slide-to="{{this.index}}" class="active"></li>
+    		{{else}}
+    		<li data-target="#residence-onsell-houses" 
+    			data-slide-to="{{this.index}}"></li>
+    		{{/if}}
 			{{/each}}
 		</ol>
 
-		<div class="carousel-inner" style="width: 100%; height: 40px;">
-			{{#each data.picURL}}
-    		<div class="item">
-      			<img style="width: 100%" src="{{this}}">
-    		</div>
+		<div class="carousel-inner">
+			{{#each data.picURLWithSize}}
+				{{#if this.first}}
+    			<div class="item active"><img src="{{this.url}}"></div>
+    			{{else}}
+    			<div class="item"><img src="{{this.url}}"></div>
+    			{{/if}}
 			{{/each}}
   		</div>
 	</div>
+
+	{{#compare houseList.length 0}}
+	<div class="houses no-house">
+	<p class='empty'>没有符合条件的搜索记录</p>
+	</div>
+	{{ else }}
+	<div class="houses">
+		{{#each houseList}}
+		<div class='residence-wrap' data-id="{{this.id}}">
+			<div class='residence'>
+				<div class='price highlight'>{{this.price}}</div>
+				<img src="{{this.picURL}}"/>
+				<div class='info'>
+					<div class="details">
+						<span class="highlight">{{this.residenceName}}</span>
+					</div>
+					<div class='details'>
+						<span class="detail" style="width: 60%">
+							单价: {{this.avg}}
+						</span>
+						<span class="detail" style="width: 40%">
+							面积: {{this.area}}
+						</span>
+					</div>
+					<div class="details last">
+						挂牌时间: {{this.onboardTimeString}}
+					</div>
+				</div>
+			</div>
+		</div>
+		{{/each}}
+	</div>
+</div>
+
+<div class="sortbar">
+	<span>排序</span>
+</div>
+
+<div id="allsorts" style="display: none">
+	<h5>排序</h5>
+	<button id="sort-time">时间</button>
+	<button id="sort-total">总价</button>
+	<button id="sort-per">单价</button>
+	<button id="sort-area">面积</button>
+	<button id="sort-cancel">取消</button>
+</div>
+<div class="modal-backdrop" style="display: none">
+</div>
+{{/compare}}
 </block>
 
-<block tpl-id="houselist-container">
-	<div style="position:fixed; top:200px;">
-	{{#each houseList}}
-		<div class="house" data-id="{{this.id}}">{{this.picURL}}</div>
-	{{/each}}
-	</div>
-
-	<div class="sortbar">
-		<span>排序</span>
-	</div>
-
-	<div id="allsorts" style="display: none">
-		<h3>排序</h3>
-		<button id="sort-time">时间</button>
-		<button id="sort-total">总价</button>
-		<button id="sort-per">单价</button>
-		<button id="sort-area">面积</button>
-		<button id="sort-cancel">取消</button>
-	</div>
-</block>
-
-<div class="haoshimai-overlay" style="display: none"></div>
 
 </div>

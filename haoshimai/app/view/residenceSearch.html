@@ -1,4 +1,4 @@
-<div id="residenceSearch" style="padding-top: 50px">
+<div id="residenceSearch">
 
 <div class='header'>
 	<div class='searchbar'>
@@ -21,15 +21,21 @@
 		<div class='residence'>
 			<img src="{{this.picURL.[0]}}"/>
 			<div class='info'>
-				<p><span class="highlight">{{this.residenceName}}</span></p>
-				<p> 均价：<span class="highlight"> {{this.price}}</span></p>
-				<div class='details'>
+				<div class="details">
+					<span class="highlight">{{this.residenceName}}</span>
+				</div>
+				<div class="details"> 
+					均价: <span class="highlight"> {{this.price}}</span>
+				</div>
+				<div class='details last'>
 					<span class="detail">
-						在售： {{this.onSaleCount}}
+						在售: {{this.onSaleCount}}
 					</span>
+					<!--
 					<span class="detail">
-						在租： {{this.lastMonthDealCount}}
+						在租: {{this.lastMonthDealCount}}
 					</span>
+					-->
 				</div>
 			</div>
 		</div>
