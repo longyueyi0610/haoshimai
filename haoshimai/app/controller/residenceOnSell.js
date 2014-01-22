@@ -59,17 +59,16 @@ App.residenceOnSell = sumeru.controller.create(function(env, session, param) {
 
 		var $root = $("#residenceOnSell");
 
-
-		$('#house-detail-icon').click(function() {
-			env.redirect('/residenceDetail', {
-				'residenceId': residenceId
-			}, true);
-		});
-
 		session.event('residence-name', function() {
 			$('.back').click(function() {
 				history.back();
 			});
+            $('#house-detail-icon').click(function() {
+                env.redirect('/residenceDetail', {
+                    'residenceId': residenceId,
+                    'clientUId':clientUId
+                }, true);
+            });
 		});
 
 		session.event('residence-container', function() {
@@ -89,7 +88,8 @@ App.residenceOnSell = sumeru.controller.create(function(env, session, param) {
 
 			$('.residence-wrap').click(function() {
 				env.redirect('/houseDetail', {
-					'houseId': $(this).attr("data-id")
+					'houseId': $(this).attr("data-id"),
+                    'clientUId': clientUId
 				}, true);
 			});
 

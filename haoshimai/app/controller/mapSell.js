@@ -98,6 +98,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 			var $el = $(el).click(function() {
 				env.redirect("/residenceOnSell", {
 					'residenceId': residenceId,
+                    'clientUId': clientUId
 				}, true);
 			});
 
@@ -219,7 +220,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 		});
 		session.eventMap("#searchButton", {
 			'click': function(e) {
-				env.redirect("/residenceSearch");
+				env.redirect("/residenceSearch",{'clientUId':clientUId},true);
 			}
 		});
         session.eventMap('#enquiry-history-button', {

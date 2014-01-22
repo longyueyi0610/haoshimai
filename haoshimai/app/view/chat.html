@@ -1,4 +1,15 @@
 <div>我是聊天页</div>
+<block tpl-id="message-list">
+{{#each messages}}
+    {{this.name}}
+    {{this.type}}
+    {{this.houseId}}
+    {{this.brokerId}}
+    {{messageId}}
+    {{useType}}
+    {{this.content}}
+{{/each}}
+</block>
 <div style="position:absolute;bottom:0;">
 <input id='chat-input'placeholder="输入内容"/>
 <button id='send-message-button'>发送</button>
