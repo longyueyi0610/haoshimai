@@ -1,8 +1,10 @@
+@import "../../../bower_components/bootstrap/less/variables.less";
 @import "../../../bower_components/bootstrap/less/mixins.less";
 
 @banner-color: #31363c;
-@banner-header-height: 70px;
+@banner-header-height: @navbar-height;
 @banner-padding: 10px;
+
 
 .haoshimai-banner() {
 	width: 100%;
@@ -23,8 +25,17 @@
 	}
 
 	.sub() {
-		height: 40px;
 		color: #fff;
 		background-color:#494c56;
 	}
 }
+
+.haoshimai-overlay {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+
+
