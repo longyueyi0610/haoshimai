@@ -3,6 +3,44 @@ function runnable(){
 	var host = sumeru.config.get("dataServerHost");//host地址
 	var appCode = 'app_test_code';
 
+    config['pubchatMessage'] = { 
+        fetchUrl : function(){
+            return 'http://api.housemart.cn:8080/server/house/chat/list.controller?appCode=app_test_code&clientUId=51A9E4C8-853D-4FAC-AB77-9135768FF432&houseId=433813&brokerId=141&type=1&messageId=5827&page=0';
+        },  
+        resolve : function(originData){
+            var j = JSON.parse(originData);
+            var resolved = j['data'];
+
+            return resolved;
+        }, 
+
+        fetchInterval: 30 * 1000, 
+        buffer : false,
+
+        //postData
+        postUrl : function(){
+            var options = {
+                host : host,
+                path : '/server/house/chat/send.controller'
+            }
+            return options;
+        },
+        prepare : function(type, data){
+            var prepareData = {};
+            if (type === 'insert'){
+                prepareData.content = data.content;
+                prepareData.appCode = appCode;
+                prepareData.clientUId = clientUId;
+                prepareData.houseId = houseId;
+                prepareData.brokerId = brokerId;
+                prepareData.type = 1;
+            }
+            return prepareData;
+        }
+    } 
+
+
+
     config['pubunreadMessage'] = {
         fetchUrl : function(clientUId){
             return host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=0';
@@ -48,7 +86,7 @@ function runnable(){
 
 	config['pubresidenceSearch'] = {
 		fetchUrl: function(keyword){
-			var url =  host + '/server/house/searchKeyword.controller?appCode=app_test_code&cityId=1&keyword=' + keyword + '&type=1';
+			var url =  host + '/server/house/searchKeyword.controller?appCode=' + appCode + '&cityId=1&keyword=' + keyword + '&type=1';
 			return encodeURI(url);
 		},
 		resolve : function(originData){
@@ -75,7 +113,7 @@ function runnable(){
 
 	config['pubresidenceOnSell'] = {
 		fetchUrl : function(args){
-			return host + '/server/residenceSale/houseListNew.controller?appCode=app_test_code&residenceId=' + args[0] + '&orderType=' + args[1] + '&pageIndex=' + args[2] + '&pageSize=' + args[3] + '&clientUId=' + args[4];
+			return host + '/server/residenceSale/houseListNew.controller?appCode=' + appCode + '&residenceId=' + args[0] + '&orderType=' + args[1] + '&pageIndex=' + args[2] + '&pageSize=' + args[3] + '&clientUId=' + args[4];
 		},
 		resolve : function(originData){
             var j =JSON.parse(originData);
