@@ -54,6 +54,10 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
 				});
 			}
 
+			$(".back").click(function() {
+				history.back();
+			});
+
 			$('#house-address').click(function() {
 				var lng = $(this).attr('lng');
 				var lat = $(this).attr('lat');

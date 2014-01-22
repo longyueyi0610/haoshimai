@@ -29,7 +29,7 @@
 		#house-detail-images {
 			img {
 				display: block;
-				height: 240px;
+				height: 200px;
 				width: 100%;
 			}
 
@@ -58,6 +58,62 @@
 				padding-right: 30px;
 				line-height: @line-height-base * @font-size-large;
 			}
+
+		}
+
+		.details {
+			padding: 0px 12px;
+			overflow: hidden;
+
+			a.detail {
+				display: block;
+				text-decoration: none;
+
+				.value {
+					color: @gray-dark;
+				}
+			}
+
+			.detail {
+				float: left;
+				width: 45%;
+
+				.prop {
+					color: @gray;
+
+					&::after {
+						content: ':\00a0';
+					}
+				}
+
+				&:first-child {
+					width: 55%;
+				}
+			}
+		}
+
+		#house-residence, #house-address {
+			display: block;
+			width: 100%;
+		}
+	}
+
+	#askButton {
+		color: #fff;
+		width:100%;
+		position:absolute;
+		bottom:0;
+		border: none;
+		.button-variant(#fff; rgba(0, 0, 0, .6); rgba(0, 0, 0, .6));
+		.button-size(0px; 12px; @font-size-base; @line-height-base; 0px;);
+
+		.inner {
+			display: block;
+			background: url(../img/ask.png) left center no-repeat transparent;
+			.center-block();
+			.size(70px; auto);
+			line-height: @line-height-computed + 15px;
+			padding-left: @line-height-computed + 15px;
 		}
 	}
 }
