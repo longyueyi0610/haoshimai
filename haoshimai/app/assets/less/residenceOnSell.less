@@ -45,16 +45,29 @@
 		}
 
 		.houses {
-			padding: 10px;
+			padding: 5px;
 			width: 100%;
 
-			.residence {
-				position: relative;
-	
-				.price {
-					position: absolute;;
-					right: 5px;
-					top: 5px;
+			&.no-house {
+				position: fixed;	
+				top: 320px;
+				bottom: 0px;
+				width: 100%;
+			}
+
+			.residence-wrap {
+				.residence {
+					position: relative;
+		
+					.price {
+						position: absolute;;
+						right: 5px;
+						top: 5px;
+					}
+				}
+
+				&:last-child {
+					margin-bottom: 30px;
 				}
 			}
 		}

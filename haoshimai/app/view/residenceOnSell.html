@@ -46,7 +46,9 @@
 	</div>
 
 	{{#compare houseList.length 0}}
+	<div class="houses no-house">
 	<p class='empty'>没有符合条件的搜索记录</p>
+	</div>
 	{{ else }}
 	<div class="houses">
 		{{#each houseList}}
