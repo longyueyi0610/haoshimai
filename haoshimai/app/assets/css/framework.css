@@ -40,13 +40,6 @@
 .affix {
   position: fixed;
 }
-.haoshimai-overlay {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-}
 #header {
   width: 100%;
   box-sizing: border-box;
@@ -216,6 +209,13 @@
   position: fixed;
   bottom: 80px;
   right: 10px;
+}
+.haoshimai-overlay {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
 }
 #residenceSearch {
   background-color: #4b4e59;
