@@ -80,7 +80,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 				name: residenceName,
 				range: priceRange,
 				img: pic,
-				count: 0
+				count: onSaleCount
 			});
 
 			var $el = $(el).click(function() {
