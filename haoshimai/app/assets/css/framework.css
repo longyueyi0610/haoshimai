@@ -1,20 +1,57 @@
-#header {
-  position: absolute;
-  width: 100%;
-  top: 0px;
-  background-color: #494c56;
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
 }
-#header .map-title {
+.clearfix:after {
+  clear: both;
+}
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pull-right {
+  float: right !important;
+}
+.pull-left {
+  float: left !important;
+}
+.hide {
+  display: none !important;
+}
+.show {
+  display: block !important;
+}
+.invisible {
+  visibility: hidden;
+}
+.text-hide {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+.affix {
+  position: fixed;
+}
+#header {
   width: 100%;
   color: #31363c;
   box-sizing: border-box;
+  position: absolute;
+  top: 0px;
+}
+#header .map-title {
   height: 70px;
   padding: 10px;
   background: url('../img/title.png') 100% 100%;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
-  position: absolute;
-  top: 0px;
-  position: static;
 }
 #header .map-title img {
   display: block;
@@ -41,7 +78,8 @@
 }
 #header .map-tab {
   height: 40px;
-  clear: both;
+  color: #fff;
+  background-color: #494c56;
 }
 #header .map-tab ul {
   padding-left: 0;
@@ -179,21 +217,21 @@
   right: 20px;
 }
 #residenceSearch {
-  background-color: #353b49;
+  background-color: #4b4e59;
   min-height: 100%;
 }
 #residenceSearch .header {
   width: 100%;
   color: #31363c;
   box-sizing: border-box;
-  height: 70px;
-  padding: 10px;
-  background: url('../img/title.png') 100% 100%;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 0px;
 }
 #residenceSearch .header .searchbar {
+  height: 70px;
+  padding: 10px;
+  background: url('../img/title.png') 100% 100%;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
   position: relative;
 }
 #residenceSearch .header .searchbar .input-wrap {
@@ -212,18 +250,21 @@
 #residenceSearch .header .searchbar button {
   position: absolute;
   border: none;
-  right: 0px;
-  top: 0px;
+  right: 10px;
+  top: 10px;
   height: 45px;
   width: 60px;
 }
 #residenceSearch p.empty {
-  width: 300px;
-  height: 50px;
-  font-size: 20px;
-  padding-left: 50px;
+  color: #2b2d30;
+  background: url(../img/search_noresult.png) left center no-repeat transparent;
+  width: 305px;
+  height: 35px;
+  font-size: 24px;
+  line-height: 35px;
+  padding-left: 40px;
   position: absolute;
-  margin-left: -150px;
+  margin-left: -152px;
   margin-top: -25px;
   left: 50%;
   top: 50%;
@@ -274,6 +315,50 @@
 }
 #residenceSearch .residences .resident-wrap::last-child {
   margin-bottom: 0px;
+}
+#residenceOnSell #residence-onsell-header {
+  width: 100%;
+  color: #31363c;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0px;
+}
+#residenceOnSell #residence-onsell-header .header {
+  height: 70px;
+  padding: 10px;
+  background: url('../img/title.png') 100% 100%;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
+  line-height: 50px;
+  font-size: 40px;
+  text-align: center;
+}
+#residenceOnSell #residence-onsell-header .header .back img,
+#residenceOnSell #residence-onsell-header .header #house-detail-icon img {
+  width: 50px;
+  height: 50px;
+}
+#residenceOnSell #residence-onsell-header #residence-onsell-total {
+  height: 40px;
+  color: #fff;
+  background-color: #494c56;
+  text-align: center;
+  line-height: 40px;
+}
+#residenceOnSell #residence-onsell-houses {
+  width: 100%;
+  position: absolute;
+  top: 110px;
+}
+#residenceOnSell #allsorts {
+  width: 100%;
+  background-color: #494c56;
+  z-index: 999;
+  position: fixed;
+  bottom: 0px;
+  height: 200px;
+}
+#residenceOnSell #allsorts button {
+  width: 100%;
 }
 /*
 #baiduMap {

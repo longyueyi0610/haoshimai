@@ -3,7 +3,6 @@ sumeru.router.add({
 	action: 'App.residenceOnSell'
 });
 
-
 App.residenceOnSell = sumeru.controller.create(function(env, session, param){
 	var view = 'residenceOnSell';	
 	var residenceId = param['residenceId'];//小区id
@@ -15,6 +14,9 @@ App.residenceOnSell = sumeru.controller.create(function(env, session, param){
 	var getDetails = function(){
         env.subscribe('pubresidenceDetail',residenceId,function(residenceDetailCollection){
             session.bind('residence-name', {
+                data:residenceDetailCollection.find()[0],
+            });
+            session.bind('residence-images', {
                 data:residenceDetailCollection.find()[0],
             });
         });
@@ -48,6 +50,8 @@ App.residenceOnSell = sumeru.controller.create(function(env, session, param){
 		$('.back').click(function(){
 			history.back();
 		});
+
+		//$("#residence-onsell-houses").carousel();
 
 		$('#house-detail-icon').click(function(){
 			env.redirect('/residenceDetail',{'residenceId':residenceId},true);

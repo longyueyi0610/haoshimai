@@ -2,14 +2,10 @@
 @import "base.less";
 
 #header {
-	position: absolute;
-	width: 100%;
-    top:0px;
-	background-color:#494c56;
+	.haoshimai-banner();
 
 	.map-title {
-		.haoshimai-banner();
-		position: static;
+		.haoshimai-banner > .header();
 
 		img {
 			display: block;
@@ -40,8 +36,7 @@
 	}
 
 	.map-tab {
-    	height:40px;
-    	clear:both;
+		.haoshimai-banner > .sub();
 
     	ul {
  			padding-left:0;
