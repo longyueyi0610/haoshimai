@@ -3,10 +3,11 @@ sumeru.router.add({
     action: 'App.residenceSearch'
 });
 
-App.residenceSearch = sumeru.controller.create(function(env, session) {
+App.residenceSearch = sumeru.controller.create(function(env, session, param) {
     var view = 'residenceSearch';
     var host = sumeru.config.get("dataServerHost");
     var keyword; //输入内容
+    var clientUId = param['clientUId'];
 
     var getDetails = function() {
         if (!session.get('keyword')) {
@@ -36,13 +37,14 @@ App.residenceSearch = sumeru.controller.create(function(env, session) {
 
         $root.on('click', '.residence', function() {
             env.redirect('/houseDetail', {
-                'houseId': $(this).data("id")
+                'houseId': $(this).data("id"),
+                'client': clientUId
             }, true);
         });
 
         session.eventMap('#cancel', {
             'click': function(e) {
-                env.redirect("/mapShell");
+                env.redirect("/");
             }
         });
         session.eventMap('#searchResidenceInput', {
