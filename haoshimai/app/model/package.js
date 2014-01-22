@@ -3,6 +3,7 @@ sumeru.packages(
 	'residenceDetail.js',
 	'house.js',
 	'houseDetail.js',
+    'unreadMessage.js',
     'unreadCounts.js'
 )
 

@@ -3,6 +3,22 @@ function runnable(){
 	var host = sumeru.config.get("dataServerHost");//host地址
 	var appCode = 'app_test_code';
 
+    config['pubunreadMessage'] = {
+        fetchUrl : function(clientUId){
+            return host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=0';
+        },
+        resolve : function(originData){
+            var j = JSON.parse(originData);
+            var resolved = j['data'];
+
+            //造一些假数据
+            resolved = {"version":null,"data":[{residenceName:'1',houseId:'sss',title:'nihao',type:'1',count:'3',lastContentFormat:'0',lastUpdateTime:'2012-01-01 19:22:45'},{ridenceName:'1',houseId:'sss',title:'nihao',type:'1',count:'3',lastContentFormat:'0',lastUpdateTime:'2012-01-01 19:22:45'}],"count":0,"code":100,"totalCount":0,"msg":"","secret":null,"unReadMsgCount":0,"exceptionDetail":null,"extData":null}['data'];
+
+            return resolved;
+        },
+        buffer : false
+    }
+
     config['pubunreadCounts'] = {
         fetchUrl :function(clientUId){
             return host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=1';
