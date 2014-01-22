@@ -54,6 +54,5 @@ App.residenceSearch = sumeru.controller.create(function(env, session) {
                 }
             }
         });
-
     };
 });

@@ -13,10 +13,20 @@ App.residenceOnSell = sumeru.controller.create(function(env, session, param) {
 
 	var getDetails = function() {
 		env.subscribe('pubresidenceDetail', residenceId, function(residenceDetailCollection) {
+			var data = residenceDetailCollection.find()[0]
+			var array = [];
+			for (var i = 0; i < data.picURLWithSize.length; i++) {
+				array[i] = {
+					first: i == 0,
+					index: i,
+					url: data.picURLWithSize[i]
+				};
+			}
+			data.picURLWithSize = array;
 			session.bind('residence-name', {
-				data: residenceDetailCollection.find()[0],
+				data: data,
 			});
-			session.bind('residence-images', {
+			session.bind('residence-container', {
 				data: residenceDetailCollection.find()[0],
 			});
 		});
@@ -31,7 +41,7 @@ App.residenceOnSell = sumeru.controller.create(function(env, session, param) {
 		args[4] = clientUId;
 
 		session.houseListCollection = env.subscribe('pubresidenceOnSell', args, function(houseListCollection) {
-			session.bind('houselist-container', {
+			session.bind('residence-container', {
 				houseList: houseListCollection.find()
 			});
 		});
@@ -49,11 +59,6 @@ App.residenceOnSell = sumeru.controller.create(function(env, session, param) {
 
 		var $root = $("#residenceOnSell");
 
-		$('.back').click(function() {
-			history.back();
-		});
-
-		//$("#residence-onsell-houses").carousel();
 
 		$('#house-detail-icon').click(function() {
 			env.redirect('/residenceDetail', {
@@ -61,18 +66,46 @@ App.residenceOnSell = sumeru.controller.create(function(env, session, param) {
 			}, true);
 		});
 
-		session.event('houselist-container', function() {
+		session.event('residence-name', function() {
+			$('.back').click(function() {
+				history.back();
+			});
+		});
+
+		session.event('residence-container', function() {
+			var $focuses = $("#residence-onsell-houses");
+			if ($focuses.find(".item").length !== 0) {
+				$focuses.carousel({
+					interval: false
+				});
+				touch.on($focuses[0], 'drag', function(e) {
+					if (e.direction === 'left') {
+						$focuses.carousel("next");
+					} else {
+						$focuses.carousel("prev");
+					}
+				});
+			}
+
+			$('.residence-wrap').click(function() {
+				env.redirect('/houseDetail', {
+					'houseId': $(this).attr("data-id")
+				}, true);
+			});
 
 			$("#residenceOnSell .sortbar").click(function() {
 				$('#allsorts').slideToggle();
+				$(".modal-backdrop").toggle();
 			});
 
 			$('#sort-cancel').click(function() {
 				$('#allsorts').slideToggle();
+				$(".modal-backdrop").toggle();
 			});
 
 			$('#sort-total').click(function() {
 				$('#allsorts').slideToggle();
+				$(".modal-backdrop").toggle();
 				orderType = 2;
 				session.set('orderType', orderType);
 				session.commit();
@@ -80,6 +113,7 @@ App.residenceOnSell = sumeru.controller.create(function(env, session, param) {
 
 			$('#sort-per').click(function() {
 				$('#allsorts').slideToggle();
+				$(".modal-backdrop").toggle();
 				orderType = 3;
 				session.set('orderType', orderType);
 				session.commit();
@@ -87,6 +121,7 @@ App.residenceOnSell = sumeru.controller.create(function(env, session, param) {
 
 			$('#sort-area').click(function() {
 				$('#allsorts').slideToggle();
+				$(".modal-backdrop").toggle();
 				orderType = 4;
 				session.set('orderType', orderType);
 				session.commit();
@@ -94,18 +129,10 @@ App.residenceOnSell = sumeru.controller.create(function(env, session, param) {
 
 			$('#sort-time').click(function() {
 				$('#allsorts').slideToggle();
+				$(".modal-backdrop").toggle();
 				orderType = '1';
 				session.set('orderType', orderType);
 				session.commit();
-			});
-
-			$('div.house').each(function() {
-				$(this).click(function() {
-					var houseId = $(this).attr("data-id");
-					env.redirect('/houseDetail', {
-						'houseId': houseId
-					}, true);
-				});
 			});
 		});
 	};
