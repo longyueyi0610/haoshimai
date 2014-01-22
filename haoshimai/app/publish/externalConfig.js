@@ -3,6 +3,20 @@ function runnable(){
 	var host = sumeru.config.get("dataServerHost");//host地址
 	var appCode = 'app_test_code';
 
+    config['pubunreadCounts'] = {
+        fetchUrl :function(clientUId){
+            return host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=1';
+        },
+        resolve: function(originData){
+            var j = JSON.parse(originData);
+            var resolved = j['data'];
+
+            return resolved;
+        },
+        fetchInterval : 60 * 1000,
+        buffer : false
+    }
+
 	config['pubhouseDetail'] = {
 		fetchUrl : function(houseId){
 			return host + '/server/house/detailNew.controller?appCode=app_test_code&houseId=' + houseId + '&clientUId=74E1B63AF061';
