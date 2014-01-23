@@ -15,6 +15,7 @@
 <block tpl-id="list">
 {{#compare data.length 0}}
 <p class='empty'>没有符合条件的搜索记录</p>
+{{$ $('.loadingDiv').css('display','none'); }}
 {{else}}
 <div class="residences">
 	{{#each data}}
