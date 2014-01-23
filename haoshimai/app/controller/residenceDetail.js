@@ -33,6 +33,10 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
 
     env.onready = function() {
         session.event('residence-onsell-detail', function() {
+            $('.back').click(function(){
+                history.back();
+            });
+
             var $focuses = $("#residence-detail-images");
             if ($focuses.find(".item").length !== 0) {
                 $focuses.carousel({
