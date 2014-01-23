@@ -8,7 +8,7 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
     var residenceId = param['residenceId'];
 
     var getDetails = function() {
-        env.subscribe('pubresidenceDetail', residenceId, function(residenceDetailCollection) {
+        session.residenceDetailCollection = env.subscribe('pubresidenceDetail', residenceId, function(residenceDetailCollection) {
             var data = residenceDetailCollection.find()[0];
             data.picURLWithSize = _.map(data.picURLWithSize, function(item, index) {
                 return {
@@ -33,6 +33,7 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
 
     env.onready = function() {
         session.event('residence-onsell-detail', function() {
+            Library.utils.createLineChart(session.residenceDetailCollection[0]['monthTrend']);
             $('.back').click(function(){
                 history.back();
             });
