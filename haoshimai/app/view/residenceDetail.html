@@ -12,6 +12,31 @@
 </block>
 
 <div class='content'>
+	<div id="house-detail-images" class="carousel slide" 
+			data-ride="carousel">
+		<ol class="carousel-indicators">
+			{{#each data.picURLWithSize}}
+			{{#if this.first}}
+    		<li data-target="#residence-onsell-houses" 
+    			data-slide-to="{{this.index}}" class="active"></li>
+    		{{else}}
+    		<li data-target="#residence-onsell-houses" 
+    				data-slide-to="{{this.index}}"></li>
+    		{{/if}}
+			{{/each}}
+		</ol>
+
+		<div class="carousel-inner">
+			{{#each data.picURLWithSize}}
+				{{#if this.first}}
+    			<div class="item active"><img src="{{this.url}}">
+    			</div>
+    			{{else}}
+    			<div class="item"><img src="{{this.url}}"></div>
+    			{{/if}}
+			{{/each}}
+  		</div>
+	</div>
 	<div id="container" style="width:100%; height:400px;"></div>
 </div>
 

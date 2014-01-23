@@ -14,15 +14,14 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
 	var getDetails = function() {
 		env.subscribe('pubhouseDetail', houseId, function(houseDetailCollection) {
 			var data = houseDetailCollection.find()[0];
-			var array = [];
-			for (var i = 0; i < data.picURLWithSize.length; i++) {
-				array[i] = {
-					first: i == 0,
-					index: i,
-					url: data.picURLWithSize[i]
+			data.picURLWithSize = _.map(data.picURLWithSize, function(item, index) {
+				return {
+					url: item,
+					first: index == 0,
+					index: index
 				};
-			}
-			data.picURLWithSize = array;
+			});
+			
 			session.bind('house-detail', {
 				data: houseDetailCollection.find()[0],
 			});
