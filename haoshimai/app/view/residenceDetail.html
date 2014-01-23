@@ -36,7 +36,15 @@
 			{{/each}}
   		</div>
 	</div>
-    <div id="line-chart"></div>
+	<div class="statistics">
+		<p class='hl' style="font-weight: bold;">
+			{{data.residenceName}}
+		</p>
+		<p style="color: #fff;font-size: 12px;">均价: {{data.price}}</p>	
+		<div id="line-chart"></div>
+		{{$ Library.utils.createLineChart(data.monthTrend);}}
+	</div>
+
 	<div class="info-pane">
 		<div class="details">
 			<div class='detail'>

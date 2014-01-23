@@ -170,6 +170,9 @@
 .details .detail:first-child {
   width: 55%;
 }
+.hl {
+  color: #428bca;
+}
 #map-sell-banner .header img {
   display: block;
   float: left;
@@ -717,6 +720,13 @@ fieldset[disabled] #houseDetail #askButton.active {
 #residence-onsell-detail .content .sketch .info {
   margin-left: 70px;
 }
+#residence-onsell-detail .content .statistics {
+  padding: 2px 8px 8px;
+  background: #333333;
+}
+#residence-onsell-detail .content .statistics p {
+  margin: 0px 0px 3px;
+}
 #enquiry-history .content {
   position: absolute;
   top: 50px;
@@ -767,7 +777,7 @@ fieldset[disabled] #houseDetail #askButton.active {
   top: 50px;
   width: 100%;
   overflow: auto;
-  bottom: 50px;
+  bottom: 0px;
 }
 #chat .messages .message {
   -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
@@ -784,6 +794,9 @@ fieldset[disabled] #houseDetail #askButton.active {
   background: #428bca;
   color: #fff;
   float: left;
+}
+#chat .messages .message:last-child {
+  margin-bottom: 65px;
 }
 #chat .bar {
   position: absolute;
