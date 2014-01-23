@@ -56,8 +56,7 @@ function runnable() {
             var resolved = j['data'];
 
             //造一些假数据
-            resolved = [];
-            /*
+            //resolved = [];
             resolved = {
                 "version": null,
                 "data": [{
@@ -134,7 +133,6 @@ function runnable() {
                 "exceptionDetail": null,
                 "extData": null
             }['data'];
-            */
 
             return resolved;
         },
