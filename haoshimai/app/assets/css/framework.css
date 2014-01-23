@@ -762,3 +762,101 @@ fieldset[disabled] #houseDetail #askButton.active {
   margin-left: -72px;
   margin-top: -10px;
 }
+#chat .messages {
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  overflow: auto;
+  bottom: 50px;
+}
+#chat .messages .message {
+  -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+  padding: 8px;
+  border-radius: 8px;
+  max-width: 75%;
+  min-width: 30px;
+  float: right;
+  clear: both;
+  margin: 10px;
+}
+#chat .messages .message.agent {
+  background: #428bca;
+  color: #fff;
+  float: left;
+}
+#chat .bar {
+  position: absolute;
+  bottom: 0px;
+  height: 45px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+#chat .bar .bar-inner {
+  padding: 5px;
+  position: relative;
+}
+#chat .bar .bar-inner button {
+  position: absolute;
+  border: none;
+  right: 5px;
+  top: 6px;
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+  padding: 5px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+}
+#chat .bar .bar-inner button:hover,
+#chat .bar .bar-inner button:focus,
+#chat .bar .bar-inner button:active,
+#chat .bar .bar-inner button.active,
+.open .dropdown-toggle#chat .bar .bar-inner button {
+  color: #ffffff;
+  background-color: #3276b1;
+  border-color: #2d6ca2;
+}
+#chat .bar .bar-inner button:active,
+#chat .bar .bar-inner button.active,
+.open .dropdown-toggle#chat .bar .bar-inner button {
+  background-image: none;
+}
+#chat .bar .bar-inner button.disabled,
+#chat .bar .bar-inner button[disabled],
+fieldset[disabled] #chat .bar .bar-inner button,
+#chat .bar .bar-inner button.disabled:hover,
+#chat .bar .bar-inner button[disabled]:hover,
+fieldset[disabled] #chat .bar .bar-inner button:hover,
+#chat .bar .bar-inner button.disabled:focus,
+#chat .bar .bar-inner button[disabled]:focus,
+fieldset[disabled] #chat .bar .bar-inner button:focus,
+#chat .bar .bar-inner button.disabled:active,
+#chat .bar .bar-inner button[disabled]:active,
+fieldset[disabled] #chat .bar .bar-inner button:active,
+#chat .bar .bar-inner button.disabled.active,
+#chat .bar .bar-inner button[disabled].active,
+fieldset[disabled] #chat .bar .bar-inner button.active {
+  background-color: #428bca;
+  border-color: #428bca;
+}
+#chat .bar .bar-inner button .badge {
+  color: #428bca;
+  background-color: #fff;
+}
+#chat .bar .bar-inner .input-wrap {
+  margin-right: 60px;
+}
+#chat .bar .bar-inner .input-wrap input[type=text] {
+  padding: 5px 12px 5px 12px;
+  outline: none;
+  line-height: 20px;
+  font-size: 14px;
+  border-radius: 15px;
+  border: none;
+  width: 100%;
+  box-shadow: inset 0px 2px 3px rgba(0, 0, 0, 0.3);
+}
