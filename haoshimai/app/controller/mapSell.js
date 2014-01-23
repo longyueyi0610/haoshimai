@@ -71,8 +71,8 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 					"	<img src='<%= img %>'/>" +
 					"	<div class='info'>" +
 					"		<p><%- name %></p>" +
-					"		<p>租金范围：<%- range %></p>" +
-					"		<p>在租：<%- count %></p>" +
+					"		<p>售价范围：<%- range %></p>" +
+					"		<p>在售：<%- count %></p>" +
 					"	</div>" +
 					"</div>"
 				);
