@@ -12,7 +12,10 @@ App.residenceOnSell = sumeru.controller.create(function(env, session, param) {
 	var clientUId = param['clientUId'];
 
 	var getDetails = function() {
-		env.subscribe('pubresidenceDetail', residenceId, function(residenceDetailCollection) {
+        var args = [];
+        args[0] = residenceId;
+        args[1] = clientUId;
+		env.subscribe('pubresidenceDetail', args, function(residenceDetailCollection) {
 			var data = residenceDetailCollection.find()[0]
 			var array = [];
 			for (var i = 0; i < data.picURLWithSize.length; i++) {

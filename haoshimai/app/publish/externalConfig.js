@@ -2,10 +2,16 @@ function runnable() {
     var config = {};
     var host = sumeru.config.get("dataServerHost"); //host地址
     var appCode = 'app_test_code';
+    var chatClientUId = '';
+    var chatHouseId = '';
+    var chatBrokerId = '';
 
     config['pubchatMessage'] = {
-        fetchUrl: function() {
-            return 'http://api.housemart.cn:8080/server/house/chat/list.controller?appCode=app_test_code&clientUId=51A9E4C8-853D-4FAC-AB77-9135768FF432&houseId=433813&brokerId=141&type=1&messageId=5827&page=0';
+        fetchUrl: function(args) {//args[0]houseId, args[1]brokerId, args[2]clientUId
+            chatClientUId = args[2];
+            chatHouseId = args[1];
+            chatBrokerId = args[0];
+            return 'http://api.housemart.cn:8080/server/house/chat/list.controller?appCode=' + appCode + '&clientUId=' +args[2]+ '&houseId=' + args[0] + '&brokerId=' + args[1] +'&type=1&messageId=-1&page=0';
         },
         resolve: function(originData) {
             var j = JSON.parse(originData);
@@ -30,9 +36,9 @@ function runnable() {
             if (type === 'insert') {
                 prepareData.content = data.content;
                 prepareData.appCode = appCode;
-                prepareData.clientUId = clientUId;
-                prepareData.houseId = houseId;
-                prepareData.brokerId = brokerId;
+                prepareData.clientUId = chatClientUId;
+                prepareData.houseId = chatHouseId;
+                prepareData.brokerId = chatBrokerId;
                 prepareData.type = 1;
             }
             return prepareData;
@@ -149,52 +155,52 @@ function runnable() {
         buffer: false
     }
 
-    config['pubhouseDetail'] = {
-        fetchUrl: function(houseId) {
-            return host + '/server/house/detailNew.controller?appCode=app_test_code&houseId=' + houseId + '&clientUId=74E1B63AF061';
-        },
-        resolve: function(originData) {
-            var j = JSON.parse(originData);
-            var resolved = j['data'];
+	config['pubhouseDetail'] = {
+		fetchUrl : function(args){
+			return host + '/server/house/detailNew.controller?appCode=' + appCode + '&houseId=' + args[0] + '&clientUId=' + args[1];
+		},
+		resolve: function(originData){
+			var j = JSON.parse(originData);
+			var resolved = j['data'];
+			
+			return resolved;
+		},
+		buffer : false
+	}
 
-            return resolved;
-        },
-        buffer: false
-    }
+	config['pubresidenceSearch'] = {
+		fetchUrl: function(keyword){
+			var url =  host + '/server/house/searchKeyword.controller?appCode=' + appCode + '&cityId=1&keyword=' + keyword + '&type=1';
+			return encodeURI(url);
+		},
+		resolve : function(originData){
+			var j =JSON.parse(originData);
+			var resolved = j['data'];
 
-    config['pubresidenceSearch'] = {
-        fetchUrl: function(keyword) {
-            var url = host + '/server/house/searchKeyword.controller?appCode=' + appCode + '&cityId=1&keyword=' + keyword + '&type=1';
-            return encodeURI(url);
-        },
-        resolve: function(originData) {
-            var j = JSON.parse(originData);
-            var resolved = j['data'];
+			return resolved;
+		},
+		buffer :false
+	}
 
-            return resolved;
-        },
-        buffer: false
-    }
+	config['pubresidenceDetail'] = {
+		fetchUrl : function(args){
+			return host + '/server/residence/detailNew.controller?appCode=' + appCode + '&residenceId='+ args[0] +'&clientUId=' + args[1];
+		},
+		resolve : function(originData){
+			var j =JSON.parse(originData);
+			var resolved = j['data'];
+			
+			return resolved;
+		},
+		buffer:false
+	}
 
-    config['pubresidenceDetail'] = {
-        fetchUrl: function(residenceId) {
-            return host + '/server/residence/detailNew.controller?appCode=app_test_code&residenceId=' + residenceId + '&clientUId=74E1B63AF061';
-        },
-        resolve: function(originData) {
-            var j = JSON.parse(originData);
-            var resolved = j['data'];
-
-            return resolved;
-        },
-        buffer: false
-    }
-
-    config['pubresidenceOnSell'] = {
-        fetchUrl: function(args) {
-            return host + '/server/residenceSale/houseListNew.controller?appCode=' + appCode + '&residenceId=' + args[0] + '&orderType=' + args[1] + '&pageIndex=' + args[2] + '&pageSize=' + args[3] + '&clientUId=' + args[4];
-        },
-        resolve: function(originData) {
-            var j = JSON.parse(originData);
+	config['pubresidenceOnSell'] = {
+		fetchUrl : function(args){
+			return host + '/server/residenceSale/houseListNew.controller?appCode=' + appCode + '&residenceId=' + args[0] + '&orderType=' + args[1] + '&pageIndex=' + args[2] + '&pageSize=' + args[3] + '&clientUId=' + args[4];
+		},
+		resolve : function(originData){
+            var j =JSON.parse(originData);
             var resolved = j['data'];
 
             return resolved;

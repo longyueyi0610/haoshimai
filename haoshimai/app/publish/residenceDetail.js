@@ -1,7 +1,7 @@
 module.exports = function(fw){
-	fw.publish('residenceDetail','pubresidenceDetail',function(residenceId,callback){
+	fw.publish('residenceDetail','pubresidenceDetail',function(args,callback){
 		var collection = this;
 
-		collection.extfind('pubresidenceDetail',residenceId,callback);
+		collection.extfind('pubresidenceDetail',args,callback);
 	});
 }

@@ -10,9 +10,14 @@ sumeru.router.add({
 App.houseDetail = sumeru.controller.create(function(env, session, param) {
 	var view = 'houseDetail';
 	var houseId = param['houseId'];
+    var clientUId = param['clientUId'];
 
 	var getDetails = function() {
-		env.subscribe('pubhouseDetail', houseId, function(houseDetailCollection) {
+        var args = [];
+        args[0] = houseId;
+        args[1] = clientUId;
+
+		session.houseDetailCollection = env.subscribe('pubhouseDetail', args, function(houseDetailCollection) {
 			var data = houseDetailCollection.find()[0];
 			data.picURLWithSize = _.map(data.picURLWithSize, function(item, index) {
 				return {
@@ -68,12 +73,19 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
 			$('#house-residence').click(function() {
 				var residenceId = $(this).attr('data-id');
 				env.redirect('/residenceDetail', {
-					'residenceId': residenceId
+					'residenceId': residenceId,
+                    'clientUId': clientUId
 				}, true);
 			});
 		});
 		$('#askButton').click(function() {
-			env.redirect('/chat', true);
+            var brokerName = session.houseDetailCollection[0]['brokerName'];
+            var brokerId = session.houseDetailCollection[0]['brokerId'];
+			env.redirect('/chat', {
+                'houseId': houseId,
+                'clientUId': clientUId,
+                'brokerId' : brokerId
+            },true);
 		});
 	};
 
