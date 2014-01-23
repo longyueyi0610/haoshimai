@@ -6,11 +6,9 @@
 	background-color: @bg-color;
 	min-height: 100%;
 
-	.header {
-		.haoshimai-banner();
+	.banner {
 
-		.searchbar {
-			.haoshimai-banner > .header();
+		.header {
 			padding: 5px;
 			@search-button-width: 50px;
 			@gutter: 10px;
@@ -19,7 +17,7 @@
 			.input-wrap {
 				margin-right: @search-button-width + @gutter;
 				input[type=text] {
-					@padding-top: 7px;
+					@padding-top: 8px;
 					@padding-bottom: @padding-top;
 					@padding-right: 12px;
 					@search-img-width: 20px;
@@ -27,6 +25,8 @@
 					background: url(../img/searchbox_icon.png) 7px center no-repeat #fff;
 					padding: @padding-top @padding-right @padding-bottom @padding-left;
 					outline: none;
+					line-height: @line-height-computed;
+					font-size: @font-size-base;
 					border-radius: @line-height-computed / 2 + @padding-top;
 					border: none;
 					width: 100%;
