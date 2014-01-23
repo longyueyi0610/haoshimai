@@ -6,9 +6,14 @@ sumeru.router.add({
 App.residenceDetail = sumeru.controller.create(function(env, session, param) {
     var view = 'residenceDetail';
     var residenceId = param['residenceId'];
+    var clientUId = param['clientUId'];
 
     var getDetails = function() {
-        session.residenceDetailCollection = env.subscribe('pubresidenceDetail', residenceId, function(residenceDetailCollection) {
+        var args = [];
+        args[0] = residenceId;
+        args[1] = clientUId;
+
+        session.residenceDetailCollection = env.subscribe('pubresidenceDetail', args, function(residenceDetailCollection) {
             var data = residenceDetailCollection.find()[0];
             data.picURLWithSize = _.map(data.picURLWithSize, function(item, index) {
                 return {

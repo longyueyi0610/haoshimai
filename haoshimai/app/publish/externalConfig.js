@@ -72,8 +72,8 @@ function runnable(){
     }
 
 	config['pubhouseDetail'] = {
-		fetchUrl : function(houseId){
-			return host + '/server/house/detailNew.controller?appCode=app_test_code&houseId=' + houseId + '&clientUId=74E1B63AF061';
+		fetchUrl : function(args){
+			return host + '/server/house/detailNew.controller?appCode=' + appCode + '&houseId=' + args[0] + '&clientUId=' + args[1];
 		},
 		resolve: function(originData){
 			var j = JSON.parse(originData);
@@ -99,8 +99,8 @@ function runnable(){
 	}
 
 	config['pubresidenceDetail'] = {
-		fetchUrl : function(residenceId){
-			return host + '/server/residence/detailNew.controller?appCode=app_test_code&residenceId='+ residenceId +'&clientUId=74E1B63AF061';
+		fetchUrl : function(args){
+			return host + '/server/residence/detailNew.controller?appCode=' + appCode + '&residenceId='+ args[0] +'&clientUId=' + args[1];
 		},
 		resolve : function(originData){
 			var j =JSON.parse(originData);
