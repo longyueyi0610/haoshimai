@@ -793,14 +793,14 @@ fieldset[disabled] #houseDetail #askButton.active {
   background: rgba(0, 0, 0, 0.6);
 }
 #chat .bar .bar-inner {
-  padding: 5px;
+  padding: 7px 5px 5px;
   position: relative;
 }
 #chat .bar .bar-inner button {
   position: absolute;
   border: none;
   right: 5px;
-  top: 6px;
+  top: 7px;
   color: #ffffff;
   background-color: #428bca;
   border-color: #428bca;
