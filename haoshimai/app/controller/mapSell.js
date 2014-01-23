@@ -232,7 +232,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
         });
 
 		var tabSwitch = function(tab) { //切换tab的操作
-			$(".map-tab li.active").removeClass("active");
+			$(".sub li.active").removeClass("active");
 			$("#" + tab).parent().addClass("active");
 			tabFlag = tab;
 			updateFlag();
