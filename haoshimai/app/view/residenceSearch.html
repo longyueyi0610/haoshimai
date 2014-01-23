@@ -1,5 +1,7 @@
 <div id="residenceSearch">
-
+<div class='loadingDiv'>
+  <img src="../assets/img/loading.gif"/>
+</div>
 <div class='banner'>
 	<div class='header'>
 		<div class='input-wrap'>
@@ -14,7 +16,6 @@
 {{#compare data.length 0}}
 <p class='empty'>没有符合条件的搜索记录</p>
 {{else}}
-
 <div class="residences">
 	{{#each data}}
 	<div class='residence-wrap' data-id="{{this.id}}">
@@ -42,6 +43,7 @@
 	</div>
     {{/each}}
 </div>
+{{$ $('.loadingDiv').css('display','none'); }}
 {{/compare}}
 </block>
 
