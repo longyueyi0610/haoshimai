@@ -26,6 +26,8 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
     }; 
 
     env.onready = function(){
+        $("#enquiry-history .back").click(function() {
+            history.back();
+        });
     }; 
-
 });

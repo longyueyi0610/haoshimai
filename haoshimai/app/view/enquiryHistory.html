@@ -1,11 +1,48 @@
-<p>ask history</p>
+<div id="enquiry-history">
+
+<div class='banner'>
+	<div class="header">
+		<a class="back">
+			<img src="../assets/img/reback_icon.png"/>
+		</a>
+		问询历史
+	</div>
+</div>
+<div class="content">
 <block tpl-id="unread-message">
-{{#each messages}}
-    {{this.residenceName}}
-    {{this.houseId}}
-    {{this.title}}
-    {{this.type}}
-    {{this.count}}
-    {{this.lastUpdateTime}}
-{{/each}}
+	{{#compare messages.length 0}}
+	<p class='empty'>暂时没有问询记录</p>
+	{{else}}
+	<div class='messages'>
+	{{#each messages}}
+	<div class='residence-wrap' data-id="{{this.id}}">
+		<div class='residence'>
+			<img src="{{this.brokerPicURl}}"/>
+			<div class='info'>
+				
+				<div class='price'>
+					<span class="highlight">1000万</span>
+				</div>
+				<div class='time'>
+					{{this.lastUpdateTime}}
+				</div>
+				<div class="details">
+					<span class="highlight">{{this.residenceName}}</span>
+				</div>
+				<div class="details"> 
+					{{this.title}}
+				</div>
+			</div>
+		</div>
+		<div class='count badge'>
+			{{this.count}}
+		</div>
+	</div>
+	{{/each}}
+	</div>
+	{{/compare}}
+
 </block>
+</div>
+
+</div>

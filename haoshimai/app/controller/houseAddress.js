@@ -21,5 +21,9 @@ App.houseAddress = sumeru.controller.create(function(env, session, param){
 				position:new AMap.LngLat(lng,lat)
 			});
 			marker.setMap(mapObj);
+
+			$("#house-address .back").click(function() {
+				history.back();
+			});
         };
 });
