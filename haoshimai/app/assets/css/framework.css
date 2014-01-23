@@ -153,6 +153,23 @@
   left: 50%;
   top: 50%;
 }
+.details {
+  padding: 0px 12px;
+  overflow: hidden;
+}
+.details .detail {
+  float: left;
+  width: 45%;
+}
+.details .detail .prop {
+  color: #555555;
+}
+.details .detail .prop::after {
+  content: ':\00a0';
+}
+.details .detail:first-child {
+  width: 55%;
+}
 #map-sell-banner .header img {
   display: block;
   float: left;
@@ -591,10 +608,6 @@ fieldset[disabled] #residenceOnSell #allsorts button.active {
   padding-right: 30px;
   line-height: 25.714285722px;
 }
-#houseDetail #content .details {
-  padding: 0px 12px;
-  overflow: hidden;
-}
 #houseDetail #content .details a.detail {
   display: block;
   text-decoration: none;
@@ -603,19 +616,6 @@ fieldset[disabled] #residenceOnSell #allsorts button.active {
 }
 #houseDetail #content .details a.detail .value {
   color: #333333;
-}
-#houseDetail #content .details .detail {
-  float: left;
-  width: 45%;
-}
-#houseDetail #content .details .detail .prop {
-  color: #555555;
-}
-#houseDetail #content .details .detail .prop::after {
-  content: ':\00a0';
-}
-#houseDetail #content .details .detail:first-child {
-  width: 55%;
 }
 #houseDetail #content #house-residence,
 #houseDetail #content #house-address {
@@ -697,4 +697,23 @@ fieldset[disabled] #houseDetail #askButton.active {
   display: block;
   height: 200px;
   width: 100%;
+}
+#residence-onsell-detail .content .details {
+  margin: 3px 0px;
+}
+#residence-onsell-detail .content .details .detail span.prop {
+  display: inline-block;
+  width: 65px;
+}
+#residence-onsell-detail .content .sketch {
+  position: relative;
+  overflow: hidden;
+  padding: 0px 12px;
+}
+#residence-onsell-detail .content .sketch .title {
+  position: absolute;
+  width: 70px;
+}
+#residence-onsell-detail .content .sketch .info {
+  margin-left: 70px;
 }

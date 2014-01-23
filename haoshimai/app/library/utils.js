@@ -46,10 +46,8 @@ Library.utils = sumeru.Library.create(function(exports){
 		}
 
 		return simple;
-
-
 	};
-    
+
     exports.createLineChart = function(monthTrend){//生成折线图
         var months = [];
         var prices = [];

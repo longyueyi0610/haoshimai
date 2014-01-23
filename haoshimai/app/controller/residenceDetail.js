@@ -38,6 +38,14 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
                 $focuses.carousel({
                     interval: false
                 });
+
+                touch.on($focuses[0], "drag", function(e) {
+                    if (e.direction === 'left') {
+                        $focuses.carousel("next");
+                    } else if (e.direction === 'right') {
+                        $focusses.carousel('prev');
+                    }
+                });
             }
         });
     };
