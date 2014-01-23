@@ -42,5 +42,9 @@ App.chat = sumeru.controller.create(function(env, session, param) {
 
             }
         });
+
+        $("#chat .back").click(function() {
+            history.back();
+        });
     };
 });

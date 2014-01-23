@@ -1,16 +1,65 @@
-<div>我是聊天页</div>
-<block tpl-id="message-list">
-{{#each messages}}
-    {{this.name}}
-    {{this.type}}
-    {{this.houseId}}
-    {{this.brokerId}}
-    {{messageId}}
-    {{useType}}
-    {{this.content}}
-{{/each}}
-</block>
-<div style="position:absolute;bottom:0;">
-<input id='chat-input'placeholder="输入内容"/>
-<button id='send-message-button'>发送</button>
+<div id="chat">
+	<div class='banner'>
+		<div class="header">
+			<a class="back">
+				<img src="../assets/img/reback_icon.png"/>
+			</a>
+			经纪人：李某某
+		</div>
+	</div>
+	<block tpl-id="message-list">
+		<div class="messages">
+			{{#each messages}}
+			<div {{#compare this.type 1}}
+					class="message normal"
+				 {{else}}
+					class="message agent"
+				 {{/compare}}>
+			<!--
+	    	{{this.name}}
+	    	{{this.type}}
+	    	{{this.houseId}}
+	    	{{this.brokerId}}
+	    	{{messageId}}
+	    	{{useType}}
+	    	-->
+	    		{{this.content}}
+	    	</div>
+	    	{{/each}}
+	    	<div class="message agent">
+	    		哈喽？你好？请问你现在方便吗？想跟你了解一下这个房子的消息，供暖好不好啊？物业怎么样啊？周围有没有小学啊？下水道爱不爱堵啊？
+	    	</div>
+	    	<div class="message normal">
+	    		呐，做人呐，最重要的就是开心~我煮面给你吃啊？
+	    	</div>
+	    	<div class="message agent">
+	    		哈喽？你好？请问你现在方便吗？想跟你了解一下这个房子的消息，供暖好不好啊？物业怎么样啊？周围有没有小学啊？下水道爱不爱堵啊？
+	    	</div>
+	    	<div class="message normal">
+	    		呐，做人呐，最重要的就是开心~我煮面给你吃啊？
+	    	</div>
+	    	<div class="message agent">
+	    		哈喽？你好？请问你现在方便吗？想跟你了解一下这个房子的消息，供暖好不好啊？物业怎么样啊？周围有没有小学啊？下水道爱不爱堵啊？
+	    	</div>
+	    	<div class="message normal">
+	    		呐，做人呐，最重要的就是开心~我煮面给你吃啊？
+	    	</div>
+	    	<div class="message agent">
+	    		哈喽？你好？请问你现在方便吗？想跟你了解一下这个房子的消息，供暖好不好啊？物业怎么样啊？周围有没有小学啊？下水道爱不爱堵啊？
+	    	</div>
+	    	<div class="message normal">
+	    		呐，做人呐，最重要的就是开心~我煮面给你吃啊？
+	    	</div>
+	    </div>
+	</block>
+
+	<div class="bar">
+		<div class="bar-inner">
+			<div class="input-wrap">
+				<input type="text" id='chat-input'placeholder="输入内容"/>
+			</div>
+			<button id='send-message-button'>发送</button>
+		</div>
+	</div>
+
 </div>
