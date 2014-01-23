@@ -572,6 +572,7 @@ fieldset[disabled] #residenceOnSell #allsorts button.active {
 }
 #houseDetail #content {
   top: 50px;
+  width: 100%;
   position: absolute;
 }
 #houseDetail #content #house-detail-images img {
@@ -609,6 +610,8 @@ fieldset[disabled] #residenceOnSell #allsorts button.active {
 #houseDetail #content .details a.detail {
   display: block;
   text-decoration: none;
+  background: url(../img/arrow_right.png) right center no-repeat transparent;
+  background-size: 9.333333333333334px 14px;
 }
 #houseDetail #content .details a.detail .value {
   color: #333333;
@@ -682,7 +685,8 @@ fieldset[disabled] #houseDetail #askButton.active {
   background-color: #fff;
 }
 #houseDetail #askButton .inner {
-  background: url(../img/ask.png) left center no-repeat transparent;
+  background: url(../img/answer_icon_normal.png) left center no-repeat transparent;
+  background-size: 30px 30px;
   display: block;
   margin-left: auto;
   margin-right: auto;
