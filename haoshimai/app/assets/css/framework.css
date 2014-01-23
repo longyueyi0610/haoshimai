@@ -116,6 +116,8 @@
 #header .map-title {
   height: 50px;
   padding: 10px;
+  font-size: 18px;
+  line-height: 30px;
   z-index: 1002;
   position: relative;
   background: url('../img/title.png') 100% 100%;
@@ -135,7 +137,8 @@
 }
 #header .map-title #area {
   padding-left: 20px;
-  line-height: 30px;
+  line-height: 35px;
+  font-size: 14px;
   float: left;
 }
 #header .map-title #on-sale {
@@ -297,6 +300,8 @@
 #residenceSearch .header .searchbar {
   height: 50px;
   padding: 10px;
+  font-size: 18px;
+  line-height: 30px;
   z-index: 1002;
   background: url('../img/title.png') 100% 100%;
   -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
@@ -395,6 +400,7 @@ fieldset[disabled] #residenceSearch .header .searchbar button.active {
 #residenceOnSell #residence-onsell-header .header {
   height: 50px;
   padding: 10px;
+  line-height: 30px;
   z-index: 1002;
   position: relative;
   background: url('../img/title.png') 100% 100%;
@@ -403,10 +409,27 @@ fieldset[disabled] #residenceSearch .header .searchbar button.active {
   font-size: 18px;
   text-align: center;
 }
-#residenceOnSell #residence-onsell-header .header .back img,
-#residenceOnSell #residence-onsell-header .header #house-detail-icon img {
+#residenceOnSell #residence-onsell-header .header .back {
   width: 30px;
   height: 30px;
+  top: 10px;
+  position: absolute;
+  left: 10px;
+}
+#residenceOnSell #residence-onsell-header .header .back img {
+  max-width: 100%;
+  max-height: 100%;
+}
+#residenceOnSell #residence-onsell-header .header #house-detail-icon {
+  width: 30px;
+  height: 30px;
+  top: 10px;
+  position: absolute;
+  right: 10px;
+}
+#residenceOnSell #residence-onsell-header .header #house-detail-icon img {
+  max-width: 100%;
+  max-height: 100%;
 }
 #residenceOnSell #residence-onsell-header #residence-onsell-total {
   z-index: 1001;
@@ -557,6 +580,7 @@ fieldset[disabled] #residenceOnSell #allsorts button.active {
 #houseDetail #house-detail-header .header {
   height: 50px;
   padding: 10px;
+  line-height: 30px;
   z-index: 1002;
   position: relative;
   background: url('../img/title.png') 100% 100%;
@@ -569,6 +593,13 @@ fieldset[disabled] #residenceOnSell #allsorts button.active {
 #houseDetail #house-detail-header .header #house-detail-icon img {
   width: 30px;
   height: 30px;
+  top: 10px;
+  position: absolute;
+}
+#houseDetail #house-detail-header .header .back img img,
+#houseDetail #house-detail-header .header #house-detail-icon img img {
+  max-width: 100%;
+  max-height: 100%;
 }
 #houseDetail #content {
   top: 50px;

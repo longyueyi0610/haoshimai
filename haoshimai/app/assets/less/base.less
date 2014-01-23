@@ -17,6 +17,8 @@
 	.header() {
 		height: @banner-header-height;
 		padding: @banner-padding;
+		font-size: @font-size-large;
+		line-height: @banner-header-height - @banner-padding * 2;
 		z-index: @banner-index + 2;
 		position: relative;
 		background:url('../img/title.png') 100% 100%;
@@ -24,6 +26,23 @@
 
     	.nav-btn() {
     		.square(@banner-header-height - @banner-padding * 2);
+			top: @banner-padding;
+    		position: absolute;
+
+    		img {
+    			max-width: 100%;
+    			max-height: 100%;
+    		}
+    	}
+
+    	.nav-info() {
+			.nav-btn();
+			right: @banner-padding;
+    	}
+
+    	.nav-back() {
+    		.nav-btn();	
+    		left: @banner-padding;
     	}
 	}
 
