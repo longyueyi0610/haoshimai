@@ -12,6 +12,7 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
         var args = [];
         args[0] = residenceId;
         args[1] = clientUId;
+        console.log(clientUId);
 
         session.residenceDetailCollection = env.subscribe('pubresidenceDetail', args, function(residenceDetailCollection) {
             var data = residenceDetailCollection.find()[0];
@@ -37,7 +38,9 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
     };
 
     env.onready = function() {
+        alert(session.residenceDetailCollection[0]['monthTrend']);
         session.event('residence-onsell-detail', function() {
+            console.log(session.residenceDetailCollection[0]['monthTrend']);
             //Library.utils.createLineChart(session.residenceDetailCollection[0]['monthTrend']);
             /*$('.back').click(function(){
                 history.back();
