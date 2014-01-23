@@ -1,7 +1,7 @@
 module.exports = function(fw){
-    fw.publish('chatMessage','pubchatMessage',function(callback){
+    fw.publish('chatMessage','pubchatMessage',function(args,callback){
         var collection = this;
 
-        collection.extfind('pubchatMessage',callback);
+        collection.extfind('pubchatMessage',args,callback);
     }); 
 }

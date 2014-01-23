@@ -3,11 +3,18 @@ sumeru.router.add({
     action: 'App.chat'
 });
 
-App.chat = sumeru.controller.create(function(env, session) {
+App.chat = sumeru.controller.create(function(env, session, param) {
     var view = 'chat';
+    var houseId = param['houseId'];
+    var brokerId = param['brokerId'];
+    var clientUId = param['clientUId'];
 
     var getDetails = function() {
-        session.chatMessages = env.subscribe('pubchatMessage', function(chatMessageCollection) {
+        var args = [];
+        args[0] = houseId;
+        args[1] = brokerId;
+        args[2] = clientUId = clientUId;
+        session.chatMessages = env.subscribe('pubchatMessage', args,function(chatMessageCollection) {
             session.bind('message-list', {
                 messages: chatMessageCollection.find(),
             });
