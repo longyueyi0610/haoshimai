@@ -717,3 +717,48 @@ fieldset[disabled] #houseDetail #askButton.active {
 #residence-onsell-detail .content .sketch .info {
   margin-left: 70px;
 }
+#enquiry-history .content {
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  overflow: auto;
+  bottom: 0px;
+}
+#enquiry-history .content .messages {
+  padding: 5px;
+}
+#enquiry-history .content .messages .residence-wrap {
+  -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: visible;
+}
+#enquiry-history .content .messages .residence-wrap .residence {
+  height: 80px;
+}
+#enquiry-history .content .messages .residence-wrap .residence .price {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+}
+#enquiry-history .content .messages .residence-wrap .residence .time {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  color: #999999;
+}
+#enquiry-history .content .messages .residence-wrap .count {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: #b20;
+  color: #fff;
+  margin-top: -2px;
+  margin-right: -2px;
+}
+#enquiry-history .content .empty {
+  width: 145px;
+  height: 20px;
+  margin-left: -72px;
+  margin-top: -10px;
+}
