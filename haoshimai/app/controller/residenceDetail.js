@@ -53,7 +53,7 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
                     if (e.direction === 'left') {
                         $focuses.carousel("next");
                     } else if (e.direction === 'right') {
-                        $focusses.carousel('prev');
+                        $focuses.carousel('prev');
                     }
                 });
             }
