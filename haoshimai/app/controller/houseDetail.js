@@ -21,9 +21,9 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
 					index: index
 				};
 			});
-			
+
 			session.bind('house-detail', {
-				data: houseDetailCollection.find()[0],
+				data: data,
 			});
 		});
 	};

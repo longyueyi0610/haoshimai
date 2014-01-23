@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div id="residence-onsell-detail">
 
 <block tpl-id="residence-onsell-detail">
@@ -9,21 +8,10 @@
 		</a>
 		小区详情
 	</div>
-=======
-<p>小区详情</p>
-<div id='line-chart'>
 </div>
-<block tpl-id="residence-onsell-detail">
-<div id="residence-onsell-de">
-{{$ Library.utils.createLineChart(data.monthTrend); }}
-{{data.id}}
-{{data.address}}
->>>>>>> upstream/master
-</div>
-</block>
 
 <div class='content'>
-	<div id="house-detail-images" class="carousel slide" 
+	<div id="residence-detail-images" class="carousel slide" 
 			data-ride="carousel">
 		<ol class="carousel-indicators">
 			{{#each data.picURLWithSize}}
@@ -48,7 +36,9 @@
 			{{/each}}
   		</div>
 	</div>
-	<div id="container" style="width:100%; height:400px;"></div>
+	<div id="line-chart"></div>
+	{{$ Library.utils.createLineChart(data.monthTrend);}}
 </div>
+</block>
 
 </div>

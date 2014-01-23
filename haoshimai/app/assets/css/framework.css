@@ -677,3 +677,8 @@ fieldset[disabled] #houseDetail #askButton.active {
   bottom: 0px;
   overflow: auto;
 }
+#residence-onsell-detail .content #residence-detail-images img {
+  display: block;
+  height: 200px;
+  width: 100%;
+}
