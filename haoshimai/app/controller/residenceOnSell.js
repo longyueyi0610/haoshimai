@@ -47,6 +47,7 @@ App.residenceOnSell = sumeru.controller.create(function(env, session, param) {
 		});
 	};
 
+
 	env.onload = function() {
 		return [getDetails];
 	};

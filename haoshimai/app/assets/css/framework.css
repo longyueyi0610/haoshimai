@@ -308,6 +308,12 @@
   bottom: 80px;
   right: 10px;
 }
+#count-badge {
+  position: fixed;
+  bottom: 130px;
+  right: 0px;
+  background-color: red;
+}
 #residenceSearch {
   background-color: #4b4e59;
   min-height: 100%;

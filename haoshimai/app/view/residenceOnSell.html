@@ -14,7 +14,7 @@
 		<div class='sub'>
     		{{data.residenceName}}({{data.onSaleCount}})
 		</div>
-	</div>
+    </div>
 </block>
 
 <block tpl-id="residence-container">
@@ -33,14 +33,14 @@
 			{{/each}}
 		</ol>
 
-		<div class="carousel-inner">
+        <div class="carousel-inner">
 			{{#each data.picURLWithSize}}
 				{{#if this.first}}
     			<div class="item active"><img src="{{this.url}}"></div>
     			{{else}}
     			<div class="item"><img src="{{this.url}}"></div>
     			{{/if}}
-			{{/each}}
+            {{/each}}
   		</div>
 	</div>
 
@@ -49,8 +49,8 @@
 	<p class='empty'>没有符合条件的搜索记录</p>
 	</div>
 	{{ else }}
-	<div class="houses">
-		{{#each houseList}}
+    <div class="houses">
+        {{#each houseList}}
 		<div class='residence-wrap' data-id="{{this.id}}">
 			<div class='residence'>
 				<div class='price highlight'>{{this.price}}</div>
@@ -73,7 +73,7 @@
 				</div>
 			</div>
 		</div>
-		{{/each}}
+        {{/each}}
 	</div>
 </div>
 

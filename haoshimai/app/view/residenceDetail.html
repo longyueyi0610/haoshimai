@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div id="residence-onsell-detail">
 
 <block tpl-id="residence-onsell-detail">
@@ -8,6 +9,16 @@
 		</a>
 		小区详情
 	</div>
+=======
+<p>小区详情</p>
+<div id='line-chart'>
+</div>
+<block tpl-id="residence-onsell-detail">
+<div id="residence-onsell-de">
+{{$ Library.utils.createLineChart(data.monthTrend); }}
+{{data.id}}
+{{data.address}}
+>>>>>>> upstream/master
 </div>
 </block>
 
