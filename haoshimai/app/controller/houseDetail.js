@@ -17,7 +17,7 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
         args[0] = houseId;
         args[1] = clientUId;
 
-		env.subscribe('pubhouseDetail', args, function(houseDetailCollection) {
+		session.houseDetailCollection = env.subscribe('pubhouseDetail', args, function(houseDetailCollection) {
 			var data = houseDetailCollection.find()[0];
 			data.picURLWithSize = _.map(data.picURLWithSize, function(item, index) {
 				return {
@@ -79,7 +79,13 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
 			});
 		});
 		$('#askButton').click(function() {
-			env.redirect('/chat', true);
+            var brokerName = session.houseDetailCollection[0]['brokerName'];
+            var brokerId = session.houseDetailCollection[0]['brokerId'];
+			env.redirect('/chat', {
+                'houseId': houseId,
+                'clientUId': clientUId,
+                'brokerId' : brokerId
+            },true);
 		});
 	};
 

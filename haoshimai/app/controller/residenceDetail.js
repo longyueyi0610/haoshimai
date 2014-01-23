@@ -57,6 +57,10 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
                     }
                 });
             }
+
+            $("#residence-onsell-detail .back").click(function() {
+                history.back();
+            });
         });
     };
 });
