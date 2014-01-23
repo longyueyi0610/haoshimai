@@ -2,6 +2,7 @@
 node_modules
 bower_components
 /haoshimai/backup
+/haoshimai/app/server_config/site_url.js
 
 # C extensions
 *.so
