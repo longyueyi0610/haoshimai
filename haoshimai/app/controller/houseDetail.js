@@ -68,7 +68,7 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
 				env.redirect('/houseAddress', {
 					'lng': lng,
 					'lat': lat
-				}, true);
+				},true);
 			});
 			$('#house-residence').click(function() {
 				var residenceId = $(this).attr('data-id');

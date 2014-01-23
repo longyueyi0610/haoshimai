@@ -38,10 +38,10 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
 
     env.onready = function() {
         session.event('residence-onsell-detail', function() {
-            Library.utils.createLineChart(session.residenceDetailCollection[0]['monthTrend']);
-            $('.back').click(function(){
+            //Library.utils.createLineChart(session.residenceDetailCollection[0]['monthTrend']);
+            /*$('.back').click(function(){
                 history.back();
-            });
+            });*/
 
             var $focuses = $("#residence-detail-images");
             if ($focuses.find(".item").length !== 0) {

@@ -12,7 +12,7 @@ appCode = 'app_test_code';
 clientUId = ''; //客户端ID
 
 App.mapSell = sumeru.controller.create(function(env, session) {
-	clientUId = env['clientId'];
+    clientUId = env['clientId'];
 
 	var _markerTemplate = null;
 	var _contentTemplate = null;
