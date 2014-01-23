@@ -1,11 +1,44 @@
-<p>小区详情</p>
-<div id='line-chart'>
-</div>
+<div id="residence-onsell-detail">
+
 <block tpl-id="residence-onsell-detail">
-<div id="residence-onsell-de">
-{{$ Library.utils.createLineChart(data.monthTrend); }}
-{{data.id}}
-{{data.address}}
+<div class="banner">
+	<div class="header">
+		<a class="back">
+			<img src="../assets/img/reback_icon.png"/>
+		</a>
+		小区详情
+	</div>
+</div>
+
+<div class='content'>
+	<div id="residence-detail-images" class="carousel slide" 
+			data-ride="carousel">
+		<ol class="carousel-indicators">
+			{{#each data.picURLWithSize}}
+			{{#if this.first}}
+    		<li data-target="#residence-onsell-houses" 
+    			data-slide-to="{{this.index}}" class="active"></li>
+    		{{else}}
+    		<li data-target="#residence-onsell-houses" 
+    				data-slide-to="{{this.index}}"></li>
+    		{{/if}}
+			{{/each}}
+		</ol>
+
+		<div class="carousel-inner">
+			{{#each data.picURLWithSize}}
+				{{#if this.first}}
+    			<div class="item active"><img src="{{this.url}}">
+    			</div>
+    			{{else}}
+    			<div class="item"><img src="{{this.url}}"></div>
+    			{{/if}}
+			{{/each}}
+  		</div>
+	</div>
+	<div id="line-chart"></div>
+	{{$ Library.utils.createLineChart(data.monthTrend);}}
 </div>
 </block>
-<div id="container" style="width:100%; height:400px;"></div>
+
+</div>

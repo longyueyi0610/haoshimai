@@ -1,22 +1,21 @@
 <div id="residenceOnSell">
 
 <block tpl-id="residence-name">
-	<div id="residence-onsell-header">
+	<div class="banner">
 		<div class="header">
-			<a class="back pull-left">
+			<a class="back">
 				<img src="../assets/img/reback_icon.png"/>
 			</a>
 			小区在售房
-			<a id="house-detail-icon" class="pull-right">
+			<a class='info' id="house-detail-icon">
 				<img src="../assets/img/house_detail_icon.png"/>
 			</a>
 		</div>
-		<div id="residence-onsell-total">
+		<div class='sub'>
     		{{data.residenceName}}({{data.onSaleCount}})
 		</div>
     </div>
 </block>
-
 
 <block tpl-id="residence-container">
 <div id="onsell-content">

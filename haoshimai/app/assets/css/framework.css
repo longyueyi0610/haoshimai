@@ -40,6 +40,54 @@
 .affix {
   position: fixed;
 }
+.banner {
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 1000;
+}
+.banner .header {
+  height: 50px;
+  padding: 10px;
+  font-size: 18px;
+  line-height: 30px;
+  z-index: 1002;
+  position: relative;
+  text-align: center;
+  background: url('../img/title.png') 100% 100%;
+  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+}
+.banner .header .info {
+  width: 30px;
+  height: 30px;
+  top: 10px;
+  position: absolute;
+  right: 10px;
+}
+.banner .header .info img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.banner .header .back {
+  width: 30px;
+  height: 30px;
+  top: 10px;
+  position: absolute;
+  left: 10px;
+}
+.banner .header .back img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.banner .sub {
+  z-index: 1001;
+  position: relative;
+  color: #fff;
+  background-color: #494c56;
+}
 .haoshimai-overlay {
   position: absolute;
   left: 0px;
@@ -105,68 +153,46 @@
   left: 50%;
   top: 50%;
 }
-#header {
-  left: 0px;
-  right: 0px;
-  top: 0px;
-  box-sizing: border-box;
-  position: fixed;
-  z-index: 1000;
-}
-#header .map-title {
-  height: 50px;
-  padding: 10px;
-  z-index: 1002;
-  position: relative;
-  background: url('../img/title.png') 100% 100%;
-  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
-}
-#header .map-title img {
+#map-sell-banner .header img {
   display: block;
   float: left;
   max-height: 100%;
   margin-right: 10px;
 }
-#header .map-title #haoshimai {
+#map-sell-banner .header #haoshimai {
   float: left;
   line-height: 30px;
   font-size: 18px;
 }
-#header .map-title #area {
+#map-sell-banner .header #area {
   padding-left: 20px;
-  line-height: 30px;
+  line-height: 35px;
+  font-size: 14px;
   float: left;
 }
-#header .map-title #on-sale {
+#map-sell-banner .header #on-sale {
   padding-right: 20px;
   font-size: 18px;
   line-height: 30px;
   float: right;
 }
-#header .map-tab {
-  z-index: 1001;
-  position: relative;
-  color: #fff;
-  background-color: #494c56;
-}
-#header .map-tab ul {
+#map-sell-banner .sub ul {
   padding-left: 0;
   margin: 0px;
   overflow: hidden;
   list-style: none;
 }
-#header .map-tab ul li {
+#map-sell-banner .sub ul li {
   width: 25%;
   box-sizing: border-box;
   padding: 0px;
   float: left;
   border-right: 1px solid #5f636a;
 }
-#header .map-tab ul li.active a {
+#map-sell-banner .sub ul li.active a {
   color: #f47c00;
 }
-#header .map-tab ul li a {
+#map-sell-banner .sub ul li a {
   text-align: center;
   color: #fff;
   text-decoration: none;
@@ -174,7 +200,7 @@
   display: block;
   padding: 5px 12px;
 }
-#header .map-tab ul li::last-child {
+#map-sell-banner .sub ul li::last-child {
   border-right: none;
 }
 .content-marker {
@@ -292,37 +318,25 @@
   background-color: #4b4e59;
   min-height: 100%;
 }
-#residenceSearch .header {
-  left: 0px;
-  right: 0px;
-  top: 0px;
-  box-sizing: border-box;
-  position: fixed;
-  z-index: 1000;
-}
-#residenceSearch .header .searchbar {
-  height: 50px;
-  padding: 10px;
-  z-index: 1002;
-  background: url('../img/title.png') 100% 100%;
-  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+#residenceSearch .banner .header {
   padding: 5px;
   position: relative;
 }
-#residenceSearch .header .searchbar .input-wrap {
+#residenceSearch .banner .header .input-wrap {
   margin-right: 60px;
 }
-#residenceSearch .header .searchbar .input-wrap input[type=text] {
+#residenceSearch .banner .header .input-wrap input[type=text] {
   background: url(../img/searchbox_icon.png) 7px center no-repeat #ffffff;
-  padding: 7px 12px 7px 32px;
+  padding: 8px 12px 8px 32px;
   outline: none;
-  border-radius: 17px;
+  line-height: 20px;
+  font-size: 14px;
+  border-radius: 18px;
   border: none;
   width: 100%;
   box-shadow: inset 0px 2px 3px rgba(0, 0, 0, 0.3);
 }
-#residenceSearch .header .searchbar button {
+#residenceSearch .banner .header button {
   position: absolute;
   border: none;
   right: 7px;
@@ -341,39 +355,39 @@
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff626675', endColorstr='#ff4b4e59', GradientType=0);
 }
-#residenceSearch .header .searchbar button:hover,
-#residenceSearch .header .searchbar button:focus,
-#residenceSearch .header .searchbar button:active,
-#residenceSearch .header .searchbar button.active,
-.open .dropdown-toggle#residenceSearch .header .searchbar button {
+#residenceSearch .banner .header button:hover,
+#residenceSearch .banner .header button:focus,
+#residenceSearch .banner .header button:active,
+#residenceSearch .banner .header button.active,
+.open .dropdown-toggle#residenceSearch .banner .header button {
   color: #ffffff;
   background-color: #383b43;
   border-color: #2f3138;
 }
-#residenceSearch .header .searchbar button:active,
-#residenceSearch .header .searchbar button.active,
-.open .dropdown-toggle#residenceSearch .header .searchbar button {
+#residenceSearch .banner .header button:active,
+#residenceSearch .banner .header button.active,
+.open .dropdown-toggle#residenceSearch .banner .header button {
   background-image: none;
 }
-#residenceSearch .header .searchbar button.disabled,
-#residenceSearch .header .searchbar button[disabled],
-fieldset[disabled] #residenceSearch .header .searchbar button,
-#residenceSearch .header .searchbar button.disabled:hover,
-#residenceSearch .header .searchbar button[disabled]:hover,
-fieldset[disabled] #residenceSearch .header .searchbar button:hover,
-#residenceSearch .header .searchbar button.disabled:focus,
-#residenceSearch .header .searchbar button[disabled]:focus,
-fieldset[disabled] #residenceSearch .header .searchbar button:focus,
-#residenceSearch .header .searchbar button.disabled:active,
-#residenceSearch .header .searchbar button[disabled]:active,
-fieldset[disabled] #residenceSearch .header .searchbar button:active,
-#residenceSearch .header .searchbar button.disabled.active,
-#residenceSearch .header .searchbar button[disabled].active,
-fieldset[disabled] #residenceSearch .header .searchbar button.active {
+#residenceSearch .banner .header button.disabled,
+#residenceSearch .banner .header button[disabled],
+fieldset[disabled] #residenceSearch .banner .header button,
+#residenceSearch .banner .header button.disabled:hover,
+#residenceSearch .banner .header button[disabled]:hover,
+fieldset[disabled] #residenceSearch .banner .header button:hover,
+#residenceSearch .banner .header button.disabled:focus,
+#residenceSearch .banner .header button[disabled]:focus,
+fieldset[disabled] #residenceSearch .banner .header button:focus,
+#residenceSearch .banner .header button.disabled:active,
+#residenceSearch .banner .header button[disabled]:active,
+fieldset[disabled] #residenceSearch .banner .header button:active,
+#residenceSearch .banner .header button.disabled.active,
+#residenceSearch .banner .header button[disabled].active,
+fieldset[disabled] #residenceSearch .banner .header button.active {
   background-color: #4b4e59;
   border-color: #4b4e59;
 }
-#residenceSearch .header .searchbar button .badge {
+#residenceSearch .banner .header button .badge {
   color: #4b4e59;
   background-color: #fff;
 }
@@ -390,35 +404,11 @@ fieldset[disabled] #residenceSearch .header .searchbar button.active {
   min-height: 100%;
   background-color: #4b4e59;
 }
-#residenceOnSell #residence-onsell-header {
-  left: 0px;
-  right: 0px;
-  top: 0px;
-  box-sizing: border-box;
-  position: fixed;
-  z-index: 1000;
-}
-#residenceOnSell #residence-onsell-header .header {
-  height: 50px;
-  padding: 10px;
-  z-index: 1002;
-  position: relative;
-  background: url('../img/title.png') 100% 100%;
-  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+#residenceOnSell .banner .header {
   font-size: 18px;
   text-align: center;
 }
-#residenceOnSell #residence-onsell-header .header .back img,
-#residenceOnSell #residence-onsell-header .header #house-detail-icon img {
-  width: 30px;
-  height: 30px;
-}
-#residenceOnSell #residence-onsell-header #residence-onsell-total {
-  z-index: 1001;
-  position: relative;
-  color: #fff;
-  background-color: #494c56;
+#residenceOnSell .banner .sub {
   text-align: center;
   line-height: 30px;
 }
@@ -552,37 +542,14 @@ fieldset[disabled] #residenceOnSell #allsorts button.active {
   min-height: 100%;
   background-color: #fff;
 }
-#houseDetail #house-detail-header {
-  left: 0px;
-  right: 0px;
-  top: 0px;
-  box-sizing: border-box;
-  position: fixed;
-  z-index: 1000;
-}
-#houseDetail #house-detail-header .header {
-  height: 50px;
-  padding: 10px;
-  z-index: 1002;
-  position: relative;
-  background: url('../img/title.png') 100% 100%;
-  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
-  font-size: 18px;
-  text-align: center;
-}
-#houseDetail #house-detail-header .header .back img,
-#houseDetail #house-detail-header .header #house-detail-icon img {
-  width: 30px;
-  height: 30px;
-}
 #houseDetail #content {
   top: 50px;
+  width: 100%;
   position: absolute;
 }
 #houseDetail #content #house-detail-images img {
   display: block;
-  height: 240px;
+  height: 200px;
   width: 100%;
 }
 #houseDetail #content .title {
@@ -608,111 +575,110 @@ fieldset[disabled] #residenceOnSell #allsorts button.active {
   padding-right: 30px;
   line-height: 25.714285722px;
 }
-/*
-#baiduMap {
-    z-index:-1;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    margin:0;
+#houseDetail #content .details {
+  padding: 0px 12px;
+  overflow: hidden;
 }
-
-#searchResidentInput{
-	width:80%;
-	float:left;
+#houseDetail #content .details a.detail {
+  display: block;
+  text-decoration: none;
+  background: url(../img/arrow_right.png) right center no-repeat transparent;
+  background-size: 9.333333333333334px 14px;
 }
-
-#cancel{
-	float:right;
+#houseDetail #content .details a.detail .value {
+  color: #333333;
 }
-
-.markerFlag{
-	height:100px;
-	width:100px;
-	background-color:black;
+#houseDetail #content .details .detail {
+  float: left;
+  width: 45%;
 }
-
-#residence-onsell-header{
-	line-height:72px;
-	background:url('../img/title.png') 100% 100%;
-	width:100%;
-	height:72px;
-	text-align:center;
-	font-size:32px;
-	color:black;
-	position:absolute;
-	top:0;
-	background-color:#494c56;
+#houseDetail #content .details .detail .prop {
+  color: #555555;
 }
-
-#residence-onsell-header .back{
-	position:absolute;
-	top:0;
-	left:0;
+#houseDetail #content .details .detail .prop::after {
+  content: ':\00a0';
 }
-
-#residence-onsell-header #house-detail-icon{
-	position:absolute;
-	top:0;
-	right:0;
+#houseDetail #content .details .detail:first-child {
+  width: 55%;
 }
-
-#residence-onsell-total{
-	width:100%;
-	height:30px;
-	line-height:30px;
-	text-align:center;
-	background-color:#494c56;
-	position:absolute;
-	top:70px;
-	font-size:20px;
-	color:white;
+#houseDetail #content #house-residence,
+#houseDetail #content #house-address {
+  display: block;
+  width: 100%;
 }
-
-#residence-content{
-	width:100%;
-	height:auto;
-	overflow:scroll;
-	position:absolute;
-	top:100px;
+#houseDetail #askButton {
+  color: #fff;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  border: none;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-color: rgba(0, 0, 0, 0.6);
+  padding: 0px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  border-radius: 0px;
 }
-
-#residence-pic {
-	width:100%;
-	overflow: hidden;
+#houseDetail #askButton:hover,
+#houseDetail #askButton:focus,
+#houseDetail #askButton:active,
+#houseDetail #askButton.active,
+.open .dropdown-toggle#houseDetail #askButton {
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-color: rgba(0, 0, 0, 0.6);
 }
-
-#residence-pic img {
-	max-width: 100%;
-	height: auto;
+#houseDetail #askButton:active,
+#houseDetail #askButton.active,
+.open .dropdown-toggle#houseDetail #askButton {
+  background-image: none;
 }
-
-#residence-pic .nav {
-	text-align: center;
-	margin-top: 10px;
+#houseDetail #askButton.disabled,
+#houseDetail #askButton[disabled],
+fieldset[disabled] #houseDetail #askButton,
+#houseDetail #askButton.disabled:hover,
+#houseDetail #askButton[disabled]:hover,
+fieldset[disabled] #houseDetail #askButton:hover,
+#houseDetail #askButton.disabled:focus,
+#houseDetail #askButton[disabled]:focus,
+fieldset[disabled] #houseDetail #askButton:focus,
+#houseDetail #askButton.disabled:active,
+#houseDetail #askButton[disabled]:active,
+fieldset[disabled] #houseDetail #askButton:active,
+#houseDetail #askButton.disabled.active,
+#houseDetail #askButton[disabled].active,
+fieldset[disabled] #houseDetail #askButton.active {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-color: rgba(0, 0, 0, 0.6);
 }
-
-#residence-pic .nav li {
-	display: inline-block;
-	height: 0;
-	line-height: 0;
-	border: 10px solid #ddd;
-	width: 0;
-	border-radius: 100%;
-	margin: 0 10px;
+#houseDetail #askButton .badge {
+  color: rgba(0, 0, 0, 0.6);
+  background-color: #fff;
 }
-
-#residence-pic .nav li.active {
-	border-color: #29A9D3;
+#houseDetail #askButton .inner {
+  background: url(../img/answer_icon_normal.png) left center no-repeat transparent;
+  background-size: 30px 30px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70px;
+  height: auto;
+  line-height: 35px;
+  padding-left: 35px;
 }
-
-#allsorts {
-	width:100%;
-	background-color:#494c56;
-	z-index:999;
-	position:fixed;
-	bottom:0;
-	height:200px;
-	display:none;
+#residence-onsell-detail .sub {
+  padding: 5px 12px;
 }
-*/
+#residence-onsell-detail .content {
+  position: absolute;
+  width: 100%;
+  top: 50px;
+  bottom: 0px;
+  overflow: auto;
+}
+#residence-onsell-detail .content #residence-detail-images img {
+  display: block;
+  height: 200px;
+  width: 100%;
+}
