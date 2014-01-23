@@ -7,6 +7,7 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
     var view = 'residenceDetail';
     var residenceId = param['residenceId'];
     var clientUId = param['clientUId'];
+    var monthTrend = [];
 
     var getDetails = function() {
         var args = [];
@@ -16,6 +17,7 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
 
         session.residenceDetailCollection = env.subscribe('pubresidenceDetail', args, function(residenceDetailCollection) {
             var data = residenceDetailCollection.find()[0];
+            monthTrend = data['monthTrend'];
             data.picURLWithSize = _.map(data.picURLWithSize, function(item, index) {
                 return {
                     url: item,
@@ -38,14 +40,10 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
     };
 
     env.onready = function() {
-        alert(session.residenceDetailCollection[0]['monthTrend']);
         session.event('residence-onsell-detail', function() {
-            console.log(session.residenceDetailCollection[0]['monthTrend']);
-            //Library.utils.createLineChart(session.residenceDetailCollection[0]['monthTrend']);
-            /*$('.back').click(function(){
-                history.back();
-            });*/
-
+            if (monthTrend !== null){
+                Library.utils.createLineChart(monthTrend);
+            }
             var $focuses = $("#residence-detail-images");
             if ($focuses.find(".item").length !== 0) {
                 $focuses.carousel({
