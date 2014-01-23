@@ -51,8 +51,12 @@ App.residenceSearch = sumeru.controller.create(function(env, session, param) {
             'keydown': function(e) {
                 if (e.keyCode == 13) {
                     keyword = $('#searchResidenceInput').val();
-                    session.set('keyword', keyword);
-                    session.commit();
+                    if (keyword == ''){
+                    }else{
+                        session.set('keyword', keyword);
+                        session.commit();
+                        $('.loadingDiv').css('display','block');
+                    }
                 }
             }
         });
