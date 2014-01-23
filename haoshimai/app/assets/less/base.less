@@ -128,3 +128,25 @@
 	left: 50%;
 	top: 50%;
 }
+
+.details {
+	padding: 0px 12px;
+	overflow: hidden;
+
+	.detail {
+		float: left;
+		width: 45%;
+
+		.prop {
+			color: @gray;
+
+			&::after {
+				content: ':\00a0';
+			}
+		}
+
+		&:first-child {
+			width: 55%;
+		}
+	}
+}

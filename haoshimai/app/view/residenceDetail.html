@@ -38,6 +38,128 @@
 	</div>
 	<div id="line-chart"></div>
 	{{$ Library.utils.createLineChart(data.monthTrend);}}
+
+	<div class="info-pane">
+		<div class="details">
+			<div class='detail'>
+				<span class='prop'>年度涨幅</span>
+				<span class="value">{{data.annualPriceIncreasement}}</span>
+			</div>
+		</div>
+		<div class="details">
+			<div class='detail'>
+				<span class='prop'>年换手率</span>
+				<span class="value">{{data.annualTurnoverRate}}</span>
+			</div>
+		</div>
+		<div class="details">
+			<div class='detail'>
+				<span class='prop'>租金回报</span>
+				<span class="value">{{data.rentRevenue}}</span>
+			</div>
+		</div>
+		<div class="details">
+			<div class='detail'>
+				<span class='prop'>在售房屋</span>
+				<span class="value">{{data.onSaleCount}}套</span>
+			</div>
+		</div>
+		<div class="details">
+			<div class='detail' style="width: 100%">
+				<span class='prop'>售价范围</span>
+				<span class="value">{{data.priceRange}}万</span>
+			</div>
+		</div>
+		<div class="details">
+			<div class='detail'>
+				<span class='prop'>上月成交</span>
+				<span class="value">{{data.lastMonthDealCount}}套
+				</span>
+			</div>
+		</div>
+		<div class="details">
+			<div class='detail'>
+				<span class='prop'>在租房屋</span>
+				<span class="value">{{data.onRentCount}}套</span>
+			</div>
+		</div>
+		<div class="details">
+			<div class='detail' style="width: 100%">
+				<span class='prop'>租金范围</span>
+				<span class="value">{{data.rentRange}}元每月</span>
+			</div>
+		</div>
+		<div class="sketch">
+			<div class="title"> 小区概况:
+			</div>
+			<div class='info'>
+				<div class="details" style="margin-top: 0px">
+					<div class='detail'>
+						<span class='prop'>总户数</span>
+						<span class="value">
+							{{data.houseHold}}
+						</span>
+					</div>
+					<div class='detail'>
+						<span class='prop'>绿化率</span>
+						<span class="value">
+							{{data.greenRate}}
+						</span>
+					</div>
+				</div>		
+				<div class="details">
+					<div class='detail'>
+						<span class='prop'>停车位</span>
+						<span class="value">
+							{{data.parking}}
+						</span>
+					</div>
+					<div class='detail'>
+						<span class='prop'>容积率</span>
+						<span class="value">
+							{{data.volumnRate}}
+						</span>
+					</div>
+				</div>		
+				<div class="details">
+					<div class='detail'>
+						<span class='prop'>类型</span>
+						<span class="value">
+							{{data.type}}
+						</span>
+					</div>
+					<div class='detail'>
+						<span class='prop'>物业费</span>
+						<span class="value">
+							{{data.propertyFree}}
+						</span>
+					</div>
+				</div>
+				<div class="details">
+					<div class='detail' style="width: 100%">
+						<span class='prop'>开发商</span>
+						<span class="value">
+							{{data.developer}}
+						</span>
+					</div>
+				</div>
+				<div class="details">
+					<div class='detail' style="width: 100%">
+						<span class='prop'>竣工时间</span>
+						<span class="value">
+							{{data.finishedTime}}
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="details">
+			<div class='detail'>
+				<span class='prop' style="display: inline-block;text-align: right;">地址</span>
+				<span class="value">{{data.address}}</span>
+			</div>
+		</div>
+	</div>
 </div>
 </block>
 
