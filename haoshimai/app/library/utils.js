@@ -49,5 +49,55 @@ Library.utils = sumeru.Library.create(function(exports){
 
 
 	};
+    exports.createLineChart = function(monthTrend){//生成折线图
+        var months = [];
+        var prices = [];
+        var length = monthTrend.length;
+        for (var i= 0; i<length; i++){
+            months[length-1-i] = monthTrend[i]['month'];
+            prices[length-1-i] = monthTrend[i]['price1'];
+        }
+        $('#line-chart').highcharts({
+            chart: {
+                renderTo: 'line-chart',
+                defaultSeriesType: 'line',
+                height: '150'
+            }, 
+            title: {
+                text: ''
+            }, 
+            legend: {
+                enabled: false
+            },  
+            credits: {
+                enabled: false
+            },  
+            exporting: {
+                enabled: false
+            },  
+            xAxis: {
+                categories: months
+            }, 
+            yAxis: {
+                title:{text: ''},
+                min:'0'
+            }, 
+            tooltip: {
+                enabled: false
+            },  
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: true
+                    },  
+                    enableMouseTracking: false
+                }   
+            },  
+            series: [{
+                data: prices
+            }]
+        });
+        return '';
+    }
 
 });
