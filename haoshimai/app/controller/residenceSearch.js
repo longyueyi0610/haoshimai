@@ -44,7 +44,7 @@ App.residenceSearch = sumeru.controller.create(function(env, session, param) {
 
         session.eventMap('#cancel', {
             'click': function(e) {
-                env.redirect("/");
+                env.redirect("/mapSell",true);
             }
         });
         session.eventMap('#searchResidenceInput', {
@@ -52,10 +52,12 @@ App.residenceSearch = sumeru.controller.create(function(env, session, param) {
                 if (e.keyCode == 13) {
                     keyword = $('#searchResidenceInput').val();
                     if (keyword == ''){
+                        //输入信息为空的时候什么都不做
                     }else{
                         session.set('keyword', keyword);
                         session.commit();
                         $('.loadingDiv').css('display','block');
+                         $('#searchResidenceInput').val('');
                     }
                 }
             }

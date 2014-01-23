@@ -33,7 +33,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
     }; 
 
 	env.onrender = function(doRender) {
-		doRender(view, ['shake', 'left']);
+		doRender(view, ['push', 'left']);
 	};
 
 	env.onready = function() {
