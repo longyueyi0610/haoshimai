@@ -25,7 +25,7 @@ App.residenceSearch = sumeru.controller.create(function(env, session, param) {
     };
 
     env.onrender = function(doRender) {
-        doRender("residenceSearch", ['fade', 'z-index']);
+        doRender("residenceSearch", ['push', 'left']);
     };
 
     var $root;
@@ -35,10 +35,10 @@ App.residenceSearch = sumeru.controller.create(function(env, session, param) {
             $root = $("#residenceSearch");
         }
 
-        $root.on('click', '.residence', function() {
-            env.redirect('/houseDetail', {
-                'houseId': $(this).data("id"),
-                'client': clientUId
+        $root.on('click', '.residence-wrap', function() {
+            env.redirect('/residenceOnSell', {
+                'residenceId': $(this).attr('data-id'),
+                'clientUId': clientUId
             }, true);
         });
 

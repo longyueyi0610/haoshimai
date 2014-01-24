@@ -64,6 +64,8 @@ function runnable() {
                 "data": [{
                     residenceName: '世茂滨江',
                     houseId: 556353,
+                    brokerName: '黄飞鸿',
+                    brokerId: 16,
                     title: 'nihao',
                     type: '1',
                     count: '3',

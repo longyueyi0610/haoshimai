@@ -13,7 +13,6 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
         var args = [];
         args[0] = residenceId;
         args[1] = clientUId;
-        console.log(clientUId);
 
         session.residenceDetailCollection = env.subscribe('pubresidenceDetail', args, function(residenceDetailCollection) {
             var data = residenceDetailCollection.find()[0];

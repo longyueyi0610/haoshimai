@@ -90,7 +90,7 @@ App.residenceOnSell = sumeru.controller.create(function(env, session, param) {
 				});
 			}
 
-			$('.residence-wrap').click(function() {
+			$root.on('click', '.residence-wrap', function() {
 				env.redirect('/houseDetail', {
 					'houseId': $(this).attr("data-id"),
                     'clientUId': clientUId
