@@ -1,5 +1,7 @@
 <div id="residenceOnSell">
-
+<div class='loadingDiv'>
+     <img src="../assets/img/loading.gif"/>
+</div>
 <block tpl-id="residence-name">
 	<div class="banner">
 		<div class="header">
@@ -92,6 +94,7 @@
 <div class="modal-backdrop" style="display: none">
 </div>
 {{/compare}}
+{{$ $('.loadingDiv').css('display','none');}}
 </block>
 
 

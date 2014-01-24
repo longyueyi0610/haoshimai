@@ -36,6 +36,7 @@ App.chat = sumeru.controller.create(function(env, session, param) {
         $('#chat .header').append(brokerName);
 
         $('#send-message-button').click(function() {
+
             var messageContent = $('#chat-input').val().trim();
             if (messageContent == '') {
                 //输入消息为空什么都不做。
@@ -46,12 +47,15 @@ App.chat = sumeru.controller.create(function(env, session, param) {
                 });
                 session.chatMessages.save();*/
                 //后期需要完善并修改
+                $(this).addClass('disabled');
                 var url = host + '/server/house/chat/send.controller?appCode=app_test_code&clientUId=' + clientUId + '&houseId=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=1';
                 var getCallback = function(data){
                     //做点什么吧
+                    $(this).removeClass('disabled');
                 }
                 sumeru.external.get(url,getCallback);
                 $('#chat-input').val('');
+                $('#chat-input').blur();
             }
         });
 
@@ -68,6 +72,7 @@ App.chat = sumeru.controller.create(function(env, session, param) {
                         }
                         sumeru.external.get(url,getCallback);
                         $('#chat-input').val('');
+                        $('#chat-input').blur();
                     }   
                 }   
             }   
@@ -76,5 +81,6 @@ App.chat = sumeru.controller.create(function(env, session, param) {
         $("#chat .back").click(function() {
             history.back();
         });
+        
     };
 });

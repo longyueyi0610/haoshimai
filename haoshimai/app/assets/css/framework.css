@@ -40,6 +40,139 @@
 .affix {
   position: fixed;
 }
+.banner {
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 1000;
+}
+.banner .header {
+  height: 50px;
+  padding: 10px;
+  font-size: 18px;
+  line-height: 30px;
+  z-index: 1002;
+  position: relative;
+  text-align: center;
+  background: url('../img/title.png') 100% 100%;
+  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+}
+.banner .header .info {
+  width: 30px;
+  height: 30px;
+  top: 10px;
+  position: absolute;
+  right: 10px;
+}
+.banner .header .info img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.banner .header .back {
+  width: 30px;
+  height: 30px;
+  top: 10px;
+  position: absolute;
+  left: 10px;
+}
+.banner .header .back img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.banner .sub {
+  z-index: 1001;
+  position: relative;
+  color: #fff;
+  background-color: #494c56;
+}
+.haoshimai-overlay {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+.residence-wrap {
+  box-shadow: 0px 0px 8px #000;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #e9e9e9 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0%, #e9e9e9 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe9e9e9', GradientType=0);
+}
+.residence-wrap .residence {
+  border-radius: 5px;
+  box-shadow: inset 0px 0px 3px #fff;
+  position: relative;
+  padding: 5px;
+  overflow: hidden;
+}
+.residence-wrap .residence img {
+  position: absolute;
+  border-radius: 5px;
+  width: 70px;
+  height: 70px;
+  left: 5px;
+  top: 5px;
+}
+.residence-wrap .residence .highlight {
+  color: #08c;
+}
+.residence-wrap .residence .info {
+  margin-left: 80px;
+}
+.residence-wrap .residence .info .details {
+  margin-bottom: 2px;
+  overflow: hidden;
+}
+.residence-wrap .residence .info .details .detail {
+  display: block;
+  float: left;
+  width: 45%;
+}
+.residence-wrap .residence .info .details.last {
+  margin-bottom: 0px;
+}
+.resident-wrap:last-child {
+  margin-bottom: 0px;
+}
+.empty {
+  color: #2b2d30;
+  background: url(../img/search_noresult.png) left center no-repeat transparent;
+  background-size: 20px 20px;
+  width: 190px;
+  height: 20px;
+  padding-left: 25px;
+  position: absolute;
+  margin-left: -95px;
+  margin-top: -10px;
+  left: 50%;
+  top: 50%;
+}
+.details {
+  padding: 0px 12px;
+  overflow: hidden;
+}
+.details .detail {
+  float: left;
+  width: 45%;
+}
+.details .detail .prop {
+  color: #555555;
+}
+.details .detail .prop::after {
+  content: ':\00a0';
+}
+.details .detail:first-child {
+  width: 55%;
+}
+.hl {
+  color: #428bca;
+}
 #map-sell-banner .header img {
   display: block;
   float: left;
@@ -200,139 +333,6 @@
   right: 0px;
   background-color: red;
 }
-.banner {
-  left: 0px;
-  right: 0px;
-  top: 0px;
-  box-sizing: border-box;
-  position: fixed;
-  z-index: 1000;
-}
-.banner .header {
-  height: 50px;
-  padding: 10px;
-  font-size: 18px;
-  line-height: 30px;
-  z-index: 1002;
-  position: relative;
-  text-align: center;
-  background: url('../img/title.png') 100% 100%;
-  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
-}
-.banner .header .info {
-  width: 30px;
-  height: 30px;
-  top: 10px;
-  position: absolute;
-  right: 10px;
-}
-.banner .header .info img {
-  max-width: 100%;
-  max-height: 100%;
-}
-.banner .header .back {
-  width: 30px;
-  height: 30px;
-  top: 10px;
-  position: absolute;
-  left: 10px;
-}
-.banner .header .back img {
-  max-width: 100%;
-  max-height: 100%;
-}
-.banner .sub {
-  z-index: 1001;
-  position: relative;
-  color: #fff;
-  background-color: #494c56;
-}
-.haoshimai-overlay {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-}
-.residence-wrap {
-  box-shadow: 0px 0px 8px #000;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  background-image: -webkit-linear-gradient(top, #ffffff 0%, #e9e9e9 100%);
-  background-image: linear-gradient(to bottom, #ffffff 0%, #e9e9e9 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe9e9e9', GradientType=0);
-}
-.residence-wrap .residence {
-  border-radius: 5px;
-  box-shadow: inset 0px 0px 3px #fff;
-  position: relative;
-  padding: 5px;
-  overflow: hidden;
-}
-.residence-wrap .residence img {
-  position: absolute;
-  border-radius: 5px;
-  width: 70px;
-  height: 70px;
-  left: 5px;
-  top: 5px;
-}
-.residence-wrap .residence .highlight {
-  color: #08c;
-}
-.residence-wrap .residence .info {
-  margin-left: 80px;
-}
-.residence-wrap .residence .info .details {
-  margin-bottom: 2px;
-  overflow: hidden;
-}
-.residence-wrap .residence .info .details .detail {
-  display: block;
-  float: left;
-  width: 45%;
-}
-.residence-wrap .residence .info .details.last {
-  margin-bottom: 0px;
-}
-.resident-wrap:last-child {
-  margin-bottom: 0px;
-}
-.empty {
-  color: #2b2d30;
-  background: url(../img/search_noresult.png) left center no-repeat transparent;
-  background-size: 20px 20px;
-  width: 190px;
-  height: 20px;
-  padding-left: 25px;
-  position: absolute;
-  margin-left: -95px;
-  margin-top: -10px;
-  left: 50%;
-  top: 50%;
-}
-.details {
-  padding: 0px 12px;
-  overflow: hidden;
-}
-.details .detail {
-  float: left;
-  width: 45%;
-}
-.details .detail .prop {
-  color: #555555;
-}
-.details .detail .prop::after {
-  content: ':\00a0';
-}
-.details .detail:first-child {
-  width: 55%;
-}
-.hl {
-  color: #428bca;
-}
 #residenceSearch {
   background-color: #4b4e59;
   min-height: 100%;
@@ -347,11 +347,13 @@
   top: 0;
 }
 #residenceSearch .loadingDiv img {
+  width: 60px;
+  height: 60px;
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-left: -50px;
-  margin-top: -50px;
+  margin-left: -30px;
+  margin-top: -30px;
 }
 #residenceSearch .banner .header {
   padding: 5px;
@@ -441,6 +443,24 @@ fieldset[disabled] #residenceSearch .banner .header button.active {
 #residenceOnSell {
   min-height: 100%;
   background-color: #4b4e59;
+}
+#residenceOnSell .loadingDiv {
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#residenceOnSell .loadingDiv img {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -30px;
+  margin-top: -30px;
 }
 #residenceOnSell .banner .header {
   font-size: 18px;

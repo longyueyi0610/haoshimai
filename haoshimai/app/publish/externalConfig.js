@@ -55,33 +55,9 @@ function runnable() {
         },
         resolve: function(originData) {
             var j = JSON.parse(originData);
-            var resolved = j;//需要其他信息，不只是data
+            var resolved = j['data'];//需要其他信息，不只是data
 
-            //造一些假数据
-            //resolved = [];
-            resolvedFalse = {
-                "version": null,
-                "data": [{
-                    residenceName: '世茂滨江',
-                    houseId: 556353,
-                    brokerName: '黄飞鸿',
-                    brokerId: 16,
-                    title: 'nihao',
-                    type: '1',
-                    count: '3',
-                    lastContentFormat: '0',
-                    lastUpdateTime: '2012-01-01 19:22:45'
-                }],
-                "count": 0,
-                "code": 100,
-                "totalCount": 0,
-                "msg": "",
-                "secret": null,
-                "unReadMsgCount": 0,
-                "exceptionDetail": null,
-                "extData": null
-            }['data'];
-            return resolvedFalse;
+            return resolved;
         },
         buffer: false
     }
