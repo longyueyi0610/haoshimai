@@ -147,7 +147,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 							var bigMarker = new AMap.Marker({
 								content: createMarkerContent(this.getPosition()),
 								position: new AMap.LngLat(lng, lat),
-								offset: new AMap.Pixel(-172, -130),
+								offset: new AMap.Pixel(-150, -130),
 								zIndex: 999
 							});
 							bigMarker.setMap(mapObj);
