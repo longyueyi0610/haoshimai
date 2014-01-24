@@ -191,7 +191,6 @@
   float: left;
 }
 #map-sell-banner .header #on-sale {
-  padding-right: 20px;
   font-size: 14px;
   line-height: 35px;
   float: right;
@@ -302,8 +301,8 @@
 #locationPlate {
   position: fixed;
   display: block;
-  bottom: 30px;
-  left: 100px;
+  bottom: 10px;
+  left: 80px;
   height: 30px;
   min-width: 100px;
   padding: 5px 12px;
