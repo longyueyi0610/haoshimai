@@ -50,7 +50,7 @@ App.residenceSearch = sumeru.controller.create(function(env, session, param) {
         session.eventMap('#searchResidenceInput', {
             'keydown': function(e) {
                 if (e.keyCode == 13) {
-                    keyword = $('#searchResidenceInput').val();
+                    keyword = $('#searchResidenceInput').val().trim();
                     if (keyword == ''){
                         //输入信息为空的时候什么都不做
                     }else{

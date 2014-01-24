@@ -84,7 +84,8 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
 			env.redirect('/chat', {
                 'houseId': houseId,
                 'clientUId': clientUId,
-                'brokerId' : brokerId
+                'brokerId' : brokerId,
+                'brokerName': brokerName
             },true);
 		});
 	};
