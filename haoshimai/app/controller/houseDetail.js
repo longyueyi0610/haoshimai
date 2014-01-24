@@ -38,7 +38,7 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
 	};
 
 	env.onrender = function(doRender) {
-		doRender(view, ['fade', 'z-index']);
+		doRender(view, ['push', 'right']);
 	};
 
 	env.onready = function() {
@@ -68,7 +68,7 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
 				env.redirect('/houseAddress', {
 					'lng': lng,
 					'lat': lat
-				}, true);
+				},true);
 			});
 			$('#house-residence').click(function() {
 				var residenceId = $(this).attr('data-id');
@@ -84,7 +84,8 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
 			env.redirect('/chat', {
                 'houseId': houseId,
                 'clientUId': clientUId,
-                'brokerId' : brokerId
+                'brokerId' : brokerId,
+                'brokerName': brokerName
             },true);
 		});
 	};

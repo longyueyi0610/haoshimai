@@ -9,10 +9,9 @@ sumeru.router.setDefault('App.mapSell');
 //定义几个全局变量
 host = sumeru.config.get("dataServerHost"); //host地址
 appCode = 'app_test_code';
-clientUId = ''; //客户端ID
 
 App.mapSell = sumeru.controller.create(function(env, session) {
-	clientUId = env['clientId'];
+    var clientUId = sumeru.clientId;
 
 	var _markerTemplate = null;
 	var _contentTemplate = null;
@@ -34,7 +33,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
     }; 
 
 	env.onrender = function(doRender) {
-		doRender(view, ['shake', 'left']);
+		doRender(view, ['push', 'left']);
 	};
 
 	env.onready = function() {

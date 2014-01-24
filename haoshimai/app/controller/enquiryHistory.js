@@ -13,6 +13,7 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
         env.subscribe('pubunreadMessage',clientUId,function(unreadMessageCollection){
             session.bind('unread-message', {
                 messages:unreadMessageCollection.find(),
+
             }); 
         }); 
     };
@@ -22,12 +23,26 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
     }; 
 
     env.onrender = function(doRender){
-        doRender("enquiryHistory", ['push','left']);
+        doRender("enquiryHistory", ['push','right']);
     }; 
 
     env.onready = function(){
         $("#enquiry-history .back").click(function() {
             history.back();
+        });
+
+        session.event('unread-message',function(){
+            $('.messages .residence-wrap').click(function(){
+                var houseId = this.getAttribute('data-houseid');
+                var brokerId = this.getAttribute('data-brokerid');
+                var brokerName = this.getAttribute('data-brokername');
+                env.redirect('/chat', {
+                    'houseId': houseId,
+                    'clientUId': clientUId,
+                    'brokerId' : brokerId,
+                    'brokerName': brokerName
+                },true);
+            });
         });
     }; 
 });

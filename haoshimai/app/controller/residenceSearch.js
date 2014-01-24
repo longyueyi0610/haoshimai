@@ -25,7 +25,7 @@ App.residenceSearch = sumeru.controller.create(function(env, session, param) {
     };
 
     env.onrender = function(doRender) {
-        doRender("residenceSearch", ['fade', 'z-index']);
+        doRender("residenceSearch", ['push', 'left']);
     };
 
     var $root;
@@ -35,27 +35,29 @@ App.residenceSearch = sumeru.controller.create(function(env, session, param) {
             $root = $("#residenceSearch");
         }
 
-        $root.on('click', '.residence', function() {
-            env.redirect('/houseDetail', {
-                'houseId': $(this).data("id"),
-                'client': clientUId
+        $root.on('click', '.residence-wrap', function() {
+            env.redirect('/residenceOnSell', {
+                'residenceId': $(this).attr('data-id'),
+                'clientUId': clientUId
             }, true);
         });
 
         session.eventMap('#cancel', {
             'click': function(e) {
-                env.redirect("/");
+                env.redirect("/mapSell",true);
             }
         });
         session.eventMap('#searchResidenceInput', {
             'keydown': function(e) {
                 if (e.keyCode == 13) {
-                    keyword = $('#searchResidenceInput').val();
+                    keyword = $('#searchResidenceInput').val().trim();
                     if (keyword == ''){
+                        //输入信息为空的时候什么都不做
                     }else{
                         session.set('keyword', keyword);
                         session.commit();
                         $('.loadingDiv').css('display','block');
+                         $('#searchResidenceInput').val('');
                     }
                 }
             }

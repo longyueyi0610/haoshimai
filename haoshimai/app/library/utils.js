@@ -79,7 +79,12 @@ Library.utils = sumeru.Library.create(function(exports){
             }, 
             yAxis: {
                 title:{text: ''},
-                min:'0'
+                min:'0',
+                labels: {
+                    formatter: function(){
+                        return this.value + '元';
+                    }
+                }               
             }, 
             tooltip: {
                 enabled: false
