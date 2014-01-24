@@ -687,7 +687,7 @@ netMessage.setReceiver({
                    console.error(err.stack || err);
                    return;
                }
-               
+
                fw.dev('client %s offline.',clientId);
                
            });

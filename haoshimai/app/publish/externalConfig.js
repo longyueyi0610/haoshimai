@@ -5,12 +5,14 @@ function runnable() {
     var chatClientUId = '';
     var chatHouseId = '';
     var chatBrokerId = '';
+    var clientUId;
 
     config['pubchatMessage'] = {
         fetchUrl: function(args) {//args[0]houseId, args[1]brokerId, args[2]clientUId
-            chatClientUId = args[2];
+            /*chatClientUId = args[2];
+            console.log(args[2]);
             chatHouseId = args[1];
-            chatBrokerId = args[0];
+            chatBrokerId = args[0];*/
             return 'http://api.housemart.cn:8080/server/house/chat/list.controller?appCode=' + appCode + '&clientUId=' +args[2]+ '&houseId=' + args[0] + '&brokerId=' + args[1] +'&type=1&messageId=-1&page=0';
         },
         resolve: function(originData) {
@@ -20,11 +22,11 @@ function runnable() {
             return resolved;
         },
 
-        fetchInterval: 30 * 1000,
-        buffer: false,
+        fetchInterval: 10 * 1000,
+        buffer: false
 
         //postData
-        postUrl: function() {
+        /*postUrl: function() {
             var options = {
                 host: host,
                 path: '/server/house/chat/send.controller'
@@ -42,82 +44,26 @@ function runnable() {
                 prepareData.type = 1;
             }
             return prepareData;
-        }
+        }*/
     }
 
 
 
     config['pubunreadMessage'] = {
         fetchUrl: function(clientUId) {
-            return host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=0';
+            return host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=0&groupBy=0';
         },
         resolve: function(originData) {
             var j = JSON.parse(originData);
-            var resolved = j['data'];
+            var resolved = j;//需要其他信息，不只是data
 
             //造一些假数据
             //resolved = [];
-            resolved = {
+            resolvedFalse = {
                 "version": null,
                 "data": [{
-                    residenceName: '1',
-                    houseId: 'sss',
-                    title: 'nihao',
-                    type: '1',
-                    count: '3',
-                    lastContentFormat: '0',
-                    lastUpdateTime: '2012-01-01 19:22:45'
-                }, {
-                    residenceName: '1',
-                    houseId: 'sss',
-                    title: 'nihao',
-                    type: '1',
-                    count: '3',
-                    lastContentFormat: '0',
-                    lastUpdateTime: '2012-01-01 19:22:45'
-                }, {
-                    residenceName: '1',
-                    houseId: 'sss',
-                    title: 'nihao',
-                    type: '1',
-                    count: '3',
-                    lastContentFormat: '0',
-                    lastUpdateTime: '2012-01-01 19:22:45'
-                }, {
-                    residenceName: '1',
-                    houseId: 'sss',
-                    title: 'nihao',
-                    type: '1',
-                    count: '3',
-                    lastContentFormat: '0',
-                    lastUpdateTime: '2012-01-01 19:22:45'
-                }, {
-                    residenceName: '1',
-                    houseId: 'sss',
-                    title: 'nihao',
-                    type: '1',
-                    count: '3',
-                    lastContentFormat: '0',
-                    lastUpdateTime: '2012-01-01 19:22:45'
-                }, {
-                    residenceName: '1',
-                    houseId: 'sss',
-                    title: 'nihao',
-                    type: '1',
-                    count: '3',
-                    lastContentFormat: '0',
-                    lastUpdateTime: '2012-01-01 19:22:45'
-                }, {
-                    residenceName: '1',
-                    houseId: 'sss',
-                    title: 'nihao',
-                    type: '1',
-                    count: '3',
-                    lastContentFormat: '0',
-                    lastUpdateTime: '2012-01-01 19:22:45'
-                }, {
-                    ridenceName: '1',
-                    houseId: 'sss',
+                    residenceName: '世茂滨江',
+                    houseId: 556353,
                     title: 'nihao',
                     type: '1',
                     count: '3',
@@ -133,14 +79,14 @@ function runnable() {
                 "exceptionDetail": null,
                 "extData": null
             }['data'];
-
-            return resolved;
+            return resolvedFalse;
         },
         buffer: false
     }
 
     config['pubunreadCounts'] = {
         fetchUrl: function(clientUId) {
+            clientUId = clientUId;
             return host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=1';
         },
         resolve: function(originData) {
