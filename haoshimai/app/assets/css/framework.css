@@ -40,6 +40,166 @@
 .affix {
   position: fixed;
 }
+#map-sell-banner .header img {
+  display: block;
+  float: left;
+  max-height: 100%;
+  margin-right: 10px;
+}
+#map-sell-banner .header #haoshimai {
+  float: left;
+  line-height: 30px;
+  font-size: 18px;
+}
+#map-sell-banner .header #area {
+  padding-left: 20px;
+  line-height: 35px;
+  font-size: 14px;
+  float: left;
+}
+#map-sell-banner .header #on-sale {
+  font-size: 14px;
+  line-height: 35px;
+  float: right;
+}
+#map-sell-banner .sub ul {
+  padding-left: 0;
+  margin: 0px;
+  overflow: hidden;
+  list-style: none;
+}
+#map-sell-banner .sub ul li {
+  width: 25%;
+  box-sizing: border-box;
+  padding: 0px;
+  float: left;
+  border-right: 1px solid #5f636a;
+}
+#map-sell-banner .sub ul li.active a {
+  color: #f47c00;
+}
+#map-sell-banner .sub ul li a {
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  display: block;
+  padding: 5px 0px;
+}
+#map-sell-banner .sub ul li::last-child {
+  border-right: none;
+}
+.content-marker {
+  padding: 12px;
+  background: url(../img/openning_detail_back.png);
+  background-size: 100% 100%;
+  width: 300px;
+  height: 150px;
+  color: #fff;
+}
+.content-marker img,
+.content-marker .info {
+  float: left;
+}
+.content-marker img {
+  display: block;
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+  border-radius: 7px;
+}
+.content-marker .info p {
+  margin-bottom: 0px;
+}
+.marker-wrap {
+  position: absolute;
+}
+.marker-wrap::after {
+  content: '';
+  width: 14px;
+  height: 24px;
+  display: block;
+  background: url(../img/flag_arrow.png) top center transparent;
+  position: relative;
+  left: 30px;
+  margin-top: -8px;
+}
+.marker-wrap .marker {
+  color: #fff;
+  white-space: nowrap;
+}
+.marker-wrap .marker::after,
+.marker-wrap .marker::before,
+.marker-wrap .marker .content {
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  height: 50px;
+}
+.marker-wrap .marker::before,
+.marker-wrap .marker::after {
+  content: '';
+  width: 9px;
+}
+.marker-wrap .marker::before {
+  background: url(../img/flag_left.png) top center transparent;
+}
+.marker-wrap .marker::after {
+  background: url(../img/flag_right.png) top center transparent;
+}
+.marker-wrap .marker .content {
+  padding: 5px 0px;
+  white-space: nowrap;
+  background: url(../img/flag_middle.png) top center transparent;
+}
+.marker-wrap .marker .content .name,
+.marker-wrap .marker .content .para {
+  display: inline-block;
+  line-height: 2.1428571435;
+}
+.marker-wrap .marker .content .name {
+  border-right: 1px solid #7fb3ed;
+  padding-right: 5px;
+}
+.marker-wrap .marker .content .para {
+  border-left: 2px solid #548ecd;
+  padding-left: 5px;
+}
+#locationPlate {
+  position: fixed;
+  display: block;
+  bottom: 10px;
+  left: 80px;
+  height: 30px;
+  min-width: 100px;
+  padding: 5px 12px;
+  color: #fff;
+  width: auto;
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
+}
+#nearbyButton {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+}
+#searchButton {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+#enquiry-history-button {
+  position: fixed;
+  bottom: 80px;
+  right: 10px;
+}
+#count-badge {
+  position: fixed;
+  bottom: 130px;
+  right: 0px;
+  background-color: red;
+}
 .banner {
   left: 0px;
   right: 0px;
@@ -172,166 +332,6 @@
 }
 .hl {
   color: #428bca;
-}
-#map-sell-banner .header img {
-  display: block;
-  float: left;
-  max-height: 100%;
-  margin-right: 10px;
-}
-#map-sell-banner .header #haoshimai {
-  float: left;
-  line-height: 30px;
-  font-size: 18px;
-}
-#map-sell-banner .header #area {
-  padding-left: 20px;
-  line-height: 35px;
-  font-size: 14px;
-  float: left;
-}
-#map-sell-banner .header #on-sale {
-  font-size: 14px;
-  line-height: 35px;
-  float: right;
-}
-#map-sell-banner .sub ul {
-  padding-left: 0;
-  margin: 0px;
-  overflow: hidden;
-  list-style: none;
-}
-#map-sell-banner .sub ul li {
-  width: 25%;
-  box-sizing: border-box;
-  padding: 0px;
-  float: left;
-  border-right: 1px solid #5f636a;
-}
-#map-sell-banner .sub ul li.active a {
-  color: #f47c00;
-}
-#map-sell-banner .sub ul li a {
-  text-align: center;
-  color: #fff;
-  text-decoration: none;
-  cursor: pointer;
-  display: block;
-  padding: 5px 12px;
-}
-#map-sell-banner .sub ul li::last-child {
-  border-right: none;
-}
-.content-marker {
-  padding: 12px;
-  background: url(../img/openning_detail_back.png);
-  background-size: 100% 100%;
-  width: 345px;
-  height: 150px;
-  color: #fff;
-}
-.content-marker img,
-.content-marker .info {
-  float: left;
-}
-.content-marker img {
-  display: block;
-  width: 60px;
-  height: 60px;
-  margin-right: 10px;
-  border-radius: 7px;
-}
-.content-marker .info p {
-  margin-bottom: 0px;
-}
-.marker-wrap {
-  position: absolute;
-}
-.marker-wrap::after {
-  content: '';
-  width: 14px;
-  height: 24px;
-  display: block;
-  background: url(../img/flag_arrow.png) top center transparent;
-  position: relative;
-  left: 30px;
-  margin-top: -8px;
-}
-.marker-wrap .marker {
-  color: #fff;
-  white-space: nowrap;
-}
-.marker-wrap .marker::after,
-.marker-wrap .marker::before,
-.marker-wrap .marker .content {
-  box-sizing: border-box;
-  display: inline-block;
-  vertical-align: top;
-  height: 50px;
-}
-.marker-wrap .marker::before,
-.marker-wrap .marker::after {
-  content: '';
-  width: 9px;
-}
-.marker-wrap .marker::before {
-  background: url(../img/flag_left.png) top center transparent;
-}
-.marker-wrap .marker::after {
-  background: url(../img/flag_right.png) top center transparent;
-}
-.marker-wrap .marker .content {
-  padding: 5px 0px;
-  white-space: nowrap;
-  background: url(../img/flag_middle.png) top center transparent;
-}
-.marker-wrap .marker .content .name,
-.marker-wrap .marker .content .para {
-  display: inline-block;
-  line-height: 2.1428571435;
-}
-.marker-wrap .marker .content .name {
-  border-right: 1px solid #7fb3ed;
-  padding-right: 5px;
-}
-.marker-wrap .marker .content .para {
-  border-left: 2px solid #548ecd;
-  padding-left: 5px;
-}
-#locationPlate {
-  position: fixed;
-  display: block;
-  bottom: 10px;
-  left: 80px;
-  height: 30px;
-  min-width: 100px;
-  padding: 5px 12px;
-  color: #fff;
-  width: auto;
-  border-radius: 15px;
-  background: rgba(0, 0, 0, 0.6);
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
-}
-#nearbyButton {
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-}
-#searchButton {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-}
-#enquiry-history-button {
-  position: fixed;
-  bottom: 80px;
-  right: 10px;
-}
-#count-badge {
-  position: fixed;
-  bottom: 130px;
-  right: 0px;
-  background-color: red;
 }
 #residenceSearch {
   background-color: #4b4e59;
@@ -585,6 +585,8 @@ fieldset[disabled] #residenceOnSell #allsorts button.active {
 }
 #houseDetail #content {
   top: 50px;
+  bottom: 40px;
+  overflow: auto;
   width: 100%;
   position: absolute;
 }
