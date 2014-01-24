@@ -784,7 +784,7 @@ fieldset[disabled] #houseDetail #askButton.active {
   top: 50px;
   width: 100%;
   overflow: auto;
-  bottom: 0px;
+  bottom: 45px;
 }
 #chat .messages .message {
   -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
@@ -803,7 +803,7 @@ fieldset[disabled] #houseDetail #askButton.active {
   float: left;
 }
 #chat .messages .message:last-child {
-  margin-bottom: 65px;
+  margin-bottom: 25px;
 }
 #chat .bar {
   position: absolute;
