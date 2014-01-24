@@ -586,6 +586,8 @@ fieldset[disabled] #residenceOnSell #allsorts button.active {
 }
 #houseDetail #content {
   top: 50px;
+  bottom: 40px;
+  overflow: auto;
   width: 100%;
   position: absolute;
 }
