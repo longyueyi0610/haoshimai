@@ -479,12 +479,12 @@ fieldset[disabled] #residenceSearch .banner .header button.active {
 }
 #residenceOnSell #onsell-content #residence-onsell-houses {
   width: 100%;
-  height: 240px;
+  height: 150px;
 }
 #residenceOnSell #onsell-content #residence-onsell-houses img {
   display: block;
   width: 100%;
-  height: 240px;
+  height: 150px;
 }
 #residenceOnSell #onsell-content .houses {
   padding: 5px;
@@ -612,7 +612,7 @@ fieldset[disabled] #residenceOnSell #allsorts button.active {
 }
 #houseDetail #content #house-detail-images img {
   display: block;
-  height: 200px;
+  height: 150px;
   width: 100%;
 }
 #houseDetail #content .title {
@@ -725,7 +725,7 @@ fieldset[disabled] #houseDetail #askButton.active {
 }
 #residence-onsell-detail .content #residence-detail-images img {
   display: block;
-  height: 200px;
+  height: 150px;
   width: 100%;
 }
 #residence-onsell-detail .content .details {
