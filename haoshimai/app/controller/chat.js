@@ -19,7 +19,7 @@ App.chat = sumeru.controller.create(function(env, session, param) {
         args[2] = clientUId = clientUId;
         session.chatMessages = env.subscribe('pubchatMessage', args,function(chatMessageCollection) {
             session.bind('message-list', {
-                messages: chatMessageCollection.find(),
+                messages: chatMessageCollection.find().reverse(),
             });
         });
     };
@@ -47,11 +47,10 @@ App.chat = sumeru.controller.create(function(env, session, param) {
                 });
                 session.chatMessages.save();*/
                 //后期需要完善并修改
-                $(this).addClass('disabled');
                 var url = host + '/server/house/chat/send.controller?appCode=app_test_code&clientUId=' + clientUId + '&houseId=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=1';
                 var getCallback = function(data){
                     //做点什么吧
-                    $(this).removeClass('disabled');
+                    session.commit();
                 }
                 sumeru.external.get(url,getCallback);
                 $('#chat-input').val('');
@@ -69,6 +68,7 @@ App.chat = sumeru.controller.create(function(env, session, param) {
                         var url = host + '/server/house/chat/send.controller?appCode=app_test_code&clientUId=' + clientUId + '&house    Id=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=1';
                         var getCallback = function(data){
                              //做点什么吧
+                             session.commit();
                         }
                         sumeru.external.get(url,getCallback);
                         $('#chat-input').val('');
@@ -82,5 +82,12 @@ App.chat = sumeru.controller.create(function(env, session, param) {
             history.back();
         });
         
+    };
+
+    env.onsleep = function(){
+        session.chatMessages.hold();
+    };
+    env.onresume = function(){
+        session.chatMessages.releaseHold();
     };
 });
