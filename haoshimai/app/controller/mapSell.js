@@ -114,7 +114,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 			};
 			sumeru.external.get(url, getCallback);
 
-			var url = host + "/server/house/residenceSale/mapSearchNew.controller?appCode=" + appCode + "&lat=" + lat + "&lng=" + lng + "&range=2000&pageIndex=1&pageSize=20&clientUId=" + clientUId;
+			var url = host + "/server/house/residenceSale/mapSearchNew.controller?appCode=" + appCode + "&lat=" + lat + "&lng=" + lng + "&range=4000&pageIndex=1&pageSize=20&clientUId=" + clientUId;
 			var getCallback = function(data) {
 				var myData = JSON.parse(data);
 				oriData = myData['data'];
