@@ -21,7 +21,8 @@ App.mapSell = sumeru.controller.create(function(env, session) {
     var getDetails = function(){
         env.subscribe('pubunreadCounts',clientUId,function(unreadCountscollection){
             session.bind('count', {
-                count:unreadCountsCollection.find()[0]['count'],
+                //count:unreadCountsCollection.find()[0]['count'],
+                count:10,
             }); 
         }); 
     };  
