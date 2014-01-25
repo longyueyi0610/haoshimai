@@ -21,6 +21,11 @@ Library.utils = sumeru.Library.create(function(exports){
 		alert ( props ) ;
     };
 
+    exports.changeElClass = function(obj){
+        obj.css('display','none');
+        return '';
+    };
+
 	exports.getresidenceSimple = function(residenceContents, position){
 		var length = residenceContents.length;
 		var lng = position['lng'];
