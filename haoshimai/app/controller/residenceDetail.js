@@ -35,7 +35,7 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
     };
 
     env.onrender = function(doRender) {
-        doRender("residenceDetail", ['push', 'right']);
+        doRender("residenceDetail", ['none', 'z']);
     };
 
     env.onready = function() {
