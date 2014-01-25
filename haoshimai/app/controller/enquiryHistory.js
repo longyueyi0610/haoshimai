@@ -23,7 +23,7 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
     }; 
 
     env.onrender = function(doRender){
-        doRender("enquiryHistory", ['push','right']);
+        doRender("enquiryHistory", ['none','z']);
     }; 
 
     env.onready = function(){

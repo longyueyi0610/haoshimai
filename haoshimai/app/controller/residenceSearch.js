@@ -25,7 +25,7 @@ App.residenceSearch = sumeru.controller.create(function(env, session, param) {
     };
 
     env.onrender = function(doRender) {
-        doRender("residenceSearch", ['push', 'left']);
+        doRender("residenceSearch", ['none', 'z']);
     };
 
     var $root;

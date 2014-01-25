@@ -249,13 +249,14 @@
 }
 .marker-wrap::after {
   content: '';
-  width: 14px;
-  height: 24px;
+  width: 8px;
+  height: 12px;
   display: block;
   background: url(../img/flag_arrow.png) top center transparent;
   position: relative;
-  left: 30px;
-  margin-top: -8px;
+  left: 25px;
+  margin-top: -14px;
+  background-size: 100% 100%;
 }
 .marker-wrap .marker {
   color: #fff;
@@ -267,7 +268,7 @@
   box-sizing: border-box;
   display: inline-block;
   vertical-align: top;
-  height: 50px;
+  height: 38px;
 }
 .marker-wrap .marker::before,
 .marker-wrap .marker::after {
@@ -276,19 +277,22 @@
 }
 .marker-wrap .marker::before {
   background: url(../img/flag_left.png) top center transparent;
+  background-size: 100% 100%;
 }
 .marker-wrap .marker::after {
   background: url(../img/flag_right.png) top center transparent;
+  background-size: 100% 100%;
 }
 .marker-wrap .marker .content {
-  padding: 5px 0px;
+  padding: 5px 3px;
+  font-size: 12px;
   white-space: nowrap;
   background: url(../img/flag_middle.png) top center transparent;
+  background-size: 100% 100%;
 }
 .marker-wrap .marker .content .name,
 .marker-wrap .marker .content .para {
   display: inline-block;
-  line-height: 2.1428571435;
 }
 .marker-wrap .marker .content .name {
   border-right: 1px solid #7fb3ed;
@@ -299,37 +303,50 @@
   padding-left: 5px;
 }
 #locationPlate {
+  font-size: 12px;
+  line-height: 11.5px;
   position: fixed;
   display: block;
-  bottom: 10px;
-  left: 80px;
-  height: 30px;
+  bottom: 20px;
+  left: 60px;
+  height: 21px;
   min-width: 100px;
   padding: 5px 12px;
   color: #fff;
   width: auto;
   border-radius: 15px;
   background: rgba(0, 0, 0, 0.6);
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
 }
 #nearbyButton {
   position: fixed;
-  bottom: 10px;
+  bottom: 20px;
   left: 10px;
+}
+#nearbyButton img {
+  width: 45px;
+  height: 45px;
 }
 #searchButton {
   position: fixed;
-  bottom: 10px;
+  bottom: 20px;
   right: 10px;
+}
+#searchButton img {
+  width: 45px;
+  height: 45px;
 }
 #enquiry-history-button {
   position: fixed;
-  bottom: 80px;
+  bottom: 75px;
   right: 10px;
+}
+#enquiry-history-button img {
+  width: 45px;
+  height: 45px;
 }
 #count-badge {
   position: fixed;
-  bottom: 130px;
+  bottom: 110px;
   right: 0px;
   background-color: red;
 }
@@ -479,12 +496,12 @@ fieldset[disabled] #residenceSearch .banner .header button.active {
 }
 #residenceOnSell #onsell-content #residence-onsell-houses {
   width: 100%;
-  height: 240px;
+  height: 150px;
 }
 #residenceOnSell #onsell-content #residence-onsell-houses img {
   display: block;
   width: 100%;
-  height: 240px;
+  height: 150px;
 }
 #residenceOnSell #onsell-content .houses {
   padding: 5px;
@@ -612,7 +629,7 @@ fieldset[disabled] #residenceOnSell #allsorts button.active {
 }
 #houseDetail #content #house-detail-images img {
   display: block;
-  height: 200px;
+  height: 150px;
   width: 100%;
 }
 #houseDetail #content .title {
@@ -725,7 +742,7 @@ fieldset[disabled] #houseDetail #askButton.active {
 }
 #residence-onsell-detail .content #residence-detail-images img {
   display: block;
-  height: 200px;
+  height: 150px;
   width: 100%;
 }
 #residence-onsell-detail .content .details {

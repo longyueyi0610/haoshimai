@@ -9,7 +9,7 @@ App.houseAddress = sumeru.controller.create(function(env, session, param){
 		var lat = param['lat'];
 
         env.onrender = function(doRender){
-            doRender(view, ['fade','z-index']);
+            doRender(view, ['none','z']);
         };
 
         env.onready = function(){

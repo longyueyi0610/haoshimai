@@ -21,6 +21,11 @@ Library.utils = sumeru.Library.create(function(exports){
 		alert ( props ) ;
     };
 
+    exports.changeElClass = function(obj){
+        obj.css('display','none');
+        return '';
+    };
+
 	exports.getresidenceSimple = function(residenceContents, position){
 		var length = residenceContents.length;
 		var lng = position['lng'];
@@ -56,6 +61,9 @@ Library.utils = sumeru.Library.create(function(exports){
             months[length-1-i] = monthTrend[i]['month'];
             prices[length-1-i] = monthTrend[i]['price1'];
         }
+        Highcharts.setOptions({
+            colors: ['#ff9110']
+        });
         $('#line-chart').highcharts({
             chart: {
                 renderTo: 'line-chart',

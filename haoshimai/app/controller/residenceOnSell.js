@@ -56,7 +56,7 @@ App.residenceOnSell = sumeru.controller.create(function(env, session, param) {
 	};
 
 	env.onrender = function(doRender) {
-		doRender("residenceOnSell", ['push', 'right']);
+        doRender("residenceOnSell", ['none', 'z']);
 	};
 
 	env.onready = function() {
