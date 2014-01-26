@@ -52,6 +52,7 @@
   height: 50px;
   padding: 10px;
   font-size: 18px;
+  font-weight: bold;
   line-height: 30px;
   z-index: 1002;
   position: relative;
@@ -120,6 +121,7 @@
   top: 5px;
 }
 .residence-wrap .residence .highlight {
+  font-size: 15px;
   color: #08c;
 }
 .residence-wrap .residence .info {
@@ -135,6 +137,7 @@
   width: 45%;
 }
 .residence-wrap .residence .info .details.last {
+  font-size: 13px;
   margin-bottom: 0px;
 }
 .resident-wrap:last-child {
@@ -158,6 +161,7 @@
   overflow: hidden;
 }
 .details .detail {
+  font-size: 13px;
   float: left;
   width: 45%;
 }
@@ -484,6 +488,7 @@ fieldset[disabled] #residenceSearch .banner .header button.active {
   text-align: center;
 }
 #residenceOnSell .banner .sub {
+  font-size: 12px;
   text-align: center;
   line-height: 30px;
 }
@@ -532,15 +537,16 @@ fieldset[disabled] #residenceSearch .banner .header button.active {
   position: fixed;
   bottom: 0px;
   width: 100%;
-  padding: 5px 0px;
+  padding: 10px 0px;
   cursor: pointer;
   background: rgba(0, 0, 0, 0.6);
 }
 #residenceOnSell .sortbar span {
+  font-size: 20px;
   color: #fff;
   background: url(../img/ordericon.png) left center no-repeat transparent;
-  background-size: 20px 20px;
-  padding-left: 20px;
+  background-size: 40px 40px;
+  padding-left: 40px;
 }
 #residenceOnSell #allsorts {
   padding: 0px 20px 20px;
@@ -679,7 +685,7 @@ fieldset[disabled] #residenceOnSell #allsorts button.active {
   background-color: rgba(0, 0, 0, 0.6);
   border-color: rgba(0, 0, 0, 0.6);
   padding: 0px 12px;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 1.428571429;
   border-radius: 0px;
 }
@@ -721,14 +727,14 @@ fieldset[disabled] #houseDetail #askButton.active {
 }
 #houseDetail #askButton .inner {
   background: url(../img/answer_icon_normal.png) left center no-repeat transparent;
-  background-size: 30px 30px;
+  background-size: 40px 40px;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 70px;
+  width: 100px;
   height: auto;
-  line-height: 35px;
-  padding-left: 35px;
+  line-height: 42px;
+  padding-left: 40px;
 }
 #residence-onsell-detail .sub {
   padding: 5px 12px;
