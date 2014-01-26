@@ -127,7 +127,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 
 						marker = new AMap.Marker({
 							content: createMarkerFlag(oriData[i]['residenceName'], oriData[i][tabFlag]),
-							offset: new AMap.Pixel(-30, -50),
+							offset: new AMap.Pixel(-30, -36),
 							position: new AMap.LngLat(lng, lat)
 						});
 						marker.setMap(mapObj);
@@ -144,7 +144,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 							var bigMarker = new AMap.Marker({
 								content: createMarkerContent(this.getPosition()),
 								position: new AMap.LngLat(lng, lat),
-								offset: new AMap.Pixel(-150, -130),
+								offset: new AMap.Pixel(-150, -140),
 								zIndex: 999
 							});
 							bigMarker.setMap(mapObj);
@@ -203,6 +203,16 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 					var lat = this.getCenter().getLat();
 					loadFlag(lat, lng);
 				});
+
+                AMap.event.addListener(mapObj, 'click', function callback(e) {//缩小小旗
+                    if (nowFlag != null) {
+                        previousFlag.show();
+                        nowFlag.setMap(null);
+                        previousFlag = null;
+                        nowFlag = null;
+                    }
+                });
+
 			};
 			sumeru.external.get(url, getCallback);
 		};
