@@ -11,9 +11,9 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
 
     var getDetails = function(){
         env.subscribe('pubunreadMessage',clientUId,function(unreadMessageCollection){
+            alert(unreadMessageCollection.find());
             session.bind('unread-message', {
                 messages:unreadMessageCollection.find(),
-
             }); 
         }); 
     };
