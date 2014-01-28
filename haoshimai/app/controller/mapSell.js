@@ -232,9 +232,10 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 				env.redirect("/residenceSearch",{'clientUId':clientUId},true);
 			}
 		});
+
         session.eventMap('#enquiry-history-button', {
             'click':function(e) {
-                env.redirect("/enquiryHistory",{'clientUId':clientUId},true);
+                env.redirect('/enquiryHistory',{'clientUId':clientUId},true);
             }
         });
 

@@ -14,14 +14,14 @@
 	<p class='empty'>暂时没有问询记录</p>
 	{{else}}
 	<div class='messages'>
-	{{#each messages}}
-    <div class='residence-wrap' data-houseid="{{this.houseId}}" data-brokerid="{{this.brokerId}}" data-brokername="{{this.brokername}}">
+    {{#each messages}}
+    <div class='residence-wrap' data-houseid="{{this.houseId}}" data-brokerid="{{this.brokerId}}" data-brokername="{{this.brokerName}}">
 		<div class='residence'>
-			<img src="{{this.brokerPicURl}}"/>
+			<img src="{{this.housePic}}"/>
 			<div class='info'>
 				
 				<div class='price'>
-					<span class="highlight">1000万</span>
+                  <span class="highlight">{{this.price}}</span>
 				</div>
 				<div class='time'>
 					{{this.lastUpdateTime}}
@@ -30,7 +30,7 @@
 					<span class="highlight">{{this.residenceName}}</span>
 				</div>
 				<div class="details"> 
-					{{this.title}}
+					{{this.content}}
 				</div>
 			</div>
 		</div>
@@ -38,10 +38,9 @@
 			{{this.count}}
 		</div>
 	</div>
-	{{/each}}
+    {{/each}}
 	</div>
 	{{/compare}}
-
 </block>
 </div>
 
