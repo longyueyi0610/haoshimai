@@ -65,7 +65,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 			if (!_contentTemplate) {
 				_contentTemplate = _.template(
 					"<div class='content-marker'>" +
-					"	<img src='<%= img %>'/>" +
+					"	<img src='<%= img %>' />" +
 					"	<div class='info'>" +
 					"		<p><%- name %></p>" +
 					"		<p>售价范围：<%- range %></p>" +

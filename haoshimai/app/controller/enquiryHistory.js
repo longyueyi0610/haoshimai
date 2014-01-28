@@ -38,13 +38,16 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
                 obj.count = count;
                 obj.houseId = houseId;
                 temp.push(obj);
-
-                var url = host + '/server/house/detailNew.controller?appCode=' + appCode + '&houseId=' + houseId + '&clientUId=' + clientUId;
+            }
+            for (var j=0;j<length;j++){
+                var url = host + '/server/house/detailNew.controller?appCode=' + appCode + '&houseId=' + temp[j]['houseId'] + '&clientUId=' + clientUId;
                 var getCallback = function(data) {
                     var oriData = JSON.parse(data);
                     var housePic = oriData['data']['picURL'][0];
                     var price = oriData['data']['price'];
-                    alert(temp);
+                    temp[messageObjs.length].housePic = housePic;
+                    temp[messageObjs.length].price = price;
+                    messageObjs.push(temp[messageObjs.length]); 
                     if (messageObjs.length == length){
                         session.bind('unread-message', {
                             messages:messageObjs,
