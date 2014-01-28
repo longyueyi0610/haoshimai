@@ -8,14 +8,52 @@ sumeru.router.add(
 App.enquiryHistory = sumeru.controller.create(function(env, session, param){
     var view = 'enquiryHistory';
     var clientUId = param['clientUId'];
+    var host = sumeru.config.get("dataServerHost"); //host地址
+    var appCode = 'app_test_code';
 
     var getDetails = function(){
         env.subscribe('pubunreadMessage',clientUId,function(unreadMessageCollection){
-            alert(unreadMessageCollection.find());
-            session.bind('unread-message', {
-                messages:unreadMessageCollection.find(),
-            }); 
-        }); 
+            var allMessages = unreadMessageCollection.find();
+            var length = allMessages.length;
+            var messageObjs = [];
+            var i = 0;
+            var temp = [];
+
+            for (i=0; i<length; i++){
+                var houseId = allMessages[i]['houseId'];
+                var residenceName = allMessages[i]['residenceName'];
+                var lastContent = allMessages[i]['lastContent'];
+                var lastContentFormat = allMessages[i]['lastContentFormat'];
+                var lastUpdateTime = allMessages[i]['lastUpdateTime'];
+                var brokerId = allMessages[i]['brokerId'];
+                var brokerName = allMessages[i]['brokerName'];
+                var count = allMessages[i]['count'];
+                var obj = new Object();
+                obj.residenceName = residenceName;
+                obj.content = lastContent;
+                obj.contentFormat = lastContentFormat;
+                obj.lastUpdateTime = lastUpdateTime;
+                obj.brokerId = brokerId;
+                obj.brokerName = brokerName;
+                obj.count = count;
+                obj.houseId = houseId;
+                temp.push(obj);
+
+                var url = host + '/server/house/detailNew.controller?appCode=' + appCode + '&houseId=' + houseId + '&clientUId=' + clientUId;
+                var getCallback = function(data) {
+                    var oriData = JSON.parse(data);
+                    var housePic = oriData['data']['picURL'][0];
+                    var price = oriData['data']['price'];
+                    alert(temp);
+                    if (messageObjs.length == length){
+                        session.bind('unread-message', {
+                            messages:messageObjs,
+                        });
+                    }
+                };
+                sumeru.external.get(url, getCallback);
+            }
+        });
     };
 
     env.onload = function(){
@@ -23,7 +61,10 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
     }; 
 
     env.onrender = function(doRender){
-        doRender("enquiryHistory", ['none','z']);
+        var rend = function(){
+            doRender("enquiryHistory", ['none','z']);
+        }
+        setTimeout(rend, 500);
     }; 
 
     env.onready = function(){
