@@ -60,7 +60,7 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
     };
 
     env.onload = function(){
-        setTimeout('', 500);
+        setTimeout('', 1000);
         return [getDetails];
     }; 
 
@@ -68,7 +68,7 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
         var rend = function(){
             doRender("enquiryHistory", ['none','z']);
         }
-        setTimeout(rend, 500);
+        setTimeout(rend, 1000);
     }; 
 
     env.onready = function(){
