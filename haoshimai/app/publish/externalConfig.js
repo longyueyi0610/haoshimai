@@ -8,8 +8,9 @@ function runnable() {
     var clientUId;
 
     config['pubchatMessage'] = {
+        uniqueColumn : "time",
         fetchUrl: function(args) {//args[0]houseId, args[1]brokerId, args[2]clientUId
-            return 'http://api.housemart.cn:8080/server/house/chat/list.controller?appCode=' + appCode + '&clientUId=' +args[2]+ '&houseId=' + args[0] + '&brokerId=' + args[1] +'&type=1&messageId=-1&page=0';
+            return host + '/server/house/chat/list.controller?appCode=' + appCode + '&clientUId=' +args[2]+ '&houseId=' + args[0] + '&brokerId=' + args[1] +'&type=1&messageId=-1&page=0';
         },
         resolve: function(originData) {
             var j = JSON.parse(originData);
@@ -18,36 +19,15 @@ function runnable() {
             return resolved;
         },
 
-        fetchInterval: 10 * 1000,
+        fetchInterval: 3 * 1000,
         buffer: false
 
-        //postData
-        /*postUrl: function() {
-            var options = {
-                host: host,
-                path: '/server/house/chat/send.controller'
-            }
-            return options;
-        },
-        prepare: function(type, data) {
-            var prepareData = {};
-            if (type === 'insert') {
-                prepareData.content = data.content;
-                prepareData.appCode = appCode;
-                prepareData.clientUId = chatClientUId;
-                prepareData.houseId = chatHouseId;
-                prepareData.brokerId = chatBrokerId;
-                prepareData.type = 1;
-            }
-            return prepareData;
-        }*/
     }
 
-
-
     config['pubunreadMessage'] = {
+
         fetchUrl: function(clientUId) {
-            return host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=0&groupBy=0&showAll=1';
+            return host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=0&showAll=1';
         },
         resolve: function(originData) {
             var j = JSON.parse(originData);
@@ -59,6 +39,7 @@ function runnable() {
     }
 
     config['pubunreadCounts'] = {
+        uniqueColumn : "count",
         fetchUrl: function(clientUId) {
             clientUId = clientUId;
             return host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=1';
@@ -69,7 +50,7 @@ function runnable() {
 
             return resolved;
         },
-        fetchInterval: 60 * 1000,
+        fetchInterval: 5 * 1000,
         buffer: false
     }
 

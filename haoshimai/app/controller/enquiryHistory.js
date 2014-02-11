@@ -60,6 +60,7 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
     };
 
     env.onload = function(){
+        setTimeout('', 500);
         return [getDetails];
     }; 
 
@@ -71,10 +72,11 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
     }; 
 
     env.onready = function(){
+
         $("#enquiry-history .back").click(function() {
             history.back();
         });
-
+        
         session.event('unread-message',function(){
             $('.messages .residence-wrap').click(function(){
                 var houseId = this.getAttribute('data-houseid');
@@ -87,6 +89,36 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
                     'brokerName': brokerName
                 },true);
             });
+
+            var url = host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId +'&totalOnly=0&showAll=0';
+            var getCallback = function(oriData){
+                var data = JSON.parse(oriData)['data'];
+                var length = data.length;
+                for (var i=0;i<length;i++){
+                    var houseId = data[i]['houseId'];
+                    var number = data[i]['count'];
+                    var str = 'div[data-id=' + houseId + ']';
+                    $(str).html(number);
+                    $(str).css('display','block');
+                }
+            }
+            sumeru.external.get(url, getCallback);
+
+            setInterval(function(){
+                var url = host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId +'&totalOnly=0&showAll=0';
+                var getCallback = function(oriData){
+                    var data = JSON.parse(oriData)['data'];
+                    var length = data.length;
+                    for (var i=0;i<length;i++){
+                        var houseId = data[i]['houseId'];
+                        var number = data[i]['count'];
+                        var str = 'div[data-id=' + houseId + ']';
+                        $(str).html(number);
+                        $(str).css('display','block');
+                    }
+                }
+                sumeru.external.get(url, getCallback);
+            },5000);
         });
     }; 
 });

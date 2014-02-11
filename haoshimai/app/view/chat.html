@@ -8,13 +8,13 @@
 		</div>
 	</div>
 	<block tpl-id="message-list">
-		<div class="messages">
+      <div class="messages">
 			{{#each messages}}
-			<div {{#compare this.type 1}}
+			<div {{#compare this.useType 1}}
 					class="message normal"
 				 {{else}}
 					class="message agent"
-				 {{/compare}}>
+                 {{/compare}}>
 			<!--
 	    	{{this.name}}
 	    	{{this.type}}

@@ -17,9 +17,9 @@ App.chat = sumeru.controller.create(function(env, session, param) {
         args[0] = houseId;
         args[1] = brokerId;
         args[2] = clientUId = clientUId;
-        session.chatMessages = env.subscribe('pubchatMessage', args,function(chatMessageCollection) {
+        session.chatMessageCollection = env.subscribe('pubchatMessage', args,function(chatMessageCollection) {
             session.bind('message-list', {
-                messages: chatMessageCollection.find().reverse(),
+                messages: chatMessageCollection.find()
             });
         });
     };
@@ -33,6 +33,7 @@ App.chat = sumeru.controller.create(function(env, session, param) {
     };
 
     env.onready = function() {
+
         $('#chat .header').append(brokerName);
 
         $('#send-message-button').click(function() {
@@ -50,10 +51,10 @@ App.chat = sumeru.controller.create(function(env, session, param) {
                 var url = host + '/server/house/chat/send.controller?appCode=app_test_code&clientUId=' + clientUId + '&houseId=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=1';
                 var getCallback = function(data){
                     //做点什么吧
+                    $('#chat-input').val('');
+                    $('#chat-input').blur();
                 }
                 sumeru.external.get(url,getCallback);
-                $('#chat-input').val('');
-                $('#chat-input').blur();
             }
         });
 
@@ -64,7 +65,7 @@ App.chat = sumeru.controller.create(function(env, session, param) {
                     if (messageContent == ''){
                         //输入信息为空的时候什么都不做
                     }else{
-                        var url = host + '/server/house/chat/send.controller?appCode=app_test_code&clientUId=' + clientUId + '&house    Id=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=1';
+                        var url = host + '/server/house/chat/send.controller?appCode=app_test_code&clientUId=' + clientUId + '&houseId=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=1';
                         var getCallback = function(data){
                              //做点什么吧
                         }
@@ -82,10 +83,10 @@ App.chat = sumeru.controller.create(function(env, session, param) {
         
     };
 
-    env.onsleep = function(){
+    /*env.onsleep = function(){
         session.chatMessages.hold();
     };
     env.onresume = function(){
         session.chatMessages.releaseHold();
-    };
+    };*/
 });
