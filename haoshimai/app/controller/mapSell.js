@@ -19,9 +19,9 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 	var view = 'mapSell';
 
     var getDetails = function(){
-        env.subscribe('pubunreadCounts',clientUId,function(unreadCountscollection){
+        env.subscribe('pubunreadCounts',clientUId,function(unreadCountsCollection){
             session.bind('count', {
-                count:unreadCountsCollection.find()[0]['count'],
+                count:unreadCountsCollection.find()[0]['count']
             }); 
         }); 
     };  
@@ -36,7 +36,8 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 
 	env.onready = function() {
 
-		var mapObj, toolBar, myLocation, marker, centerPosition, previousFlag, nowFlag; //高德地图、地图工具、我的位置、标记、中心点、上一个标记，现在的标记
+		var mapObj, toolBar, myLocation, marker, centerPosition, previousFlag, nowFlag, flagForWay; //高德地图、地图工具、我的位置、标记、中心点、上一个标记，现在的标记，出售房或者出租房
+        flagForWay = 'onSale';
 		var markerContents = []; //为了不重复加载点坐标
 
 		var markers = new Array(); //marker数组
@@ -105,7 +106,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 		};
 
 
-		var loadFlag = function(lat, lng) { //加载点坐标
+		var loadFlag = function(lat, lng, flagForWay) { //加载点坐标,flagForWay表示出租房或者出售房
 
 			var url = host + '/server/plate/nearBy.controller?appCode=' + appCode + '&lat=' + lat + '&lng=' + lng;
 			var getCallback = function(data) {
@@ -114,7 +115,11 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 			};
 			sumeru.external.get(url, getCallback);
 
-			var url = host + "/server/house/residenceSale/mapSearchNew.controller?appCode=" + appCode + "&lat=" + lat + "&lng=" + lng + "&range=4000&pageIndex=1&pageSize=20&clientUId=" + clientUId;
+            if (flagForWay == 'onRent'){
+                url = host + "/server/house/residenceRent/mapSearchNew.controller?appCode=" + appCode + "&lat=" + lat + "&lng=" + lng + "&range=4000&pageIndex=1&pageSize=20&clientUId=" + clientUId;
+            }else{
+			    url = host + "/server/house/residenceSale/mapSearchNew.controller?appCode=" + appCode + "&lat=" + lat + "&lng=" + lng + "&range=4000&pageIndex=1&pageSize=20&clientUId=" + clientUId;
+            }
 			var getCallback = function(data) {
 				var myData = JSON.parse(data);
 				oriData = myData['data'];
@@ -220,6 +225,20 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 		session.event(gaodeMap, function() {
 			mapInit();
 		});
+        
+        //出售房和出租房切换
+        $('#on-rent').click(function(){
+            flagForWay = 'onRent';
+            $('.sub').css('display','none');
+            mapObj.clearMap();
+            var lng = mapObj.getCenter().getLng();
+            var lat = mapObj.getCenter().getLat();
+            loadFlag(lat, lng, flagForWay);
+        });
+        
+        $('#on-sale').click(function(){
+            $('.sub').css('display','block'); 
+        });
 
 		session.eventMap('#nearbyButton', { //定位我的位置
 			'click': function(e) {
