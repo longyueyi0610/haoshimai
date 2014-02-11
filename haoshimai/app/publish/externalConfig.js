@@ -25,12 +25,13 @@ function runnable() {
     }
 
     config['pubunreadMessage'] = {
+        uniqueColumn : 'lastUpdateTime',
 
         fetchUrl: function(clientUId) {
             return host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=0&showAll=1';
         },
         resolve: function(originData) {
-            console.log(originData);
+            console.log('pubunreadMessage' + originData);
             var j = JSON.parse(originData);
             var resolved = j['data'];//需要其他信息，不只是data
 
@@ -46,7 +47,7 @@ function runnable() {
             return host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=1';
         },
         resolve: function(originData) {
-            console.log(originData);
+            console.log('pubreadCounts' + originData);
             var j = JSON.parse(originData);
             var resolved = j['data'];
 
