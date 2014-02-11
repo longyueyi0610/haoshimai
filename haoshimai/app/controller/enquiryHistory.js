@@ -109,6 +109,7 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
                 var getCallback = function(oriData){
                     var data = JSON.parse(oriData)['data'];
                     var length = data.length;
+                    $('.messages .residence-wrap .count').css('display','none');
                     for (var i=0;i<length;i++){
                         var houseId = data[i]['houseId'];
                         var number = data[i]['count'];
