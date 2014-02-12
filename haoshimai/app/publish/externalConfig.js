@@ -31,13 +31,15 @@ function runnable() {
             return host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=0&showAll=1';
         },
         resolve: function(originData) {
-            //console.log('pubunreadMessage' + originData);
             var j = JSON.parse(originData);
             var resolved = j['data'];//需要其他信息，不只是data
 
             return resolved;
         },
+
+        fetchInterval : 5 * 1000,
         buffer: false
+
     }
 
     config['pubunreadCounts'] = {
