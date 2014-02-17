@@ -168,6 +168,9 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 						$focuses.carousel("prev");
 					}
 				});
+                touch.on($focuses[0], 'click', function(e) {
+                    alert('x');
+                });
 			}
 
             if(!soldHistory){
@@ -181,7 +184,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
             }else{//成交历史情况下取消绑定事件
                 $root.off('click');
             }
-
+            //排序功能
 			$("#residenceOnSell .sortbar").click(function() {
 				$('#allsorts').slideToggle();
 				$(".modal-backdrop").toggle();
