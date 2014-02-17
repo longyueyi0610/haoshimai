@@ -7,20 +7,50 @@
 		<div class="header">
 			<a class="back">
 				<img src="../assets/img/reback_icon.png"/>
-			</a>
-			小区在售房
+            </a>
+                {{#compare saleRentType "==" "all"}}
+                    {{residenceName}}  
+                {{else}}
+                    {{#compare saleRentType "==" "sale"}}
+                    <a id='sale'>售房</a><a id='sold'>成交历史</a>
+                    {{else}}
+                        小区在租房
+                    {{/compare}}
+                {{/compare}}
 			<a class='info' id="house-detail-icon">
 				<img src="../assets/img/house_detail_icon.png"/>
 			</a>
-		</div>
-		<div class='sub'>
-    		{{data.residenceName}}({{data.onSaleCount}})
-		</div>
+        </div>
+        {{#compare saleRentType "==" "all"}}
+            <div class='sub'>
+                <ul>
+                    <li class="active">
+                        <a id='onSale'>在售({{saleCount}})</a>
+                    </li>
+                    <li>
+                        <a id='onSold'>成交</a>
+                    </li>
+                    <li>
+                        <a id='onRent'>在租({{rentCount}})</a>
+                    </li>
+                </ul>
+            </div>
+        {{else}}
+            <div class='sub'>
+                {{#compare saleRentType "==" "sale"}}
+                {{data.residenceName}}({{data.onSaleCount}})
+                {{else}}
+                {{data.residenceName}}({{data.onRentCount}})
+                {{/compare}}
+            </div>
+        {{/compare}}
     </div>
 </block>
 
 <block tpl-id="residence-container">
 <div id="onsell-content">
+    {{#if soldHistory}}
+    {{else}}
 	<div id="residence-onsell-houses" class="carousel slide" 
 			data-ride="carousel">
 		<ol class="carousel-indicators">
@@ -44,38 +74,23 @@
     			{{/if}}
             {{/each}}
   		</div>
-	</div>
-
+    </div>
+    {{/if}}
 	{{#compare houseList.length 0}}
 	<div class="houses no-house">
 	<p class='empty'>没有符合条件的搜索记录</p>
 	</div>
 	{{ else }}
     <div class="houses">
-        {{#each houseList}}
-		<div class='residence-wrap' data-id="{{this.id}}">
-			<div class='residence'>
-				<div class='price highlight'>{{this.price}}</div>
-				<img src="{{this.picURL}}"/>
-				<div class='info'>
-					<div class="details">
-						<span class="highlight">{{this.roomType}}</span>
-					</div>
-					<div class='details'>
-						<span class="detail" style="width: 60%">
-							单价: {{this.avg}}
-						</span>
-						<span class="detail" style="width: 40%">
-							面积: {{this.area}}
-						</span>
-					</div>
-					<div class="details last">
-						挂牌时间: {{this.onboardTimeString}}
-					</div>
-				</div>
-			</div>
-		</div>
-        {{/each}}
+        {{#compare saleRentType "==" "rent"}}
+        {{> house_rent}}
+        {{else}}
+            {{#if soldHistory}}
+            {{> house_sold}}
+            {{else}}
+            {{> house_sale}}
+            {{/if}}
+        {{/compare}}
 	</div>
 </div>
 

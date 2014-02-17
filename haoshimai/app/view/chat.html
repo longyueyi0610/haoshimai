@@ -9,7 +9,8 @@
 	</div>
 	<block tpl-id="message-list">
       <div class="messages">
-			{{#each messages}}
+            {{#each messages}}
+            <div style="clear:both;width:100%;text-align:center;">{{this.time}}</div>
 			<div {{#compare this.useType 1}}
 					class="message normal"
 				 {{else}}
@@ -22,7 +23,11 @@
 	    	{{this.brokerId}}
 	    	{{messageId}}
 	    	{{useType}}
-	    	-->
+            -->
+            {{#compare this.useType 1}}
+            {{else}}
+            <img src="{{this.brokerPicURL}}" style="width:30px;height:30px"/>
+            {{/compare}}
 	    		{{this.content}}
 	    	</div>
 	    	{{/each}}

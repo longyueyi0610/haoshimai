@@ -121,5 +121,6 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
                 sumeru.external.get(url, getCallback);
             },5000);
         });
-    }; 
+    };
+
 });

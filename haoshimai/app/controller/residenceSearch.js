@@ -36,9 +36,13 @@ App.residenceSearch = sumeru.controller.create(function(env, session, param) {
         }
 
         $root.on('click', '.residence-wrap', function() {
-            env.redirect('/residenceOnSell', {
+            env.redirect('/houseList', {
                 'residenceId': $(this).attr('data-id'),
-                'clientUId': clientUId
+                'clientUId': clientUId,
+                'saleRent': 'all',
+                'residenceName': $(this).attr('data-name'),
+                'saleCount': $(this).attr('data-sale'),
+                'rentCount': $(this).attr('data-rent')
             }, true);
         });
 

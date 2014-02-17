@@ -22,12 +22,63 @@
 	    		font-size: @font-size-base;
 	    		float: left;
 			}
+            
+            #sale_rent {
+                width:120px;
+                height:30px;
+                float:right;
+                border:1px solid #141518;
+                background-color:#3d4048;
+                border-radius: 15px;
+                
+                ul {
+                    list-style: none;
+                    
+                    li a{
+                        color: #c6c6c6;
+                        text-shadow: 1px 1px 1px rgba(0,0,0,0.25);
+                    }
 	
-			#on-sale {
-	    		font-size: @font-size-base;
-	    		line-height: 35px;
-	    		float: right;
-			}
+                    #on-sale {
+                        font-size: @font-size-base;
+                        line-height: 28px;
+                        position: fixed;
+                        right: 62px;
+                        z-index:100;
+                        margin-right:16px;                   
+                        text-decoration:none; 
+                    }
+
+                    .active a{
+                        color: #fff;
+                        text-shadow: 1px 1px 1px rgba(0,0,0,0.25);
+                    }
+
+                    #on-rent {
+                        font-size: @font-size-base;
+                        line-height: 28px;
+                        position: fixed;
+                        z-index: 100;
+                        right: 11px;
+                        margin-right:9px;
+                        text-decoration:none;
+                    }
+                }
+
+            }
+
+            #sale_rent_bg {
+                margin-top:2px;
+                position:fixed;
+                right:70px;
+                width:58px;
+                background: -webkit-linear-gradient(#5095e3, #4585cf); /* For Safari */
+                background: -o-linear-gradient(#5095e3, #4585cf); /* For Opera 11.1 to 12.0 */
+                background: -moz-linear-gradient(#5095e3, #4585cf); /* For Firefox 3.6 to 15 */
+                background: linear-gradient(#5095e3, #4585cf); /* Standard syntax */
+                height:26px;
+                border-radius:15px;
+            }
 		}
 	
 		.sub {
@@ -86,7 +137,8 @@
 		}
 	
 		.info p {
-			margin-bottom: 0px;
+            font-size: 13px;
+			margin-bottom: 3px;
 		}
 	}
 	

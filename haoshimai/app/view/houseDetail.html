@@ -38,14 +38,23 @@
 			{{data.title}}
 		</div>
 		<div class="important-info">
-			<div class='price'>{{data.price}}</div>
+            <div class='price'>
+            {{#compare saleRent "==" "sale"}}
+            {{data.price}}
+            {{else}}
+            {{data.rentPrice}}
+            {{/compare}}
+            </div>
 			<div class="area">{{data.area}}</div>
 			<div class="type">{{data.roomType}}</div>
 		</div>
 		<div class="details">
-			<div class="detail">
-				<span class='prop'>单价</span>
-				<span class='value'>{{data.avg}}</span>
+            <div class="detail">
+                {{#compare saleRent "==" "sale"}}
+                <span class='prop'>单价</span>
+                <span class='value'>{{data.avg}}</span>
+                {{else}}
+                {{/compare}}
 			</div>
 		</div>
 		<div class="details">
@@ -79,7 +88,16 @@
 				<span class='prop'>特殊说明</span>
 				<span class='value'>{{data.memo}}</span>
 			</div>
-		</div>
+        </div>
+        {{#compare saleRent "==" "rent"}}
+        <div class="details">
+			<div class="detail">
+				<span class='prop'>房屋配置</span>
+				<span class='value'>{{data.equipment}}</span>
+			</div>
+        </div>
+        {{else}}
+        {{/compare}}
 
 		<div class="details" style="margin-top: 10px">
 			<a id='house-address' class='detail' lng='{{data.lng}}' 

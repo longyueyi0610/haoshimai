@@ -11,6 +11,7 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
 	var view = 'houseDetail';
 	var houseId = param['houseId'];
     var clientUId = param['clientUId'];
+    var saleRent = param['saleRent'];
 
 	var getDetails = function() {
         var args = [];
@@ -29,6 +30,7 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
 
 			session.bind('house-detail', {
 				data: data,
+                saleRent: saleRent
 			});
 		});
 	};
