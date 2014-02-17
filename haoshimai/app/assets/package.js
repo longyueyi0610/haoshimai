@@ -1,0 +1,11 @@
+sumeru.packages(
+   'css/bootstrap.min.css',
+   'css/framework.css',
+   'js/jquery-1.10.2.min.js',
+   'js/bootstrap.js',
+   'js/underscore.js',
+   'js/jquery.banner.js',
+   'js/highcharts.js',
+   'js/unslider.js',
+   'js/jquery.hammer.js'
+);

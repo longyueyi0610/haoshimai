@@ -61,6 +61,7 @@ function runnable() {
 
 	config['pubhouseDetail'] = {
 		fetchUrl : function(args){
+            console.log(host + '/server/house/detailNew.controller?appCode=' + appCode + '&houseId=' + args[0] + '&clientUId=' + args[1]);
 			return host + '/server/house/detailNew.controller?appCode=' + appCode + '&houseId=' + args[0] + '&clientUId=' + args[1];
 		},
 		resolve: function(originData){
@@ -102,6 +103,31 @@ function runnable() {
 	config['pubresidenceOnSell'] = {
 		fetchUrl : function(args){
 			return host + '/server/residenceSale/houseListNew.controller?appCode=' + appCode + '&residenceId=' + args[0] + '&orderType=' + args[1] + '&pageIndex=' + args[2] + '&pageSize=' + args[3] + '&clientUId=' + args[4];
+		},
+		resolve : function(originData){
+            var j =JSON.parse(originData);
+            var resolved = j['data'];
+
+            return resolved;
+        },
+        buffer: false
+    }
+
+    config['pubresidenceRent'] = {
+		fetchUrl : function(args){
+			return host + '/server/residenceRent/houseListNew.controller?appCode=' + appCode + '&residenceId=' + args[0] + '&orderType=' + args[1] + '&pageIndex=' + args[2] + '&pageSize=' + args[3] + '&clientUId=' + args[4];
+		},
+		resolve : function(originData){
+            var j =JSON.parse(originData);
+            var resolved = j['data'];
+
+            return resolved;
+        },
+        buffer: false
+    }
+    config['pubresidenceSold'] = {
+		fetchUrl : function(args){
+			return 'http://test.housemart.cn:8080/server/residenceSold/houseListNew.controller?appCode=' + appCode + '&residenceId=' + args[0] + '&orderType=' + args[1] + '&pageIndex=' + args[2] + '&pageSize=' + args[3] + '&clientUId=' + args[4];
 		},
 		resolve : function(originData){
             var j =JSON.parse(originData);

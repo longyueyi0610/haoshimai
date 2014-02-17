@@ -57,10 +57,58 @@
   font-size: 14px;
   float: left;
 }
-#map-sell-banner .header #on-sale {
-  font-size: 14px;
-  line-height: 35px;
+#map-sell-banner .header #sale_rent {
+  width: 120px;
+  height: 30px;
   float: right;
+  border: 1px solid #141518;
+  background-color: #3d4048;
+  border-radius: 15px;
+}
+#map-sell-banner .header #sale_rent ul {
+  list-style: none;
+}
+#map-sell-banner .header #sale_rent ul li a {
+  color: #c6c6c6;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+}
+#map-sell-banner .header #sale_rent ul #on-sale {
+  font-size: 14px;
+  line-height: 28px;
+  position: fixed;
+  right: 62px;
+  z-index: 100;
+  margin-right: 16px;
+  text-decoration: none;
+}
+#map-sell-banner .header #sale_rent ul .active a {
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+}
+#map-sell-banner .header #sale_rent ul #on-rent {
+  font-size: 14px;
+  line-height: 28px;
+  position: fixed;
+  z-index: 100;
+  right: 11px;
+  margin-right: 9px;
+  text-decoration: none;
+}
+#map-sell-banner .header #sale_rent_bg {
+  margin-top: 2px;
+  position: fixed;
+  right: 70px;
+  width: 58px;
+  background: -webkit-linear-gradient(#5095e3, #4585cf);
+  /* For Safari */
+  background: -o-linear-gradient(#5095e3, #4585cf);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#5095e3, #4585cf);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#5095e3, #4585cf);
+  /* Standard syntax */
+  height: 26px;
+  border-radius: 15px;
 }
 #map-sell-banner .sub ul {
   padding-left: 0;
@@ -109,7 +157,8 @@
   border-radius: 7px;
 }
 .content-marker .info p {
-  margin-bottom: 0px;
+  font-size: 13px;
+  margin-bottom: 3px;
 }
 .marker-wrap {
   position: absolute;
@@ -491,6 +540,33 @@ fieldset[disabled] #residenceSearch .banner .header button.active {
   font-size: 12px;
   text-align: center;
   line-height: 30px;
+}
+#residenceOnSell .banner .sub ul {
+  padding-left: 0;
+  margin: 0px;
+  overflow: hidden;
+  list-style: none;
+}
+#residenceOnSell .banner .sub ul li {
+  width: 33.3%;
+  box-sizing: border-box;
+  padding: 0px;
+  float: left;
+  border-right: 1px solid #5f636a;
+}
+#residenceOnSell .banner .sub ul li.active a {
+  color: #f47c00;
+}
+#residenceOnSell .banner .sub ul li a {
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  display: block;
+  padding: 5px 0px;
+}
+#residenceOnSell .banner .sub ul li::last-child {
+  border-right: none;
 }
 #residenceOnSell #onsell-content {
   position: fixed;

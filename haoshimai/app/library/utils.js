@@ -30,7 +30,7 @@ Library.utils = sumeru.Library.create(function(exports){
 		var length = residenceContents.length;
 		var lng = position['lng'];
 		var lat = position['lat'];
-		var simple = new Array(5);
+		var simple = new Array(7);
 
 		for(var i=0;i<length;i++){
 			var residence = JSON.parse(residenceContents[i]);
@@ -46,6 +46,8 @@ Library.utils = sumeru.Library.create(function(exports){
 				simple[2]=residence['onSaleCount'];
 				simple[3]=residence['picURLWithSize'][0];
 				simple[4]=residence['residenceId'];
+                simple[5]=residence['rentRange'];
+                simple[6]=residence['onRentCount'];
 				break;
 			}
 		}
