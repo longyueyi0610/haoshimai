@@ -7,7 +7,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 	var view = 'houseList';
 	var residenceId = param['residenceId']; //小区id
 	var orderType = 1; //默认1
-	var pageSize = 35;
+	var pageSize = 5;
 	var pageIndex = 1;
 	var clientUId = param['clientUId'];
     var saleRent = param['saleRent'];
@@ -64,7 +64,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
         var args = [];
         args[0] = residenceId;
         args[1] = clientUId;
-		env.subscribe('pubresidenceDetail', args, function(residenceDetailCollection) {
+		session.residenceDetailCollection = env.subscribe('pubresidenceDetail', args, function(residenceDetailCollection) {
 			var data = residenceDetailCollection.find()[0]
 			var array = [];
 			for (var i = 0; i < data.picURLWithSize.length; i++) {
@@ -156,6 +156,16 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 		});
 
 		session.event('residence-container', function() {
+            var sort = function(){
+                alert(soldHistory);
+                alert(saleRent);
+                if(!soldHistory){
+                    subWay(saleRent);
+                }else{
+                    subWay('sold');
+                }
+            }
+
 			var $focuses = $("#residence-onsell-houses");
 			if ($focuses.find(".item").length !== 0) {
 				$focuses.carousel({
@@ -169,7 +179,11 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 					}
 				});
                 touch.on($focuses[0], 'click', function(e) {
-                    alert('x');
+                    var picStr = JSON.stringify(session.residenceDetailCollection[0]['picURL']);
+                    var activeUrl = $('.active img').attr('src');
+                    sessionStorage.setItem('picStr', picStr);
+                    sessionStorage.setItem('activeUrl', activeUrl);
+                    env.redirect('/picShow',true);
                 });
 			}
 
@@ -200,7 +214,8 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 				$(".modal-backdrop").toggle();
 				orderType = 2;
 				session.set('orderType', orderType);
-				session.commit();
+				//session.commit();
+                sort();
 			});
 
 			$('#sort-per').click(function() {
@@ -208,7 +223,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 				$(".modal-backdrop").toggle();
 				orderType = 3;
 				session.set('orderType', orderType);
-				session.commit();
+                sort();
 			});
 
 			$('#sort-area').click(function() {
@@ -216,7 +231,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 				$(".modal-backdrop").toggle();
 				orderType = 4;
 				session.set('orderType', orderType);
-				session.commit();
+				sort();
 			});
 
 			$('#sort-time').click(function() {
@@ -224,7 +239,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 				$(".modal-backdrop").toggle();
 				orderType = '1';
 				session.set('orderType', orderType);
-				session.commit();
+				sort();
 			});
 		});
 	};
