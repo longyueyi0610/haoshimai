@@ -128,10 +128,18 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
             });
 
             $('#residenceOnSell #sold').click(function(){
+                $('#sale_sold_bg').animate({left:'38px'},'fast',function(){
+                    $('.header #sale_sold li.active').removeClass("active");
+                    $('#sold').parent().addClass("active");
+                });
                 soldHistory = true;
                 subWay('sold');
             });
             $('#residenceOnSell #sale').click(function(){
+                $('#sale_sold_bg').animate({left:'-38px'},'fast',function(){
+                    $('.header #sale_sold li.active').removeClass("active");
+                    $('#sale').parent().addClass("active");
+                });
                 soldHistory = false;
                 subWay('sale');
             });

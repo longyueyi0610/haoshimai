@@ -536,6 +536,62 @@ fieldset[disabled] #residenceSearch .banner .header button.active {
   font-size: 18px;
   text-align: center;
 }
+#residenceOnSell .banner .header #sale_sold {
+  width: 160px;
+  height: 30px;
+  margin: auto;
+  border: 1px solid #141518;
+  background-color: #3d4048;
+  border-radius: 15px;
+}
+#residenceOnSell .banner .header #sale_sold ul {
+  list-style: none;
+}
+#residenceOnSell .banner .header #sale_sold ul li a {
+  color: #c6c6c6;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+}
+#residenceOnSell .banner .header #sale_sold ul #sale {
+  position: relative;
+  top: -2px;
+  left: -52px;
+  font-size: 14px;
+  line-height: 28px;
+  z-index: 100;
+  margin-right: 16px;
+  text-decoration: none;
+}
+#residenceOnSell .banner .header #sale_sold ul .active a {
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+}
+#residenceOnSell .banner .header #sale_sold ul #sold {
+  position: relative;
+  top: -32px;
+  left: 25px;
+  font-size: 14px;
+  line-height: 28px;
+  z-index: 100;
+  margin-right: 9px;
+  text-decoration: none;
+}
+#residenceOnSell .banner .header #sale_sold_bg {
+  position: relative;
+  top: -28px;
+  left: -38px;
+  margin: auto;
+  width: 80px;
+  background: -webkit-linear-gradient(#5095e3, #4585cf);
+  /* For Safari */
+  background: -o-linear-gradient(#5095e3, #4585cf);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#5095e3, #4585cf);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#5095e3, #4585cf);
+  /* Standard syntax */
+  height: 26px;
+  border-radius: 15px;
+}
 #residenceOnSell .banner .sub {
   font-size: 12px;
   text-align: center;
