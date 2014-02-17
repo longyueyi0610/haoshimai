@@ -1,0 +1,30 @@
+{{#each houseList}}
+        <div class='residence-wrap' data-id="{{this.id}}">
+            <div class='residence'>
+                <div class='price highlight'>
+                    {{this.price}}
+                </div>
+                <img src="{{this.picURL}}"/>
+                <div class='info'>
+                    <div class="details">
+                        <span class="highlight">{{this.roomType}}</span>
+                    </div>
+                    <div class='details'>
+                        <span class="detail" style="width: 60%">
+                            单价: {{this.avg}}
+                        </span>
+                        <span class="detail" style="width: 40%">
+                            面积: {{this.area}}
+                        </span>
+                        <span class="detail" style="width: 60%;color:red">
+                            已售
+                        </span>
+                        <span class="detail" style="width: 40%">
+                            {{this.dealTimeString}}
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+{{/each}}

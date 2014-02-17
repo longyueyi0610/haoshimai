@@ -1,7 +1,7 @@
 sumeru.packages(
     'mapSell.js',
 	'residenceSearch.js',
-	'residenceOnSell.js',
+	'houseList.js',
 	'residenceDetail.js',
 	'houseDetail.js',
 	'houseAddress.js',

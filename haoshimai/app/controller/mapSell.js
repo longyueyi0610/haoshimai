@@ -34,15 +34,26 @@ App.mapSell = sumeru.controller.create(function(env, session) {
         doRender(view,['none','z']);
 	};
 
+    env.onerror = function(){
+        alert("errot");
+    };
+
 	env.onready = function() {
 
-		var mapObj, toolBar, myLocation, marker, centerPosition, previousFlag, nowFlag, flagForWay; //高德地图、地图工具、我的位置、标记、中心点、上一个标记，现在的标记，出售房或者出租房
-        flagForWay = 'onSale';
+		var mapObj, toolBar, myLocation, marker, centerPosition, previousFlag, nowFlag; //高德地图、地图工具、我的位置、标记、中心点、上一个标记，现在的标记，出售房或者出租房
+       
 		var markerContents = []; //为了不重复加载点坐标
 
 		var markers = new Array(); //marker数组
 
-		var tabFlag = "annualPriceIncreasement"; //初始的tab选项
+		var tabFlag = "annualPriceIncreasement"; //初始的tab选项,这里虽然数据接口不同，但是接口获取的数据相同，所以把出租房选项当一个tab来看待,tabFlag='rentPrice'
+
+        /*var clearFlags = function(){//清楚地图上保存的数据
+            previousFlag = null;
+            nowFlag = null;
+            markerContents = [];
+            markers = new Array();
+        }*/
 
 		var createMarkerFlag = function(residenceName, residencePara) { //创建小标记
 			if (!_markerTemplate) {
@@ -63,22 +74,36 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 
 		var createMarkerContent = function(position) { //创建大标记
 
-			if (!_contentTemplate) {
-				_contentTemplate = _.template(
-					"<div class='content-marker'>" +
-					"	<img src='<%= img %>' />" +
-					"	<div class='info'>" +
-					"		<p><%- name %></p>" +
-					"		<p>售价范围：<%- range %></p>" +
-					"		<p>在售：<%- count %></p>" +
-					"	</div>" +
-					"</div>"
-				);
+			if (true) {
+                if (tabFlag == 'rentPrice'){
+				    _contentTemplate = _.template(
+					    "<div class='content-marker'>" +
+					    "	<img src='<%= img %>' " + "onerror="+'"'+"javascript:this.src=" +"'../assets/img/nopic_default.png'" +'"'+ "/>" +
+					    "	<div class='info'>" +
+					    "		<p><%- name %></p>" +
+					    "		<p>租金范围：<%- range %></p>" +
+					    "		<p>在租：<%- count %></p>" +
+					    "	</div>" +
+					    "</div>"
+				    );
+                }else{
+                    _contentTemplate = _.template(
+					    "<div class='content-marker'>" +
+                        "   <img src='<%= img %>' " + "onerror="+'"'+"javascript:this.src=" +"'../assets/img/nopic_default.png'" +'"'+ "/>" +
+					    "	<div class='info'>" +
+					    "		<p><%- name %></p>" +
+					    "		<p>售价范围：<%- range %></p>" +
+					    "		<p>在售：<%- count %></p>" +
+					    "	</div>" +
+					    "</div>"
+				    );
+                }
+
 			}
 
 
 			var simple = Library.utils.getresidenceSimple(markerContents, position);
-			var residenceName, priceRange, onSaleCount, pic, residenceId;
+			var residenceName, priceRange, onSaleCount, pic, residenceId, rentRange, onRentCount;
 
 			if (simple != null) {
 				residenceName = simple[0];
@@ -86,19 +111,23 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 				onSaleCount = simple[2];
 				pic = simple[3];
 				residenceId = simple[4];
+                rentRange = simple[5];
+                onRentCount = simple[6];
 			}
 
 			var el = _contentTemplate({
 				name: residenceName,
-				range: priceRange,
+				range: (tabFlag=='rentPrice')?rentRange:priceRange,
 				img: pic,
-				count: onSaleCount
+				count: (tabFlag=='rentPrice')?onRentCount:onSaleCount
 			});
 
 			var $el = $(el).click(function() {
-				env.redirect("/residenceOnSell", {
+                var saleRent = (tabFlag=='rentPrice')?'rent':'sale'; 
+				env.redirect("/houseList", {
 					'residenceId': residenceId,
-                    'clientUId': clientUId
+                    'clientUId': clientUId,
+                    'saleRent':saleRent
 				}, true);
 			});
 
@@ -106,7 +135,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 		};
 
 
-		var loadFlag = function(lat, lng) { //加载点坐标,flagForWay表示出租房或者出售房
+		var loadFlag = function(lat, lng) { //加载点坐标
 
 			var url = host + '/server/plate/nearBy.controller?appCode=' + appCode + '&lat=' + lat + '&lng=' + lng;
 			var getCallback = function(data) {
@@ -115,12 +144,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 			};
 			sumeru.external.get(url, getCallback);
 
-            /*if (flagForWay == 'onRent'){
-                url = host + "/server/house/residenceRent/mapSearchNew.controller?appCode=" + appCode + "&lat=" + lat + "&lng=" + lng + "&range=4000&pageIndex=1&pageSize=20&clientUId=" + clientUId;
-            }else{
-			    url = host + "/server/house/residenceSale/mapSearchNew.controller?appCode=" + appCode + "&lat=" + lat + "&lng=" + lng + "&range=4000&pageIndex=1&pageSize=20&clientUId=" + clientUId;
-            }*/
-            url = host + "/server/house/residenceSale/mapSearchNew.controller?appCode=" + appCode + "&lat=" + lat + "&lng=" + lng + "&range=4000&pageIndex=1&pageSize=20&clientUId=" + clientUId;
+            url = host + "/server/house/residenceRent/mapSearchNew.controller?appCode=" + appCode + "&lat=" + lat + "&lng=" + lng + "&range=4000&pageIndex=1&pageSize=20&clientUId=" + clientUId;
 			var getCallback = function(data) {
 				var myData = JSON.parse(data);
 				oriData = myData['data'];
@@ -228,18 +252,25 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 		});
         
         //出售房和出租房切换
-        /*$('#on-rent').click(function(){
-            flagForWay = 'onRent';
-            $('.sub').css('display','none');
-            mapObj.clearMap();
-            var lng = mapObj.getCenter().getLng();
-            var lat = mapObj.getCenter().getLat();
-            loadFlag(lat, lng, flagForWay);
+        $('#on-rent').click(function(){
+            tabFlag = 'rentPrice'
+            $('#map-sell-banner .sub').css('display','none');
+            updateFlag();
+            $('#sale_rent_bg').animate({right:'12px'},'fast',function(){
+                $('.header #sale_rent li.active').removeClass("active");
+                $('#on-rent').parent().addClass("active");
+            });
         });
         
         $('#on-sale').click(function(){
-            $('.sub').css('display','block'); 
-        });*/
+            tabFlag = 'annualPriceIncreasement';
+            $('#map-sell-banner .sub').css('display','block');
+            updateFlag();
+            $('#sale_rent_bg').animate({right:'70px'},'fast',function(){
+                $('.header #sale_rent li.active').removeClass("active");
+                $('#on-sale').parent().addClass("active");
+            });
+        });
 
 		session.eventMap('#nearbyButton', { //定位我的位置
 			'click': function(e) {

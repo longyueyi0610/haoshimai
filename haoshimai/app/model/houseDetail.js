@@ -12,7 +12,7 @@ Model.houseDetail = function(exports){
 			{ name: 'residenceId', type: 'number'},
             { name: 'buildingNo', type: 'number'},
             { name: 'cellNo', type: 'string'},
-			{ name: 'rentPrice', type: 'number'},
+			{ name: 'rentPrice', type: 'string'},
             { name: 'residenceName', type: 'string'},
             { name: 'price', type: 'string'},
             { name: 'roomType', type: 'string'},

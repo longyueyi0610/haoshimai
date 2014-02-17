@@ -68,10 +68,10 @@ App.chat = sumeru.controller.create(function(env, session, param) {
                         var url = host + '/server/house/chat/send.controller?appCode=app_test_code&clientUId=' + clientUId + '&houseId=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=1';
                         var getCallback = function(data){
                              //做点什么吧
+                            $('#chat-input').val('');
+                            $('#chat-input').blur();
                         }
                         sumeru.external.get(url,getCallback);
-                        $('#chat-input').val('');
-                        $('#chat-input').blur();
                     }   
                 }   
             }   
@@ -83,10 +83,4 @@ App.chat = sumeru.controller.create(function(env, session, param) {
         
     };
 
-    /*env.onsleep = function(){
-        session.chatMessages.hold();
-    };
-    env.onresume = function(){
-        session.chatMessages.releaseHold();
-    };*/
 });
