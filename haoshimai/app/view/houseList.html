@@ -12,7 +12,14 @@
                     {{residenceName}}  
                 {{else}}
                     {{#compare saleRentType "==" "sale"}}
-                    <a id='sale'>售房</a><a id='sold'>成交历史</a>
+                    <!--<a id='sale'>售房</a><a id='sold'>成交历史</a>-->
+                    <div id='sale_sold'>
+                        <ul>
+                          <li class='active'><a id="sale">在售房屋</a></li>
+                            <li><a id="sold">成交历史</a></li>
+                        </ul>
+                    </div>
+                    <div id='sale_sold_bg'></div>
                     {{else}}
                         小区在租房
                     {{/compare}}
