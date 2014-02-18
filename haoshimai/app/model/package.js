@@ -6,6 +6,7 @@ sumeru.packages(
     'unreadMessage.js',
     'unreadCounts.js',
     'chatMessage.js',
-    'houseRent.js'
+    'houseRent.js',
+    'houseInfo.js'
 )
 
