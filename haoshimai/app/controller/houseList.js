@@ -66,7 +66,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
             args[5] = 'Sale';
             session.houseListCollection = env.subscribe('pubhouseInfo', args, function(houseListCollection) {
 			    session.bind('residence-container', {
-				    houseList: houseListCollection.find(),
+				    houseList: houseListCollection.find()[0]['data'],
                     saleRentType: 'all',
                     soldHistory: soldHistory,
                     totalCount: houseListCollection.find()[0]['totalCount']
@@ -120,11 +120,15 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 	env.onready = function() {
 
 		var $root = $("#residenceOnSell");
+        var addLoading = function(obj){
+            obj.css('display','block');
+        }
 
 		session.event('residence-name', function() {
             $('#residenceOnSell #onSale').click(function(){
                 $('#residenceOnSell .sub li.active').removeClass('active');
                 $('#residenceOnSell #onSale').parent().addClass('active');
+                addLoading($('#residenceOnSell .loadingDiv')); 
                 soldHistory = false;
                 subWay('sale');
                 
@@ -132,6 +136,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
             $('#residenceOnSell #onRent').click(function(){
                 $('#residenceOnSell .sub li.active').removeClass('active');
                 $('#residenceOnSell #onRent').parent().addClass('active');
+                addLoading($('#residenceOnSell .loadingDiv')); 
                 soldHistory = false;
                 subWay('rent');
 
@@ -139,6 +144,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
             $('#residenceOnSell #onSold').click(function(){
                 $('#residenceOnSell .sub li.active').removeClass('active');
                 $('#residenceOnSell #onSold').parent().addClass('active');
+                addLoading($('#residenceOnSell .loadingDiv'));
                 soldHistory = true;
                 subWay('sold');
 
@@ -149,6 +155,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
                     $('.header #sale_sold li.active').removeClass("active");
                     $('#sold').parent().addClass("active");
                 });
+                addLoading($('#residenceOnSell .loadingDiv'));
                 soldHistory = true;
                 subWay('sold');
             });
@@ -157,6 +164,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
                     $('.header #sale_sold li.active').removeClass("active");
                     $('#sale').parent().addClass("active");
                 });
+                addLoading($('#residenceOnSell .loadingDiv')); 
                 soldHistory = false;
                 subWay('sale');
             });
