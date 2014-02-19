@@ -6,6 +6,7 @@ sumeru.packages(
 	'houseDetail.js',
 	'houseAddress.js',
 	'chat.js',
-    'enquiryHistory.js'
+    'enquiryHistory.js',
+    'picShow.js'
 )
 

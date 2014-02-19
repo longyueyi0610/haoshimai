@@ -1,3 +1,4 @@
+//出售房，已售房
 Model.house = function(exports){
     exports.config = {
         fields : [

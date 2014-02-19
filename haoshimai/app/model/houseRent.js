@@ -1,4 +1,4 @@
-
+//出租房
 Model.houseRent = function(exports){
     exports.config = {
         fields : [

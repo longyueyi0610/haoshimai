@@ -1,13 +1,14 @@
 {{#each houseList}}
         <div class='residence-wrap' data-id="{{this.id}}">
             <div class='residence'>
-                <div class='price highlight'>
-                    {{this.price}}
+                <div class='price'>
+                    {{this.dealTimeString}}
                 </div>
+                <img class='sold_pic' src='../assets/img/sold_icon.png'/>
                 <img src="{{this.picURL}}"/>
                 <div class='info'>
                     <div class="details">
-                        <span class="highlight">{{this.roomType}}</span>
+                        <span class="highlight">{{this.price}}</span>
                     </div>
                     <div class='details'>
                         <span class="detail" style="width: 60%">
@@ -16,11 +17,8 @@
                         <span class="detail" style="width: 40%">
                             面积: {{this.area}}
                         </span>
-                        <span class="detail" style="width: 60%;color:red">
-                            已售
-                        </span>
                         <span class="detail" style="width: 40%">
-                            {{this.dealTimeString}}
+                            {{this.address}}
                         </span>
 
                     </div>

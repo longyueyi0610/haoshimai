@@ -11,10 +11,16 @@
                 {{#compare saleRentType "==" "all"}}
                     {{residenceName}}  
                 {{else}}
-                    {{#compare saleRentType "==" "sale"}}
-                    <a id='sale'>售房</a><a id='sold'>成交历史</a>
+                    {{#compare saleRentType "==" "rent"}}
+                    小区在租房
                     {{else}}
-                        小区在租房
+                    <div id='sale_sold'>
+                        <ul>
+                          <li class='active'><a id="sale">在售房屋</a></li>
+                          <li><a id="sold">成交历史</a></li>
+                        </ul>
+                    </div>
+                    <div id='sale_sold_bg'></div>
                     {{/compare}}
                 {{/compare}}
 			<a class='info' id="house-detail-icon">
@@ -77,8 +83,16 @@
     </div>
     {{/if}}
 	{{#compare houseList.length 0}}
-	<div class="houses no-house">
-	<p class='empty'>没有符合条件的搜索记录</p>
+    <div class="houses no-house">
+        {{#compare saleRentType "==" "rent"}}
+        <p class='empty'>没有出租房</p>
+        {{else}}
+            {{#if soldHistory}}
+            <p class='empty'>没有成交历史</p>
+            {{else}}
+            <p class='empty'>没有在售房</p>
+            {{/if}}
+        {{/compare}} 
 	</div>
 	{{ else }}
     <div class="houses">
@@ -90,6 +104,10 @@
             {{else}}
             {{> house_sale}}
             {{/if}}
+        {{/compare}}
+        {{#compare totalCount ">" houseList.length}}
+        <div style="width:100%;height:95px;"><button id='load-more'>加载更多</button></div>
+        {{else}}
         {{/compare}}
 	</div>
 </div>

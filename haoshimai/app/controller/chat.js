@@ -16,7 +16,7 @@ App.chat = sumeru.controller.create(function(env, session, param) {
         var args = [];
         args[0] = houseId;
         args[1] = brokerId;
-        args[2] = clientUId = clientUId;
+        args[2] = clientUId;
         session.chatMessageCollection = env.subscribe('pubchatMessage', args,function(chatMessageCollection) {
             session.bind('message-list', {
                 messages: chatMessageCollection.find()

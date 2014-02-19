@@ -256,7 +256,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
             tabFlag = 'rentPrice'
             $('#map-sell-banner .sub').css('display','none');
             updateFlag();
-            $('#sale_rent_bg').animate({right:'12px'},'fast',function(){
+            $('#sale_rent_bg').animate({left:'28px'},'fast',function(){
                 $('.header #sale_rent li.active').removeClass("active");
                 $('#on-rent').parent().addClass("active");
             });
@@ -266,7 +266,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
             tabFlag = 'annualPriceIncreasement';
             $('#map-sell-banner .sub').css('display','block');
             updateFlag();
-            $('#sale_rent_bg').animate({right:'70px'},'fast',function(){
+            $('#sale_rent_bg').animate({left:'-29px'},'fast',function(){
                 $('.header #sale_rent li.active').removeClass("active");
                 $('#on-sale').parent().addClass("active");
             });
