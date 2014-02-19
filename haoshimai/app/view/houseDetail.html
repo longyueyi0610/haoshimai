@@ -1,4 +1,7 @@
 <div id="houseDetail">
+<div class='loadingDiv'>
+     <img src="../assets/img/loading.gif"/>
+</div>
 
 <block tpl-id="house-detail">
 	<div class='banner'>
@@ -121,6 +124,7 @@
 		</div>
 
 	</div>
+    {{$ Library.utils.changeElClass($('.loadingDiv'));}}
 </block>
 <div id="askButton" style="">
 	<span class='inner'>问询</span>
