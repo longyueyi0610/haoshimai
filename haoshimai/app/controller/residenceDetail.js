@@ -56,6 +56,13 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
                         $focuses.carousel('prev');
                     }
                 });
+                touch.on($focuses[0], 'click', function(e) {
+                    var picStr = JSON.stringify(session.residenceDetailCollection[0]['picURL']);
+                    var activeUrl = $('#residence-detail-images .active img').attr('src');
+                    sessionStorage.setItem('picStr', picStr);
+                    sessionStorage.setItem('activeUrl', activeUrl);
+                    env.redirect('/picShow',{},true);
+                }); 
             }
 
             $("#residence-onsell-detail .back").click(function() {

@@ -60,10 +60,11 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
 				});
                 touch.on($slides[0], 'click', function(e) {
                     var picStr = JSON.stringify(session.houseDetailCollection[0]['picURL']);
-                    var activeUrl = $('.active img').attr('src');
+                    var activeUrl = $('#house-detail-images .active img').attr('src');
+                    sessionStorage.clear();
                     sessionStorage.setItem('picStr', picStr);
                     sessionStorage.setItem('activeUrl', activeUrl);
-                    env.redirect('/picShow',true);
+                    env.redirect('/picShow',{},true);
                 }); 
 			}
 
