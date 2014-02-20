@@ -1,5 +1,7 @@
 <div id="residence-onsell-detail">
-
+<div class='loadingDiv'>
+     <img src="../assets/img/loading.gif"/>
+</div>
 <block tpl-id="residence-onsell-detail">
 <div class="banner">
 	<div class="header">
@@ -167,6 +169,7 @@
 		</div>
 	</div>
 </div>
+{{$ Library.utils.changeElClass($('.loadingDiv'));}}
 </block>
 
 </div>
