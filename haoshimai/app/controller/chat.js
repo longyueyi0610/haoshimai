@@ -36,6 +36,16 @@ App.chat = sumeru.controller.create(function(env, session, param) {
 
         $('#chat .header').append(brokerName);
 
+        session.event('message-list', function(){
+            $('#chat .messages').height(document.body.clientHeight - 95);
+            $('#chat .messages').scrollTop($('#chat .messages')[0].scrollHeight);
+        });
+
+        window.onresize = function(){
+            $('#chat .messages').height(document.body.clientHeight - 95);
+            $('#chat .messages').scrollTop($('#chat .messages')[0].scrollHeight);
+        };
+
         $('#send-message-button').click(function() {
 
             var messageContent = $('#chat-input').val().trim();
