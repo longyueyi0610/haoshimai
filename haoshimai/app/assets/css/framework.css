@@ -112,7 +112,7 @@
   padding: 5px;
   overflow: hidden;
 }
-.residence-wrap .residence img {
+.residence-wrap .residence img:not(.sold_pic) {
   position: absolute;
   border-radius: 5px;
   width: 70px;
@@ -994,27 +994,67 @@ fieldset[disabled] #houseDetail #askButton.active {
   bottom: 45px;
 }
 #chat .messages .message {
-  -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
   padding: 8px;
   border-radius: 8px;
   max-width: 75%;
   min-width: 30px;
   float: right;
   clear: both;
-  margin: 10px;
+  margin: 10px 20px 10px 50px;
+  position: relative;
 }
 #chat .messages .message.agent {
   background: #428bca;
   color: #fff;
   float: left;
+  background-image: -webkit-linear-gradient(top, #63a4ed 0%, #4585cf 100%);
+  background-image: linear-gradient(to bottom, #63a4ed 0%, #4585cf 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff63a4ed', endColorstr='#ff4585cf', GradientType=0);
+  border: 1px solid #fff;
+  -webkit-box-shadow: 0 0 6px #bcbcbc;
+  box-shadow: 0 0 6px #bcbcbc;
+}
+#chat .messages .message.normal {
+  background-image: -webkit-linear-gradient(top, #dedede 0%, #f8f8f8 100%);
+  background-image: linear-gradient(to bottom, #dedede 0%, #f8f8f8 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffdedede', endColorstr='#fff8f8f8', GradientType=0);
+  border: 1px solid #c0c0c0;
+  -webkit-box-shadow: 0 0 1px #ffffff inset, 0 0 6px #bcbcbc;
+  -moz-box-shadow: 0 0 1px #ffffff inset, 0 0 6px #bcbcbc;
+  box-shadow: 0 0 1px #ffffff inset, 0 0 6px #bcbcbc;
+}
+#chat .messages .message.normal::after {
+  content: '';
+  width: 10px;
+  height: 15px;
+  background-image: url('../img/small_sanjiao_white.png');
+  background-size: 100% 100%;
+  position: absolute;
+  top: 10px;
+  right: -10px;
+}
+#chat .messages .message.agent::after {
+  background-image: url('../img/small_sanjiao_blue.png');
+  background-size: 100% 100%;
+  content: '';
+  width: 10px;
+  height: 15px;
+  position: absolute;
+  top: 10px;
+  left: -10px;
 }
 #chat .messages .message:last-child {
   margin-bottom: 25px;
 }
 #chat .messages img {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  position: absolute;
+  top: 0px;
+  left: -45px;
   background: url('../img/default_people.png') no-repeat top left;
   background-size: 100% 100%;
 }
