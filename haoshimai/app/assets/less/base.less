@@ -85,7 +85,7 @@
 			height: 70px;
 			left: 5px;
 			top: 5px;
-            background:url('../img/nopic_default.png') no-repeat top left;
+            background:url('../img/default_cover_small.png') no-repeat top left;
             background-size: 100% 100%;
 		}
 
@@ -128,19 +128,21 @@
 }
 
 .empty {
-	@empty-width: 190px;
-	@empty-height: 20px;
+	@empty-height: 25px;
 	color: #2b2d30;
-	background: url(../img/search_noresult.png) left center no-repeat transparent;
-	background-size: @empty-height @empty-height;
-	.size(@empty-width, @empty-height);
-	padding-left: @empty-height + 5px;
+	//background: url(../img/search_noresult.png) left center no-repeat transparent;
+	//background-size: @empty-height @empty-height;
 	position: absolute;
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
 
-	margin-left: -@empty-width/2;
 	margin-top: -@empty-height/2;
-	left: 50%;
 	top: 50%;
+    
+    &.rent, &.sale {
+        margin-top: -@empty-height/2 + 75px;
+    }    
 }
 
 .details {
@@ -190,3 +192,18 @@
         margin-top: -30px;
     }   
 } 
+
+.carousel-indicators {
+    bottom: -10px;
+
+    li {
+        width: 5px;
+        height: 5px;
+    }
+
+    .active {
+        margin-bottom: 1px;
+        width: 5px;
+        height: 5px;
+    }
+}

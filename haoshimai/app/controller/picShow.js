@@ -35,18 +35,6 @@ App.picShow = sumeru.controller.create(function(env, session, param){
 
         env.onready = function(){
 
-            /*var imgCenter = function(){
-                var windowHeight = $(window).height();
-                $('#picShow img').each(function(){
-                    if($(this).height()!==0){
-                        var picHeight = $(this).height();
-                        if(windowHeight > picHeight){
-                            $(this).css('margin-top',(windowHeight-picHeight)/2);
-                        }
-                    }
-                });
-            }*/
-
             var imgCenter = function(){
                 var windowHeight = $(window).height();
                 var i=0;
@@ -75,13 +63,16 @@ App.picShow = sumeru.controller.create(function(env, session, param){
                         interval: false
                     }); 
                     touch.on($focuses[0], 'drag', function(e) {
-                    if (e.direction === 'left') {
-                        $focuses.carousel("next");
-                    } else {
-                        $focuses.carousel("prev");
-                    }   
-                }); 
-            } 
+                        if (e.direction === 'left') {
+                            $focuses.carousel("next");
+                        } else {
+                            $focuses.carousel("prev");
+                        }   
+                    }); 
+                    touch.on($focuses[0], 'click', function(e) {
+                        history.back();
+                    });
+                } 
             });
         };
 });

@@ -1,5 +1,5 @@
 "use strict";
-var runnable = function(fw, findDiff, publishBaseDir, externalConfig, http, serverObjectId, url){
+var runnable = function(fw, findDiff, publishBaseDir, externalConfig, http, https, serverObjectId, url){
 
 	//package
 	var external = fw.addSubPackage('external');
@@ -72,7 +72,7 @@ var runnable = function(fw, findDiff, publishBaseDir, externalConfig, http, serv
 			});
 			
 			if(ret.length > 1){
-				fw.log("ERROR: uniqueColume data is not unique, it may cause error. ");
+				fw.log("ERROR: uniqueColumn data is not unique, it may cause error. ");
 			}
 			
 			if(ret.length){
@@ -96,8 +96,12 @@ var runnable = function(fw, findDiff, publishBaseDir, externalConfig, http, serv
 		
 		var chunks = [];
 		var size = 0;
-		
-		var getRequest = http.get(url, function(res){
+		var urlObj = urlParser && urlParser.parse(url);
+		var mode = urlObj.protocol === "https" ? https : http;
+		if(urlObj && urlObj.protocol){
+			delete urlObj.protocol;	
+		}
+		var getRequest = mode.get(url, function(res){
 		
 			var data = null;
 			
@@ -135,16 +139,30 @@ var runnable = function(fw, findDiff, publishBaseDir, externalConfig, http, serv
 		
 		//error handler
 		getRequest.on('error', function(err){
-			fw.log("Error when do external fetch", url);
+			var errMsg = "Error when do external fetch";
+			fw.log(errMsg, url);
 			errorHandler && errorHandler(err);
-			cb([]);
+			var errInfo = {
+				errMsg : errMsg,
+				errUrl : url,
+				err : err,
+				__smrerr__ : true
+			};
+			cb(errInfo);
 		});
 		
 		//timeout handler
 		getRequest.setTimeout( REQUEST_TIMEOUT, function(info){
-			fw.log("Timeout when do external fetch", url);
+			var timeoutMsg = "Timeout when do external fetch";
+			fw.log(timeoutMsg, url);
 			timeoutHandler && timeoutHandler();
-			cb([]);
+			var timeoutInfo = {
+				errMsg : timeoutMsg,
+				errUrl : url,
+				err : info,
+				__smrerr__ : true
+			};
+			cb(timeoutInfo);
 		});
 		
 	}
@@ -162,8 +180,11 @@ var runnable = function(fw, findDiff, publishBaseDir, externalConfig, http, serv
 		
 		var chunks = [];
 		var size = 0;
-		
-		var postRequest = http.request(options, function(res){
+		var mode = options.protocol === "https" ? https : http;
+		if(options && options.protocol){
+			delete options.protocol;	
+		}
+		var postRequest = mode.request(options, function(res){
 			
 			var data = null;
 			
@@ -204,18 +225,31 @@ var runnable = function(fw, findDiff, publishBaseDir, externalConfig, http, serv
 		
 		//error handler
 		postRequest.on('error', function(err){
-			fw.log("Error when do external post");
-			options && postData && fw.log(options, postData);
+			var errMsg = "Error when do external post";
+			fw.log(errMsg, options, postData);
 			errorHandler && errorHandler(err);
-			cb([]);
+			var errInfo = {
+				errMsg : errMsg,
+				options : options,
+				requestBody : postData,
+				err : err,
+				__smrerr__ : true
+			};
+			cb(errInfo);
 		});
 		
 		//timeout handler
 		postRequest.setTimeout( REQUEST_TIMEOUT, function(){
-			fw.log("Timeout when do external post");
-			options && postData && fw.log(options, postData);
+			var timeoutMsg = "Timeout when do external post";
+			fw.log(timeoutMsg, options, postData);
 			timeoutHandler && timeoutHandler();
-			cb([]);
+			var timeoutInfo = {
+				errMsg : timeoutMsg,
+				options : options,
+				requestBody : postData,
+				__smrerr__ : true
+			};
+			cb(timeoutInfo);
 		});
 		
 	}
@@ -253,13 +287,13 @@ var runnable = function(fw, findDiff, publishBaseDir, externalConfig, http, serv
 		if(!config.resolve){ //强制有resolve函数
 			fw.log('Need resolve method for external fetch!');
 			return;
-		} 
+		}
 		try{
-			var remoteData = config.resolve(data);
+			var remoteData = config.resolve(data, pubName, url);
 			remoteData = Array.isArray(remoteData) ? remoteData : [remoteData];
 			return remoteData;
 		}catch(e){
-			fw.log("Please check fetch url, 3rd-party server encounters an error: ", url, "\n" ,data, "\n");
+			fw.log("Please check fetch url, 3rd-party server encounters an error: ", url, "\n" ,data, "\n",e.stack);
 			return ;
 		}
 		
@@ -326,6 +360,10 @@ var runnable = function(fw, findDiff, publishBaseDir, externalConfig, http, serv
 
 		var _doSync = function(data){
 
+			if(data.__smrerr__){
+				callback([]); //TODO when DB cache hierarchy is done by susu
+				return;
+			}
 			if(typeof remoteDataMgr[url] === "undefined"){ var firstFetch = true; }	//首次抓取不必trigger_push
 			var remoteData = _resolve(data, pubName, url);	//处理原始数据
 			if(firstFetch){
@@ -359,6 +397,7 @@ var runnable = function(fw, findDiff, publishBaseDir, externalConfig, http, serv
 			}
 
 			var opts = {
+				protocol : postOptions.protocol,
 				hostname : postOptions.hostname,
 				path : postOptions.pathname,
 				port : postOptions.port || 80,
@@ -465,6 +504,7 @@ var runnable = function(fw, findDiff, publishBaseDir, externalConfig, http, serv
 	        handle : function(pack,target,conn) {
 	            var cbn = pack.cbn;
 	            var postData = encodeURIComponent(JSON.stringify(pack.postData));
+	            var buffer = pack.buffer;
 	            var defaultOptions = {
 					method : 'POST',
 					headers: {
@@ -474,9 +514,9 @@ var runnable = function(fw, findDiff, publishBaseDir, externalConfig, http, serv
 				};
 
 				var opts = Library.objUtils.extend(true, defaultOptions, pack.options);
-				//var opts = fw.utils.merge( pack.options, defaultOptions);
 
 		        _doPost(opts, postData, function(data){
+		        	data = buffer ? data : data.toString();
 		        	fw.netMessage.sendMessage(data.toString(),cbn,conn._sumeru_socket_id);
 		        });
 	            
@@ -646,7 +686,7 @@ var runnable = function(fw, findDiff, publishBaseDir, externalConfig, http, serv
 		        onMessage : {
 		            target : cbn,
 		            overwrite: true,
-		            once:true,
+		            once: true,
 		            handle : function(data){
 		            	cb(data);
 		            }
@@ -670,7 +710,7 @@ var runnable = function(fw, findDiff, publishBaseDir, externalConfig, http, serv
 	 * @param {Object} postData: post data sent to external server.
 	 * @param {Function} cb: post callback, result for;
 	 */
-	function sendPostRequest(options, postData, cb){
+	function sendPostRequest(options, postData, cb, buffer){
 		//server
 		if(fw.IS_SUMERU_SERVER){
             postData = encodeURIComponent(JSON.stringify(postData));
@@ -685,6 +725,7 @@ var runnable = function(fw, findDiff, publishBaseDir, externalConfig, http, serv
 			var opts = Library.objUtils.extend(true, defaultOptions, options);
 
 	        _doPost(opts, postData, function(data){
+	        	data = buffer ? data : data.toString();
 	        	cb(data);
 	        });
 
@@ -708,7 +749,8 @@ var runnable = function(fw, findDiff, publishBaseDir, externalConfig, http, serv
 			fw.netMessage.sendMessage({
 		        cbn : cbn,
 		        options : options,
-		        postData : postData
+		        postData : postData,
+		        buffer : buffer
 		    }, "SEND_EXTERNAL_POST");
 		}
 
@@ -768,7 +810,7 @@ var runnable = function(fw, findDiff, publishBaseDir, externalConfig, http, serv
 	external.__reg('post', sendPostRequest);
 	external.__reg('sync', synchronize);
 	
-}
+};
 
 if(typeof module !='undefined' && module.exports){
     module.exports = runnable;

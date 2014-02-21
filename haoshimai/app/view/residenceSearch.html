@@ -18,30 +18,49 @@
 {{$ $('.loadingDiv').css('display','none'); }}
 {{else}}
 <div class="residences">
-	{{#each data}}
-    <div class='residence-wrap' data-id="{{this.residenceId}}" data-name="{{this.residenceName}}" data-sale="{{this.onSaleCount}}" data-rent="{{this.onRentCount}}">
-		<div class='residence'>
-			<img src="{{this.picURL.[0]}}"/>
-			<div class='info'>
-				<div class="details">
-					<span class="highlight">{{this.residenceName}}</span>
-				</div>
-				<div class="details"> 
-                  <span class="detail">均价: <span class="highlight"> {{this.price}}</span></span>
-                  <span class="detail">租金: <span class="highlight"> {{this.rentPrice}}</span></span>
+    {{#compare saleRent "==" "sale"}}
+        {{#each data}}
+        <div class='residence-wrap' data-id="{{this.residenceId}}" data-name="{{this.residenceName}}" data-sale="{{this.onSaleCount}}" data-rent="{{this.onRentCount}}">
+            <div class='residence'>
+                <img src="{{this.picURL.[0]}}"/>
+                <div class='info'>
+                    <div class="details">
+                        <span class="highlight">{{this.residenceName}}</span>
+                    </div>
+                    <div class="details"> 
+                      <span class="detail" style="width:100%">均价: <span class="highlight"> {{this.price}}</span></span>
+                    </div>
+                    <div class='details last'>
+                        <span class="detail">
+                            在售: {{this.onSaleCount}}
+                        </span>
+                    </div>
                 </div>
-				<div class='details last'>
-					<span class="detail">
-						在售: {{this.onSaleCount}}
-					</span>
-					<span class="detail">
-						在租: {{this.onRentCount}}
-					</span>
-				</div>
-			</div>
-		</div>
-	</div>
-    {{/each}}
+            </div>
+        </div>
+        {{/each}}
+    {{else}}
+        {{#each data}}
+        <div class='residence-wrap' data-id="{{this.residenceId}}" data-name="{{this.residenceName}}" data-sale="{{this.onSaleCount}}" data-rent="{{this.onRentCount}}">
+            <div class='residence'>
+                <img src="{{this.picURL.[0]}}"/>
+                <div class='info'>
+                    <div class="details">
+                        <span class="highlight">{{this.residenceName}}</span>
+                    </div>
+                    <div class="details"> 
+                      <span class="detail" style="width:100%">租金: <span class="highlight"> {{this.rentPrice}}</span></span>
+                    </div>
+                    <div class='details last'>
+                        <span class="detail">
+                            在租: {{this.onRentCount}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    {{/compare}}
 </div>
 {{$ $('.loadingDiv').css('display','none'); }}
 {{/compare}}

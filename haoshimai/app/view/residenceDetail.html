@@ -30,10 +30,10 @@
 		<div class="carousel-inner">
 			{{#each data.picURLWithSize}}
 				{{#if this.first}}
-    			<div class="item active"><img src="{{this.url}}" onerror="javascript:this.src='../assets/img/nopic_default.png'"/>
+    			<div class="item active"><img src="{{this.url}}"/>
     			</div>
     			{{else}}
-    			<div class="item"><img src="{{this.url}}" onerror="javascript:this.src='../assets/img/nopic_default.png'"/></div>
+    			<div class="item"><img src="{{this.url}}"/></div>
     			{{/if}}
 			{{/each}}
   		</div>
@@ -131,7 +131,7 @@
 				</div>		
 				<div class="details">
 					<div class='detail'>
-						<span class='prop' style="width: 50px;">类型</span>
+						<span class='prop' style="width: 50px;">类&nbsp;&nbsp;&nbsp;型</span>
 						<span class="value">
 							{{data.type}}
 						</span>
@@ -145,7 +145,7 @@
 				</div>
 				<div class="details">
 					<div class='detail' style="width: 100%">
-						<span class='prop'>开发商</span>
+						<span class='prop' style="width: 50px;">开发商</span>
 						<span class="value">
 							{{data.developer}}
 						</span>
@@ -163,7 +163,7 @@
 		</div>
 		<div class="details">
 			<div class='detail' style="width: 100%;">
-				<span class='prop' style="display: inline-block;text-align: right;">地址</span>
+				<span class='prop'>小区地址</span>
 				<span class="value">{{data.address}}</span>
 			</div>
 		</div>
