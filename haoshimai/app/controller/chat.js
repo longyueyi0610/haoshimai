@@ -37,6 +37,8 @@ App.chat = sumeru.controller.create(function(env, session, param) {
         $('#chat .header').append(brokerName);
 
         session.event('message-list', function(){
+            $('#send-message-button').text('发送');
+            $('#send-message-button').removeAttr('disabled');
             $('#chat .messages').height(document.body.clientHeight - 95);
             $('#chat .messages').scrollTop($('#chat .messages')[0].scrollHeight);
         });
@@ -58,6 +60,8 @@ App.chat = sumeru.controller.create(function(env, session, param) {
                 });
                 session.chatMessages.save();*/
                 //后期需要完善并修改
+                $('#send-message-button').text('正在发送');
+                $('#send-message-button').attr("disabled","disabled");
                 var url = host + '/server/house/chat/send.controller?appCode=app_test_code&clientUId=' + clientUId + '&houseId=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=1';
                 var getCallback = function(data){
                     //做点什么吧

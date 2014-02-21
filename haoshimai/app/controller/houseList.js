@@ -175,13 +175,13 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 		});
 
         window.onresize = function(){
-            $('#residenceOnSell #onsell-content').height(document.body.clientHeight - 130);
+            $('#residenceOnSell #onsell-content').height(document.body.clientHeight - 125);
             $('#residenceOnSell #onsell-content').scrollTop(scrollOffset);
         };
 
 		session.event('residence-container', function() {
             //加载更多的滚动条处理
-            $('#residenceOnSell #onsell-content').height(document.body.clientHeight - 130);
+            $('#residenceOnSell #onsell-content').height(document.body.clientHeight - 125);
             $('#residenceOnSell #onsell-content').scrollTop(scrollOffset);
 
 

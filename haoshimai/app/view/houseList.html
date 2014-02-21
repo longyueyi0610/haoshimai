@@ -69,12 +69,12 @@
 	{{#compare houseList.length 0}}
     <div class="houses no-house">
         {{#compare saleRentType "==" "rent"}}
-        <p class='empty'>没有出租房</p>
+        <p class='empty rent'>没有在租房</p>
         {{else}}
             {{#if soldHistory}}
-            <p class='empty'>没有成交历史</p>
+            <p class='empty sold'>没有成交历史</p>
             {{else}}
-            <p class='empty'>没有在售房</p>
+            <p class='empty sale'>没有在售房</p>
             {{/if}}
         {{/compare}} 
 	</div>

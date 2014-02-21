@@ -155,16 +155,16 @@
 }
 .empty {
   color: #2b2d30;
-  background: url(../img/search_noresult.png) left center no-repeat transparent;
-  background-size: 20px 20px;
-  width: 190px;
-  height: 20px;
-  padding-left: 25px;
   position: absolute;
-  margin-left: -95px;
-  margin-top: -10px;
-  left: 50%;
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
+  margin-top: -12.5px;
   top: 50%;
+}
+.empty.rent,
+.empty.sale {
+  margin-top: 62.5px;
 }
 .details {
   padding: 0px 12px;
@@ -204,6 +204,18 @@
   left: 50%;
   margin-left: -30px;
   margin-top: -30px;
+}
+.carousel-indicators {
+  bottom: -10px;
+}
+.carousel-indicators li {
+  width: 5px;
+  height: 5px;
+}
+.carousel-indicators .active {
+  margin-bottom: 1px;
+  width: 5px;
+  height: 5px;
 }
 #map-sell-banner .header img {
   display: block;
@@ -620,11 +632,11 @@ fieldset[disabled] #residenceSearch .banner .header button.active {
 #residenceOnSell .banner .sub {
   font-size: 12px;
   text-align: center;
-  line-height: 30px;
+  line-height: 25px;
 }
 #residenceOnSell #onsell-content {
   position: fixed;
-  top: 80px;
+  top: 75px;
   bottom: 0px;
   width: 100%;
   overflow: auto;
@@ -646,8 +658,8 @@ fieldset[disabled] #residenceSearch .banner .header button.active {
 }
 #residenceOnSell #onsell-content .houses.no-house {
   position: fixed;
-  top: 320px;
-  bottom: 0px;
+  top: 75px;
+  bottom: 0;
   width: 100%;
 }
 #residenceOnSell #onsell-content .houses .residence-wrap .residence {
@@ -673,6 +685,9 @@ fieldset[disabled] #residenceSearch .banner .header button.active {
 }
 #residenceOnSell #onsell-content .houses .details {
   padding: 1px 0px;
+}
+#residenceOnSell #onsell-content .houses .details .detail {
+  font-size: 14px;
 }
 #residenceOnSell .sortbar {
   text-align: center;
@@ -1056,6 +1071,7 @@ fieldset[disabled] #houseDetail #askButton.active {
 }
 #chat .bar .bar-inner button {
   position: absolute;
+  width: 80px;
   border: none;
   right: 5px;
   top: 7px;
@@ -1106,7 +1122,7 @@ fieldset[disabled] #chat .bar .bar-inner button.active {
   background-color: #ffffff;
 }
 #chat .bar .bar-inner .input-wrap {
-  margin-right: 60px;
+  margin-right: 85px;
 }
 #chat .bar .bar-inner .input-wrap input[type=text] {
   padding: 5px 12px 5px 12px;
