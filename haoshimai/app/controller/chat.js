@@ -62,7 +62,6 @@ App.chat = sumeru.controller.create(function(env, session, param) {
                 var getCallback = function(data){
                     //做点什么吧
                     $('#chat-input').val('');
-                    $('#chat-input').blur();
                 }
                 sumeru.external.get(url,getCallback);
             }
@@ -79,7 +78,6 @@ App.chat = sumeru.controller.create(function(env, session, param) {
                         var getCallback = function(data){
                              //做点什么吧
                             $('#chat-input').val('');
-                            $('#chat-input').blur();
                         }
                         sumeru.external.get(url,getCallback);
                     }   

@@ -37,8 +37,12 @@
 				{{/each}}
   			</div>
 		</div>
-		<div class="title">
-			{{data.title}}
+        <div class="title">
+            {{#compare saleRent "==" "sale"}}
+            {{data.title}}
+            {{else}}
+            {{data.rentTitle}}
+            {{/compare}}
 		</div>
 		<div class="important-info">
             <div class='price'>
@@ -94,7 +98,7 @@
         </div>
         {{#compare saleRent "==" "rent"}}
         <div class="details">
-			<div class="detail">
+			<div class="detail" style="width:100%">
 				<span class='prop'>房屋配置</span>
 				<span class='value'>{{data.equipment}}</span>
 			</div>
@@ -112,7 +116,7 @@
 		<div class="details">
 			<a id='house-residence' class='detail' 
 				data-id='{{data.residenceId}}'>
-				<span class='prop'>小区名称</span>
+				<span class='prop'>小区</span>
 				<span class='value'>{{data.residenceName}}</span>
 			</a>
 		</div>

@@ -49,7 +49,6 @@ function runnable() {
             return host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=1';
         },
         resolve: function(originData) {
-            //console.log('pubreadCounts' + originData);
             var j = JSON.parse(originData);
             var resolved = j['data'];
 
@@ -61,10 +60,10 @@ function runnable() {
 
 	config['pubhouseDetail'] = {
 		fetchUrl : function(args){
-            console.log(host + '/server/house/detailNew.controller?appCode=' + appCode + '&houseId=' + args[0] + '&clientUId=' + args[1]);
 			return host + '/server/house/detailNew.controller?appCode=' + appCode + '&houseId=' + args[0] + '&clientUId=' + args[1];
 		},
 		resolve: function(originData){
+                     console.log(originData);
 			var j = JSON.parse(originData);
 			var resolved = j['data'];
 			
@@ -74,8 +73,8 @@ function runnable() {
 	}
 
 	config['pubresidenceSearch'] = {
-		fetchUrl: function(keyword){
-			var url =  host + '/server/house/searchKeyword.controller?appCode=' + appCode + '&cityId=1&keyword=' + keyword + '&type=1';
+		fetchUrl: function(args){
+			var url =  host + '/server/house/searchKeyword.controller?appCode=' + appCode + '&cityId=1&keyword=' + args[0] + '&type=' + args[1];
 			return encodeURI(url);
 		},
 		resolve : function(originData){
@@ -130,11 +129,12 @@ function runnable() {
         fetchUrl : function(args){
             if (args[5] == 'Sold'){
                 return 'http://test.housemart.cn:8080/server/residenceSold/houseListNew.controller?appCode=' + appCode + '&residenceId=' + args[0] + '&orderType=' + args[1] + '&pageIndex=' + args[2] + '&pageSize=' + args[3] + '&clientUId=' + args[4];
-            }else{   
-            return host + '/server/residence'+ args[5] + '/houseListNew.controller?appCode=' + appCode + '&residenceId=' + args[0] + '&orderType=' + args[1] + '&pageIndex=' + args[2] + '&pageSize=' + args[3] + '&clientUId=' + args[4];
+            }else{ 
+                return host + '/server/residence'+ args[5] + '/houseListNew.controller?appCode=' + appCode + '&residenceId=' + args[0] + '&orderType=' + args[1] + '&pageIndex=' + args[2] + '&pageSize=' + args[3] + '&clientUId=' + args[4];
             }       
          },
         resolve : function(originData){
+                      console.log(originData);
             var j =JSON.parse(originData);
             var resolved = j;
 

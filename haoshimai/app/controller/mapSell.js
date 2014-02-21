@@ -280,7 +280,8 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 		});
 		session.eventMap("#searchButton", {
 			'click': function(e) {
-				env.redirect("/residenceSearch",{'clientUId':clientUId},true);
+                var saleRent = (tabFlag=='rentPrice')?'rent':'sale';
+				env.redirect("/residenceSearch",{'clientUId':clientUId, 'saleRent': saleRent},true);
 			}
 		});
 

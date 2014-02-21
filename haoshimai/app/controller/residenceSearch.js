@@ -6,18 +6,25 @@ sumeru.router.add({
 App.residenceSearch = sumeru.controller.create(function(env, session, param) {
     var view = 'residenceSearch';
     var host = sumeru.config.get("dataServerHost");
-    var keyword; //输入内容
+    var keyword = ''; //输入内容
     var clientUId = param['clientUId'];
+    var saleRent = param['saleRent'];
 
     var getDetails = function() {
-        if (!session.get('keyword')) {
+        /*if (!session.get('keyword')) {
             session.set('keyword', 'none');
-        }
-        env.subscribe('pubresidenceSearch', session.get('keyword'), function(residenceSearchCollection) {
-            session.bind('list', {
-                data: residenceSearchCollection.find()
+        }*/
+        if (keyword != ''){
+            args = [];
+            args[0] = session.get('keyword');
+            args[1] = session.get('type');
+            env.subscribe('pubresidenceSearch', args, function(residenceSearchCollection) {
+                session.bind('list', {
+                    data: residenceSearchCollection.find(),
+                    saleRent: saleRent
+                });
             });
-        });
+        }
     };
 
     env.onload = function() {
@@ -36,14 +43,23 @@ App.residenceSearch = sumeru.controller.create(function(env, session, param) {
         }
 
         $root.on('click', '.residence-wrap', function() {
-            env.redirect('/houseList', {
-                'residenceId': $(this).attr('data-id'),
-                'clientUId': clientUId,
-                'saleRent': 'all',
-                'residenceName': $(this).attr('data-name'),
-                'saleCount': $(this).attr('data-sale'),
-                'rentCount': $(this).attr('data-rent')
-            }, true);
+            if(saleRent == 'sale'){
+                env.redirect('/houseList', {
+                    'residenceId': $(this).attr('data-id'),
+                    'clientUId': clientUId,
+                    'saleRent': saleRent,
+                    'residenceName': $(this).attr('data-name'),
+                    'saleCount': $(this).attr('data-sale'),
+                }, true);
+            }else{
+                env.redirect('/houseList', {
+                    'residenceId': $(this).attr('data-id'),
+                    'clientUId': clientUId,
+                    'saleRent': saleRent,
+                    'residenceName': $(this).attr('data-name'),
+                    'rentCount': $(this).attr('data-rent')
+                }, true);
+            }
         });
 
         session.eventMap('#cancel', {
@@ -59,7 +75,9 @@ App.residenceSearch = sumeru.controller.create(function(env, session, param) {
                         //输入信息为空的时候什么都不做
                     }else{
                         session.set('keyword', keyword);
+                        session.set('type', ((saleRent=='sale')?1:2));
                         session.commit();
+                        getDetails();
                         $('.loadingDiv').css('display','block');
                         $('#searchResidenceInput').val('');
                     }

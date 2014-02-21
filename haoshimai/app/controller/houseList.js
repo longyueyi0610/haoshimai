@@ -15,6 +15,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
     var saleCount = param['saleCount'];
     var rentCount = param['rentCount'];
     var soldHistory = false;
+    var scrollOffset = 0;
 
     var subWay = function(way){
         var args = new Array();
@@ -53,7 +54,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
                     totalCount: houseListCollection.find()[0]['totalCount']
                 });
             });
-        }else if(way == 'sold'){
+        }else{//way='sold'
             args[5] = 'Sold';
             session.houseListCollection = env.subscribe('pubhouseInfo', args, function(houseListCollection) {
 			    session.bind('residence-container', {
@@ -62,19 +63,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
                     totalCount: houseListCollection.find()[0]['totalCount']
 			    });
 		    });
-        }else{
-            args[5] = 'Sale';
-            session.houseListCollection = env.subscribe('pubhouseInfo', args, function(houseListCollection) {
-			    session.bind('residence-container', {
-				    houseList: houseListCollection.find()[0]['data'],
-                    saleRentType: 'all',
-                    soldHistory: soldHistory,
-                    totalCount: houseListCollection.find()[0]['totalCount']
-			    });
-		    });
-
         }
-
     }
 
 	var getDetails = function() {
@@ -130,6 +119,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
                 $('#residenceOnSell #onSale').parent().addClass('active');
                 addLoading($('#residenceOnSell .loadingDiv')); 
                 soldHistory = false;
+                scrollOffset = 0;
                 subWay('sale');
                 
             });
@@ -138,6 +128,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
                 $('#residenceOnSell #onRent').parent().addClass('active');
                 addLoading($('#residenceOnSell .loadingDiv')); 
                 soldHistory = false;
+                scrollOffset = 0;
                 subWay('rent');
 
             });
@@ -146,6 +137,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
                 $('#residenceOnSell #onSold').parent().addClass('active');
                 addLoading($('#residenceOnSell .loadingDiv'));
                 soldHistory = true;
+                scrollOffset = 0;
                 subWay('sold');
 
             });
@@ -157,6 +149,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
                 });
                 addLoading($('#residenceOnSell .loadingDiv'));
                 soldHistory = true;
+                scrollOffset = 0;
                 subWay('sold');
             });
             $('#residenceOnSell #sale').click(function(){
@@ -166,6 +159,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
                 });
                 addLoading($('#residenceOnSell .loadingDiv')); 
                 soldHistory = false;
+                scrollOffset = 0;
                 subWay('sale');
             });
 
@@ -180,7 +174,17 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
             });
 		});
 
+        window.onresize = function(){
+            $('#residenceOnSell #onsell-content').height(document.body.clientHeight - 130);
+            $('#residenceOnSell #onsell-content').scrollTop(scrollOffset);
+        };
+
 		session.event('residence-container', function() {
+            //加载更多的滚动条处理
+            $('#residenceOnSell #onsell-content').height(document.body.clientHeight - 130);
+            $('#residenceOnSell #onsell-content').scrollTop(scrollOffset);
+
+
             var sort = function(){
                 if(!soldHistory){
                     subWay(saleRent);
@@ -226,6 +230,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
             $('#residenceOnSell #load-more').click(function() {
                 pageSize = pageSize + pageSize;
                 $(this).text('加载中...');
+                scrollOffset = $('#residenceOnSell #onsell-content').scrollTop();
                 sort();
             });
             //排序功能
@@ -268,6 +273,14 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 				$('#allsorts').slideToggle();
 				$(".modal-backdrop").toggle();
 				orderType = '1';
+				session.set('orderType', orderType);
+				sort();
+			});
+
+			$('#sort-rent').click(function() {
+				$('#allsorts').slideToggle();
+				$(".modal-backdrop").toggle();
+				orderType = '2';
 				session.set('orderType', orderType);
 				sort();
 			});
