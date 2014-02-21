@@ -1,6 +1,6 @@
 {
   "name": "sumeru",
-  "version": "0.8.20",
+  "version": "0.10.0",
   "description": "A Realtime Javascript RIA Framework For Mobile WebApp",
   "main": "app.js",
   "scripts": {
@@ -30,7 +30,7 @@
     "chai": "1.7.2",
     "coveralls": "2.1.0",
     "mocha-lcov-reporter": "0.0.1",
-    "grunt-contrib-jshint": "~0.8.0"
+    "grunt": "~0.4.2"
   },
   "bin": {
     "sumeru": "./sumeru/npm-tools/sumeru"
@@ -45,6 +45,6 @@
     "url": "https://github.com/tongyao/sumeru/issues"
   },
   "homepage": "https://github.com/tongyao/sumeru",
-  "_id": "sumeru@0.8.20",
-  "_from": "sumeru@0.8"
+  "_id": "sumeru@0.10.0",
+  "_from": "sumeru@0.10.0"
 }

@@ -4,9 +4,9 @@
             <div class="carousel-inner">
                 {{#each picUrl}}
                 {{#if this.isActive}}
-                <div class="item active"><img src="{{this.url}}" style="width:100%" onerror="javascript:this.src='../assets/img/nopic_default.png'"/></div>
+                <div class="item active"><img src="{{this.url}}" style="width:100%"/></div>
                 {{else}}
-                <div class="item"><img src="{{this.url}}" style="width:100%" onerror="javascript:this.src='../assets/img/nopic_default.png'"/></div>
+                <div class="item"><img src="{{this.url}}" style="width:100%"/></div>
                 {{/if}}
                 {{/each}}
             </div> 
