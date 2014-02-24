@@ -9,38 +9,7 @@
 	</div>
 </div>
 <div class="content">
-<block tpl-id="unread-message">
-	{{#compare messages.length 0}}
-	<p class='empty'>暂时没有问询记录</p>
-	{{else}}
-	<div class='messages'>
-    {{#each messages}}
-    <div class='residence-wrap' data-houseid="{{this.houseId}}" data-brokerid="{{this.brokerId}}" data-brokername="{{this.brokerName}}">
-		<div class='residence'>
-			<img src="{{this.housePic}}"/>
-			<div class='info'>
-				
-				<div class='price'>
-                  <span class="highlight">{{this.price}}</span>
-				</div>
-				<div class='time'>
-					{{this.lastUpdateTime}}
-				</div>
-                <div class="details">
-					<span class="highlight">{{this.residenceName}}</span>
-				</div>
-				<div class="details" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap"> 
-					{{this.content}}
-				</div>
-			</div>
-		</div>
-        <div data-id="{{this.houseId}}" class='count badge' style="display:none">
-		</div>
-	</div>
-    {{/each}}
-	</div>
-	{{/compare}}
-</block>
+    <div class="messages">
+    </div>
 </div>
-
 </div>

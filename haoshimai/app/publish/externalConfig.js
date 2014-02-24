@@ -7,56 +7,6 @@ function runnable() {
     var chatBrokerId = '';
     var clientUId;
 
-    /*config['pubchatMessage'] = {
-        uniqueColumn : "time",
-        fetchUrl: function(args) {//args[0]houseId, args[1]brokerId, args[2]clientUId, args[3]type
-            console.log(host + '/server/house/chat/list.controller?appCode=' + appCode + '&clientUId=' +args[2]+ '&houseId=' + args[0] + '&brokerId=' + args[1] +'&type=' + args[3] + '&messageId=-1&page=0');
-            return host + '/server/house/chat/list.controller?appCode=' + appCode + '&clientUId=' +args[2]+ '&houseId=' + args[0] + '&brokerId=' + args[1] +'&type=' + args[3] + '&messageId=-1&page=0';
-        },
-        resolve: function(originData) {
-            console.log(originData);
-            var j = JSON.parse(originData);
-            var resolved = j['data'];
-
-            return resolved;
-        },
-
-        buffer: false
-
-    }*/
-
-    config['pubunreadMessage'] = {
-        uniqueColumn : 'lastUpdateTime',
-
-        fetchUrl: function(clientUId) {
-            return host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=0&showAll=1';
-        },
-        resolve: function(originData) {
-            var j = JSON.parse(originData);
-            var resolved = j['data'];//需要其他信息，不只是data
-
-            return resolved;
-        },
-
-        buffer: false
-
-    }
-
-    /*config['pubunreadCounts'] = {
-        uniqueColumn : "count",
-        fetchUrl: function(clientUId) {
-            clientUId = clientUId;
-            return host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=1';
-        },
-        resolve: function(originData) {
-            var j = JSON.parse(originData);
-            var resolved = j['data'];
-
-            return resolved;
-        },
-        buffer: false
-    }*/
-
 	config['pubhouseDetail'] = {
 		fetchUrl : function(args){
 			return host + '/server/house/detailNew.controller?appCode=' + appCode + '&houseId=' + args[0] + '&clientUId=' + args[1];
