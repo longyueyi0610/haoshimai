@@ -19,23 +19,6 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 	var view = 'mapSell';
     var count = 0;
 
-    /*var getDetails = function(){
-        session.unreadCountsCollection = env.subscribe('pubunreadCounts',clientUId,function(unreadCountsCollection){
-            if (session.unreadCountsCollection.length != count){
-                session.bind('count', {
-                    count:unreadCountsCollection.find()[0]['count']
-                });
-                count = session.unreadCountsCollection.length;
-            }else{
-                //什么都不做
-            } 
-        }); 
-    };  
-
-    env.onload = function(){
-        return [getDetails];
-    }; */
-
 	env.onrender = function(doRender) {
         doRender(view,['none','z']);
 	};
@@ -62,12 +45,23 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 
 		var tabFlag = "annualPriceIncreasement"; //初始的tab选项,这里虽然数据接口不同，但是接口获取的数据相同，所以把出租房选项当一个tab来看待,tabFlag='rentPrice'
 
-        /*var clearFlags = function(){//清楚地图上保存的数据
-            previousFlag = null;
-            nowFlag = null;
-            markerContents = [];
-            markers = new Array();
-        }*/
+        var clearFlags = function(markerContents, oriData, markers){//清楚地图上保存的数据(4公里以外的数据)
+            for (var i = 0; i < markers.length; i++) {
+                var isIn = false;//是否已加载，false代表没有
+                for(var j = 0; j< oriData.length; j++){
+                    if (oriData[j]['id'] == markers[i].data['id']){
+                        isIn = true;
+                    }else{
+                        ;
+                    }
+                }
+                if (!isIn){
+                    markers[i].marker.setMap(null);
+                    markers.splice(i,1);
+                    markerContents.splice(i,1);
+                }
+            }
+        }
 
 		var createMarkerFlag = function(residenceName, residencePara) { //创建小标记
 			if (!_markerTemplate) {
@@ -163,6 +157,9 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 			var getCallback = function(data) {
 				var myData = JSON.parse(data);
 				oriData = myData['data'];
+                
+                //加一步操作，进行删除flag操作
+                clearFlags(markerContents, oriData, markers);
 
 				for (var i = 0; i < oriData.length; i++) {
 					var lng = oriData[i]['position']['lng'];
