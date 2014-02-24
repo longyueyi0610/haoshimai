@@ -1,6 +1,6 @@
 sumeru.router.add({
     pattern: '/chat',
-    action: 'App.chat'
+    action: 'App.chat',
 });
 
 App.chat = sumeru.controller.create(function(env, session, param) {
@@ -11,22 +11,9 @@ App.chat = sumeru.controller.create(function(env, session, param) {
     var brokerId = param['brokerId'];
     var clientUId = param['clientUId'];
     var brokerName = param['brokerName'];//经理名称
-
-    var getDetails = function() {
-        var args = [];
-        args[0] = houseId;
-        args[1] = brokerId;
-        args[2] = clientUId;
-        session.chatMessageCollection = env.subscribe('pubchatMessage', args,function(chatMessageCollection) {
-            session.bind('message-list', {
-                messages: chatMessageCollection.find()
-            });
-        });
-    };
-
-    env.onload = function() {
-        return [getDetails];
-    };
+    var type = (param['saleRent']=='sale')?1:2;
+    var messageCount = 0;//记录message条数，为了不重复加载
+    var _markerTemplate = null;
 
     env.onrender = function(doRender) {
         doRender(view, ['none', 'z']);
@@ -35,14 +22,61 @@ App.chat = sumeru.controller.create(function(env, session, param) {
     env.onready = function() {
 
         $('#chat .header').append(brokerName);
+        
+        var createMessage = function(args) { //创建对话,args[0]~useType, args[1]~time,args[2]~brokerPicURL,args[3]~content
+            if (args[0] == 1) {//nomal
+                _messageTemplate = _.template(
+                    "<div class='message-time'><%- time %></div>" +
+                    "<div class='message normal'>" +
+                    "<%- content %>" +
+                    "</div>"
+                );  
+            }else{
+                _messageTemplate = _.template(//经纪人
+                    "<div class='message-time'><%- time %></div>" +
+                    "<div class='message agent'>" +
+                    "<img src='<%- brokerPicURL %>'/>" +
+                    "<%- content %>" +
+                    "</div>"
 
-        session.event('message-list', function(){
-            $('#send-message-button').text('发送');
-            $('#send-message-button').removeAttr('disabled');
-            $('#chat .messages').height(document.body.clientHeight - 95);
-            $('#chat .messages').scrollTop($('#chat .messages')[0].scrollHeight);
-        });
+                );
+            }   
 
+            return _messageTemplate({
+                time: args[1],
+                brokerPicURL: args[2],
+                content: args[3]
+            }); 
+        };
+
+        var getMessages = function(){
+            var url = host + "/server/house/chat/list.controller?appCode=app_test_code&clientUId=" + clientUId + "&houseId=" + houseId +"&brokerId=" +brokerId +"&type=" + type +"&messageId=-1&page=0"; 
+            var getCallback = function(data){
+                var resolved = JSON.parse(data)['data'];
+                var length =resolved.length;
+                var args = [];
+                if (length > messageCount){//有新的消息
+                    for (var i=messageCount; i<length; i++){
+                        args[0] = resolved[i].useType;
+                        args[1] = resolved[i].time;
+                        args[2] = resolved[i].brokerPicURL;
+                        args[3] = resolved[i].content;
+                        var message = createMessage(args);
+                        $('#chat .messages').append(message);
+                    }
+                    messageCount = length;
+                    //修改一些状态
+                    $('#send-message-button').text('发送');
+                    $('#send-message-button').removeAttr('disabled');
+                    $('#chat .messages').height(document.body.clientHeight - 95);
+                    $('#chat .messages').scrollTop($('#chat .messages')[0].scrollHeight);
+                }else{
+                }
+            };
+            sumeru.external.get(url,getCallback);
+        }
+        getMessages();
+        var timeID = setInterval(getMessages, 3000);
         window.onresize = function(){
             $('#chat .messages').height(document.body.clientHeight - 95);
             $('#chat .messages').scrollTop($('#chat .messages')[0].scrollHeight);
@@ -54,12 +88,6 @@ App.chat = sumeru.controller.create(function(env, session, param) {
             if (messageContent == '') {
                 //输入消息为空什么都不做。
             } else {
-                //这种方法不好使，先注掉
-                /*session.chatMessages.add({
-                    content: messageContent
-                });
-                session.chatMessages.save();*/
-                //后期需要完善并修改
                 $('#send-message-button').text('正在发送');
                 $('#send-message-button').attr("disabled","disabled");
                 var url = host + '/server/house/chat/send.controller?appCode=app_test_code&clientUId=' + clientUId + '&houseId=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=1';
@@ -78,6 +106,8 @@ App.chat = sumeru.controller.create(function(env, session, param) {
                     if (messageContent == ''){
                         //输入信息为空的时候什么都不做
                     }else{
+                        $('#send-message-button').text('正在发送');
+                        $('#send-message-button').attr("disabled","disabled");
                         var url = host + '/server/house/chat/send.controller?appCode=app_test_code&clientUId=' + clientUId + '&houseId=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=1';
                         var getCallback = function(data){
                              //做点什么吧
@@ -90,6 +120,7 @@ App.chat = sumeru.controller.create(function(env, session, param) {
         });
 
         $("#chat .back").click(function() {
+            clearInterval(timeID);
             history.back();
         });
         

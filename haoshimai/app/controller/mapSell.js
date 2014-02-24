@@ -17,28 +17,25 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 	var _contentTemplate = null;
 
 	var view = 'mapSell';
-
-    var getDetails = function(){
-        env.subscribe('pubunreadCounts',clientUId,function(unreadCountsCollection){
-            session.bind('count', {
-                count:unreadCountsCollection.find()[0]['count']
-            }); 
-        }); 
-    };  
-
-    env.onload = function(){
-        return [getDetails];
-    }; 
+    var count = 0;
 
 	env.onrender = function(doRender) {
         doRender(view,['none','z']);
 	};
 
-    env.onerror = function(){
-        alert("errot");
-    };
-
 	env.onready = function() {
+        //轮询取未读信息数
+        var getUnCounts = function(){
+            var url = host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=1';
+            var getCallback = function(data){
+                count = JSON.parse(data)['data']['count'];
+                if (count != 0){
+                    $('#count-badge').html(count);
+                }
+            }
+            sumeru.external.get(url, getCallback);
+        }
+        var timeID = setInterval(getUnCounts, 5000);
 
 		var mapObj, toolBar, myLocation, marker, centerPosition, previousFlag, nowFlag; //高德地图、地图工具、我的位置、标记、中心点、上一个标记，现在的标记，出售房或者出租房
        
@@ -48,12 +45,23 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 
 		var tabFlag = "annualPriceIncreasement"; //初始的tab选项,这里虽然数据接口不同，但是接口获取的数据相同，所以把出租房选项当一个tab来看待,tabFlag='rentPrice'
 
-        /*var clearFlags = function(){//清楚地图上保存的数据
-            previousFlag = null;
-            nowFlag = null;
-            markerContents = [];
-            markers = new Array();
-        }*/
+        var clearFlags = function(markerContents, oriData, markers){//清楚地图上保存的数据(4公里以外的数据)
+            for (var i = 0; i < markers.length; i++) {
+                var isIn = false;//是否已加载，false代表没有
+                for(var j = 0; j< oriData.length; j++){
+                    if (oriData[j]['id'] == markers[i].data['id']){
+                        isIn = true;
+                    }else{
+                        ;
+                    }
+                }
+                if (!isIn){
+                    markers[i].marker.setMap(null);
+                    markers.splice(i,1);
+                    markerContents.splice(i,1);
+                }
+            }
+        }
 
 		var createMarkerFlag = function(residenceName, residencePara) { //创建小标记
 			if (!_markerTemplate) {
@@ -124,6 +132,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 
 			var $el = $(el).click(function() {
                 var saleRent = (tabFlag=='rentPrice')?'rent':'sale'; 
+                clearInterval(timeID);
 				env.redirect("/houseList", {
 					'residenceId': residenceId,
                     'clientUId': clientUId,
@@ -148,6 +157,9 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 			var getCallback = function(data) {
 				var myData = JSON.parse(data);
 				oriData = myData['data'];
+                
+                //加一步操作，进行删除flag操作
+                clearFlags(markerContents, oriData, markers);
 
 				for (var i = 0; i < oriData.length; i++) {
 					var lng = oriData[i]['position']['lng'];
@@ -281,12 +293,14 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 		session.eventMap("#searchButton", {
 			'click': function(e) {
                 var saleRent = (tabFlag=='rentPrice')?'rent':'sale';
+                clearInterval(timeID);
 				env.redirect("/residenceSearch",{'clientUId':clientUId, 'saleRent': saleRent},true);
 			}
 		});
 
         session.eventMap('#enquiry-history-button', {
             'click':function(e) {
+                clearInterval(timeID);
                 env.redirect('/enquiryHistory',{'clientUId':clientUId},true);
             }
         });

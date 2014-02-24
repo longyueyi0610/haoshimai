@@ -290,6 +290,9 @@
   height: 26px;
   border-radius: 15px;
 }
+#map-sell-banner .sub {
+  z-index: 9999;
+}
 #map-sell-banner .sub ul {
   padding-left: 0;
   margin: 0px;
@@ -339,8 +342,8 @@
   background-size: 100% 100%;
 }
 .content-marker .info p {
-  font-size: 13px;
-  margin-bottom: 3px;
+  font-size: 12px;
+  margin-bottom: 5px;
 }
 .marker-wrap {
   position: absolute;
@@ -991,6 +994,11 @@ fieldset[disabled] #houseDetail #askButton.active {
   width: 100%;
   overflow: auto;
   bottom: 45px;
+}
+#chat .messages .message-time {
+  clear: both;
+  width: 100%;
+  text-align: center;
 }
 #chat .messages .message {
   padding: 8px;

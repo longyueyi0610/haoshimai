@@ -95,7 +95,8 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
                 'houseId': houseId,
                 'clientUId': clientUId,
                 'brokerId' : brokerId,
-                'brokerName': brokerName
+                'brokerName': brokerName,
+                'saleRent': saleRent
             },true);
 		});
 	};
