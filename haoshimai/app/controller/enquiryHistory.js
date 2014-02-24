@@ -98,7 +98,7 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
         };
 
         var getAllDatas = function(){//获取所有数据
-            var url = host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=0&showAll=1';
+            var url = host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=0&showAll=1&withPic=1';
             var getCallback =  function(oriData){
                 var resolved = JSON.parse(oriData)['data'];
                 var length = resolved.length;
@@ -108,7 +108,7 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
                     args[1] = resolved[i]['houseId'];
                     args[2] = resolved[i]['brokerId'];
                     args[3] = resolved[i]['brokerName'];
-                    args[4] = resolved[i]['brokerPicURL'];
+                    args[4] = resolved[i]['housePicURL'];
                     args[5] = resolved[i]['title'];
                     args[6] = resolved[i]['lastUpdateTime'];
                     args[7] = resolved[i]['residenceName'];
