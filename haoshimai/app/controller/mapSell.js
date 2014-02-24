@@ -17,28 +17,42 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 	var _contentTemplate = null;
 
 	var view = 'mapSell';
+    var count = 0;
 
-    var getDetails = function(){
-        env.subscribe('pubunreadCounts',clientUId,function(unreadCountsCollection){
-            session.bind('count', {
-                count:unreadCountsCollection.find()[0]['count']
-            }); 
+    /*var getDetails = function(){
+        session.unreadCountsCollection = env.subscribe('pubunreadCounts',clientUId,function(unreadCountsCollection){
+            if (session.unreadCountsCollection.length != count){
+                session.bind('count', {
+                    count:unreadCountsCollection.find()[0]['count']
+                });
+                count = session.unreadCountsCollection.length;
+            }else{
+                //什么都不做
+            } 
         }); 
     };  
 
     env.onload = function(){
         return [getDetails];
-    }; 
+    }; */
 
 	env.onrender = function(doRender) {
         doRender(view,['none','z']);
 	};
 
-    env.onerror = function(){
-        alert("errot");
-    };
-
 	env.onready = function() {
+        //轮询取未读信息数
+        var getUnCounts = function(){
+            var url = host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=1';
+            var getCallback = function(data){
+                count = JSON.parse(data)['data']['count'];
+                if (count != 0){
+                    $('#count-badge').html(count);
+                }
+            }
+            sumeru.external.get(url, getCallback);
+        }
+        var timeID = setInterval(getUnCounts, 5000);
 
 		var mapObj, toolBar, myLocation, marker, centerPosition, previousFlag, nowFlag; //高德地图、地图工具、我的位置、标记、中心点、上一个标记，现在的标记，出售房或者出租房
        
@@ -124,6 +138,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 
 			var $el = $(el).click(function() {
                 var saleRent = (tabFlag=='rentPrice')?'rent':'sale'; 
+                clearInterval(timeID);
 				env.redirect("/houseList", {
 					'residenceId': residenceId,
                     'clientUId': clientUId,
@@ -281,12 +296,14 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 		session.eventMap("#searchButton", {
 			'click': function(e) {
                 var saleRent = (tabFlag=='rentPrice')?'rent':'sale';
+                clearInterval(timeID);
 				env.redirect("/residenceSearch",{'clientUId':clientUId, 'saleRent': saleRent},true);
 			}
 		});
 
         session.eventMap('#enquiry-history-button', {
             'click':function(e) {
+                clearInterval(timeID);
                 env.redirect('/enquiryHistory',{'clientUId':clientUId},true);
             }
         });

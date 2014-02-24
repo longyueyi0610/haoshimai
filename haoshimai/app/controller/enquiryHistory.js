@@ -72,6 +72,7 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
     }; 
 
     env.onready = function(){
+        var timeID = setInterval(getDetails, 5000);
 
         $("#enquiry-history .back").click(function() {
             history.back();

@@ -7,22 +7,23 @@ function runnable() {
     var chatBrokerId = '';
     var clientUId;
 
-    config['pubchatMessage'] = {
+    /*config['pubchatMessage'] = {
         uniqueColumn : "time",
-        fetchUrl: function(args) {//args[0]houseId, args[1]brokerId, args[2]clientUId
-            return host + '/server/house/chat/list.controller?appCode=' + appCode + '&clientUId=' +args[2]+ '&houseId=' + args[0] + '&brokerId=' + args[1] +'&type=1&messageId=-1&page=0';
+        fetchUrl: function(args) {//args[0]houseId, args[1]brokerId, args[2]clientUId, args[3]type
+            console.log(host + '/server/house/chat/list.controller?appCode=' + appCode + '&clientUId=' +args[2]+ '&houseId=' + args[0] + '&brokerId=' + args[1] +'&type=' + args[3] + '&messageId=-1&page=0');
+            return host + '/server/house/chat/list.controller?appCode=' + appCode + '&clientUId=' +args[2]+ '&houseId=' + args[0] + '&brokerId=' + args[1] +'&type=' + args[3] + '&messageId=-1&page=0';
         },
         resolve: function(originData) {
+            console.log(originData);
             var j = JSON.parse(originData);
             var resolved = j['data'];
 
             return resolved;
         },
 
-        fetchInterval: 3 * 1000,
         buffer: false
 
-    }
+    }*/
 
     config['pubunreadMessage'] = {
         uniqueColumn : 'lastUpdateTime',
@@ -37,12 +38,11 @@ function runnable() {
             return resolved;
         },
 
-        fetchInterval : 5 * 1000,
         buffer: false
 
     }
 
-    config['pubunreadCounts'] = {
+    /*config['pubunreadCounts'] = {
         uniqueColumn : "count",
         fetchUrl: function(clientUId) {
             clientUId = clientUId;
@@ -54,16 +54,14 @@ function runnable() {
 
             return resolved;
         },
-        fetchInterval: 5 * 1000,
         buffer: false
-    }
+    }*/
 
 	config['pubhouseDetail'] = {
 		fetchUrl : function(args){
 			return host + '/server/house/detailNew.controller?appCode=' + appCode + '&houseId=' + args[0] + '&clientUId=' + args[1];
 		},
 		resolve: function(originData){
-                     console.log(originData);
 			var j = JSON.parse(originData);
 			var resolved = j['data'];
 			
@@ -134,7 +132,6 @@ function runnable() {
             }       
          },
         resolve : function(originData){
-                      console.log(originData);
             var j =JSON.parse(originData);
             var resolved = j;
 
