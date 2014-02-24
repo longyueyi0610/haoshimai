@@ -256,7 +256,9 @@ App.mapSell = sumeru.controller.create(function(env, session) {
                 });
 
 			};
+            getUnCounts();
 			sumeru.external.get(url, getCallback);
+
 		};
 
 		session.event(gaodeMap, function() {

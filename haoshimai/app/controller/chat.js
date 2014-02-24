@@ -90,7 +90,7 @@ App.chat = sumeru.controller.create(function(env, session, param) {
             } else {
                 $('#send-message-button').text('正在发送');
                 $('#send-message-button').attr("disabled","disabled");
-                var url = host + '/server/house/chat/send.controller?appCode=app_test_code&clientUId=' + clientUId + '&houseId=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=1';
+                var url = host + '/server/house/chat/send.controller?appCode=app_test_code&clientUId=' + clientUId + '&houseId=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=' + type;
                 var getCallback = function(data){
                     //做点什么吧
                     $('#chat-input').val('');
@@ -108,7 +108,7 @@ App.chat = sumeru.controller.create(function(env, session, param) {
                     }else{
                         $('#send-message-button').text('正在发送');
                         $('#send-message-button').attr("disabled","disabled");
-                        var url = host + '/server/house/chat/send.controller?appCode=app_test_code&clientUId=' + clientUId + '&houseId=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=1';
+                        var url = host + '/server/house/chat/send.controller?appCode=app_test_code&clientUId=' + clientUId + '&houseId=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=' + type;
                         var getCallback = function(data){
                              //做点什么吧
                             $('#chat-input').val('');
