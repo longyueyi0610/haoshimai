@@ -66,6 +66,8 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
             }
 
             $("#residence-onsell-detail .back").click(function() {
+                $(this).find('img').attr('src', '../assets/img/reback_icon_selected.png');
+                setTimeout("$('#residence-onsell-detail .back img').attr('src', '../assets/img/reback_icon.png')", 500);
                 history.back();
             });
         });

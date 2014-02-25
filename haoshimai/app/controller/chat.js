@@ -120,6 +120,8 @@ App.chat = sumeru.controller.create(function(env, session, param) {
         });
 
         $("#chat .back").click(function() {
+            $(this).find('img').attr('src', '../assets/img/reback_icon_selected.png');
+            setTimeout("$('#chat .back img').attr('src', '../assets/img/reback_icon.png')", 500);
             clearInterval(timeID);
             history.back();
         });

@@ -164,9 +164,13 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
             });
 
 			$('.back').click(function() {
+                $(this).find('img').attr('src', '../assets/img/reback_icon_selected.png');
+                setTimeout("$('.back img').attr('src', '../assets/img/reback_icon.png')", 500);
 				history.back();
 			});
             $('#house-detail-icon').click(function() {
+                $(this).find('img').attr('src', '../assets/img/house_detail_icon_selected.png');
+                setTimeout("$('#house-detail-icon img').attr('src', '../assets/img/house_detail_icon.png')", 500);
                 env.redirect('/residenceDetail', {
                     'residenceId': residenceId,
                     'clientUId':clientUId
@@ -235,16 +239,20 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
             });
             //排序功能
 			$("#residenceOnSell .sortbar").click(function() {
+                $(this).css('background-image','url(../assets/img/bt_selected.png)');
 				$('#allsorts').slideToggle();
 				$(".modal-backdrop").toggle();
+                setTimeout("$('#residenceOnSell .sortbar').css('background-image','none');", 500);
 			});
 
 			$('#sort-cancel').click(function() {
+                $(this).css('background-color', '#f47c00');
 				$('#allsorts').slideToggle();
 				$(".modal-backdrop").toggle();
 			});
 
 			$('#sort-total').click(function() {
+                $(this).css('background-color', '#f47c00');
 				$('#allsorts').slideToggle();
 				$(".modal-backdrop").toggle();
 				orderType = 2;
@@ -254,6 +262,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 			});
 
 			$('#sort-per').click(function() {
+                $(this).css('background-color', '#f47c00');
 				$('#allsorts').slideToggle();
 				$(".modal-backdrop").toggle();
 				orderType = 3;
@@ -262,6 +271,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 			});
 
 			$('#sort-area').click(function() {
+                $(this).css('background-color', '#f47c00');
 				$('#allsorts').slideToggle();
 				$(".modal-backdrop").toggle();
 				orderType = 4;
@@ -270,6 +280,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 			});
 
 			$('#sort-time').click(function() {
+                $(this).css('background-color', '#f47c00');
 				$('#allsorts').slideToggle();
 				$(".modal-backdrop").toggle();
 				orderType = '1';
@@ -278,6 +289,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 			});
 
 			$('#sort-rent').click(function() {
+                $(this).css('background-color', '#f47c00');
 				$('#allsorts').slideToggle();
 				$(".modal-backdrop").toggle();
 				orderType = '2';

@@ -288,22 +288,29 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 
 		session.eventMap('#nearbyButton', { //定位我的位置
 			'click': function(e) {
+                $('#nearbyButton img').attr('src', '../assets/img/bt_nearby_selected.png');
+                clearInterval(timeID);
 				toolBar.doLocation();
 				loadFlag(mapObj.getCenter()['lat'], mapObj.getCenter()['lng']);
+                setTimeout("$('#nearbyButton img').attr('src', '../assets/img/nearicon.png');", 500);
 			}
 		});
 		session.eventMap("#searchButton", {
 			'click': function(e) {
+                $('#searchButton img').attr('src', '../assets/img/bt_search_selected.png');
                 var saleRent = (tabFlag=='rentPrice')?'rent':'sale';
                 clearInterval(timeID);
 				env.redirect("/residenceSearch",{'clientUId':clientUId, 'saleRent': saleRent},true);
+                setTimeout("$('#searchButton img').attr('src', '../assets/img/bt_search.png');", 500);
 			}
 		});
 
         session.eventMap('#enquiry-history-button', {
             'click':function(e) {
+                $('#enquiry-history-button img').attr('src', '../assets/img/bt_dialogue_selected.png');
                 clearInterval(timeID);
                 env.redirect('/enquiryHistory',{'clientUId':clientUId},true);
+                setTimeout("$('#enquiry-history-button img').attr('src', '../assets/img/bt_dialogue.png');", 500);
             }
         });
 

@@ -700,11 +700,13 @@ fieldset[disabled] #residenceSearch .banner .header button.active {
   padding: 10px 0px;
   cursor: pointer;
   background: rgba(0, 0, 0, 0.6);
+  background-repeat: no-repeat;
+  background-position: center;
 }
 #residenceOnSell .sortbar span {
   font-size: 20px;
   color: #fff;
-  background: url(../img/ordericon.png) left center no-repeat transparent;
+  background: url(../img/order_icon.png) left center no-repeat transparent;
   background-size: 40px 40px;
   padding-left: 40px;
 }
@@ -850,6 +852,8 @@ fieldset[disabled] #residenceOnSell #allsorts button.active {
   font-size: 20px;
   line-height: 1.42857143;
   border-radius: 0px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 #houseDetail #askButton:hover,
 #houseDetail #askButton:focus,

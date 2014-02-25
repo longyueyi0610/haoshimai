@@ -42,6 +42,8 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
         var timeID = setInterval(getCount, 5000);
 
         $("#enquiry-history .back").click(function() {
+            $(this).find('img').attr('src', '../assets/img/reback_icon_selected.png');
+            setTimeout("$('#enquiry-history .back img').attr('src', '../assets/img/reback_icon.png')", 500);
             clearInterval(timeID);
             history.back();
         });
