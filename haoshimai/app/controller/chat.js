@@ -23,23 +23,41 @@ App.chat = sumeru.controller.create(function(env, session, param) {
 
         $('#chat .header').append(brokerName);
         
-        var createMessage = function(args) { //创建对话,args[0]~useType, args[1]~time,args[2]~brokerPicURL,args[3]~content
+        var createMessage = function(args) { //创建对话,args[0]~useType, args[1]~time,args[2]~brokerPicURL,args[3]~content,args[4]~flag用来判断消息的下一条和自己是否一边
             if (args[0] == 1) {//nomal
-                _messageTemplate = _.template(
-                    "<div class='message-time'><%- time %></div>" +
-                    "<div class='message normal'>" +
-                    "<%- content %>" +
-                    "</div>"
-                );  
+                if (args[4]){
+                    _messageTemplate = _.template(
+                        "<div class='message normal'>" +
+                        "<%- content %>" +
+                        "</div>"
+                    );  
+                }else{
+                    _messageTemplate = _.template(
+                        "<div class='message-time'><%- time %></div>" +
+                        "<div class='message normal'>" +
+                        "<%- content %>" +
+                        "</div>"
+                    );  
+                }
             }else{
-                _messageTemplate = _.template(//经纪人
-                    "<div class='message-time'><%- time %></div>" +
-                    "<div class='message agent'>" +
-                    "<img src='<%- brokerPicURL %>'/>" +
-                    "<%- content %>" +
-                    "</div>"
+                if (args[4]){
+                    _messageTemplate = _.template(//经纪人
+                        "<div class='message agent'>" +
+                        "<img src='<%- brokerPicURL %>'/>" +
+                        "<%- content %>" +
+                        "</div>"
 
-                );
+                    );
+                }else{
+                    _messageTemplate = _.template(//经纪人
+                        "<div class='message-time'><%- time %></div>" +
+                        "<div class='message agent'>" +
+                        "<img src='<%- brokerPicURL %>'/>" +
+                        "<%- content %>" +
+                        "</div>"
+
+                    );
+                }
             }   
 
             return _messageTemplate({
@@ -57,6 +75,11 @@ App.chat = sumeru.controller.create(function(env, session, param) {
                 var args = [];
                 if (length > messageCount){//有新的消息
                     for (var i=messageCount; i<length; i++){
+                        if (i>0 && resolved[i].useType == resolved[i-1].useType){//和上一条比
+                            args[4] = true;//表示这条和上条消息是同一边所发，没有时间显示
+                        }else{
+                            args[4] = false;
+                        }
                         args[0] = resolved[i].useType;
                         args[1] = resolved[i].time;
                         args[2] = resolved[i].brokerPicURL;
