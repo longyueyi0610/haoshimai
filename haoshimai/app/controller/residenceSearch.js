@@ -79,7 +79,6 @@ App.residenceSearch = sumeru.controller.create(function(env, session, param) {
                         session.commit();
                         getDetails();
                         $('.loadingDiv').css('display','block');
-                        $('#searchResidenceInput').val('');
                     }
                 }
             }

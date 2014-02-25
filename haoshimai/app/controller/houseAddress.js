@@ -23,6 +23,8 @@ App.houseAddress = sumeru.controller.create(function(env, session, param){
 			marker.setMap(mapObj);
 
 			$("#house-address .back").click(function() {
+                $(this).find('img').attr('src', '../assets/img/reback_icon_selected.png');
+                setTimeout("$('#house-address .back img').attr('src', '../assets/img/reback_icon.png')", 500);
 				history.back();
 			});
         };

@@ -69,6 +69,8 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
 			}
 
 			$(".back").click(function() {
+                $(this).find('img').attr('src', '../assets/img/reback_icon_selected.png');
+                setTimeout("$('.back img').attr('src', '../assets/img/reback_icon.png')", 500);
 				history.back();
 			});
 
@@ -91,6 +93,8 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
 		$('#askButton').click(function() {
             var brokerName = session.houseDetailCollection[0]['brokerName'];
             var brokerId = session.houseDetailCollection[0]['brokerId'];
+            $(this).css('background-image','url(../assets/img/bt_selected.png)');
+            setTimeout("$('#askButton').css('background-image', 'none')", 500);
 			env.redirect('/chat', {
                 'houseId': houseId,
                 'clientUId': clientUId,
@@ -98,6 +102,7 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
                 'brokerName': brokerName,
                 'saleRent': saleRent
             },true);
+            
 		});
 	};
 
