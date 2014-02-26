@@ -9,7 +9,7 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
     var view = 'enquiryHistory';
     var clientUId = param['clientUId'];
     var host = sumeru.config.get("dataServerHost"); //host地址
-    var appCode = 'app_test_code';
+    var appCode = 'baiduClient';
     var _contentTemplate = null;
 
     env.onrender = function(doRender){

@@ -8,11 +8,12 @@ sumeru.router.setDefault('App.mapSell');
 
 //定义几个全局变量
 host = sumeru.config.get("dataServerHost"); //host地址
-appCode = 'app_test_code';
+appCode = 'baiduClient';
 //说明几点：sessionStorage中map_type~出租房还是出售房~rent, sale
 //map_location 地图中心点
 //map_residenceId 点击的小区
 //map_tabFlag 出售房中的四个选项
+//map_register ok表示已注册
 
 App.mapSell = sumeru.controller.create(function(env, session) {
     var clientUId = sumeru.clientId;
@@ -22,6 +23,15 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 
 	var view = 'mapSell';
     var count = 0;
+
+    if(sessionStorage.getItem('map_register') == null){
+        var url = host + '/server/client/clientRegister.controller?appCode=' + appCode + '&clientUId=' + clientUId +'&version=1.0&device=baidu&clientToken=';
+        var getCallback = function(data){
+            sessionStorage.setItem('map_register', 'ok');
+            alert('x');
+        }
+        sumeru.external.get(url, getCallback);
+    }
 
 	env.onrender = function(doRender) {
         doRender(view,['none','z']);

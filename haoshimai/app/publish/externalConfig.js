@@ -1,7 +1,7 @@
 function runnable() {
     var config = {};
     var host = sumeru.config.get("dataServerHost"); //host地址
-    var appCode = 'app_test_code';
+    var appCode = 'baiduClient';
     var chatClientUId = '';
     var chatHouseId = '';
     var chatBrokerId = '';

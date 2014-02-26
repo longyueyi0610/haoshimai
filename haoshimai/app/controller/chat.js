@@ -5,6 +5,7 @@ sumeru.router.add({
 
 App.chat = sumeru.controller.create(function(env, session, param) {
     var host = sumeru.config.get("dataServerHost"); //host地址
+    var appCode = 'baiduClient';
     
     var view = 'chat';
     var houseId = param['houseId'];
@@ -68,7 +69,7 @@ App.chat = sumeru.controller.create(function(env, session, param) {
         };
 
         var getMessages = function(){
-            var url = host + "/server/house/chat/list.controller?appCode=app_test_code&clientUId=" + clientUId + "&houseId=" + houseId +"&brokerId=" +brokerId +"&type=" + type +"&messageId=-1&page=0"; 
+            var url = host + "/server/house/chat/list.controller?appCode="+ appCode + "&clientUId=" + clientUId + "&houseId=" + houseId +"&brokerId=" +brokerId +"&type=" + type +"&messageId=-1&page=0"; 
             var getCallback = function(data){
                 var resolved = JSON.parse(data)['data'];
                 var length =resolved.length;
@@ -113,7 +114,7 @@ App.chat = sumeru.controller.create(function(env, session, param) {
             } else {
                 $('#send-message-button').text('正在发送');
                 $('#send-message-button').attr("disabled","disabled");
-                var url = host + '/server/house/chat/send.controller?appCode=app_test_code&clientUId=' + clientUId + '&houseId=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=' + type;
+                var url = host + '/server/house/chat/send.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&houseId=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=' + type;
                 var getCallback = function(data){
                     //做点什么吧
                     $('#chat-input').val('');
@@ -131,7 +132,7 @@ App.chat = sumeru.controller.create(function(env, session, param) {
                     }else{
                         $('#send-message-button').text('正在发送');
                         $('#send-message-button').attr("disabled","disabled");
-                        var url = host + '/server/house/chat/send.controller?appCode=app_test_code&clientUId=' + clientUId + '&houseId=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=' + type;
+                        var url = host + '/server/house/chat/send.controller?appCode='+ appCode + '&clientUId=' + clientUId + '&houseId=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=' + type;
                         var getCallback = function(data){
                              //做点什么吧
                             $('#chat-input').val('');
