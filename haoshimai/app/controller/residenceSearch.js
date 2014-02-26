@@ -2,7 +2,7 @@ sumeru.router.add({
     pattern: '/residenceSearch',
     action: 'App.residenceSearch'
 });
-
+//rSearch_keyword表示关键字
 App.residenceSearch = sumeru.controller.create(function(env, session, param) {
     var view = 'residenceSearch';
     var host = sumeru.config.get("dataServerHost");
@@ -14,6 +14,10 @@ App.residenceSearch = sumeru.controller.create(function(env, session, param) {
         /*if (!session.get('keyword')) {
             session.set('keyword', 'none');
         }*/
+        if (sessionStorage.getItem('rSearch_keyword')){//--------------记录数据关键字
+            keyword = sessionStorage.getItem('rSearch_keyword');
+        }
+
         if (keyword != ''){
             args = [];
             args[0] = session.get('keyword');
@@ -40,6 +44,10 @@ App.residenceSearch = sumeru.controller.create(function(env, session, param) {
     env.onready = function() {
         if (!$root) {
             $root = $("#residenceSearch");
+        }
+        //---------------记录数据关键字
+        if (sessionStorage.getItem('rSearch_keyword')){
+            $('#searchResidenceInput').val(sessionStorage.getItem('rSearch_keyword'));
         }
 
         $root.on('click', '.residence-wrap', function() {
@@ -74,6 +82,7 @@ App.residenceSearch = sumeru.controller.create(function(env, session, param) {
                     if (keyword == ''){
                         //输入信息为空的时候什么都不做
                     }else{
+                        sessionStorage.setItem('rSearch_keyword', keyword);
                         session.set('keyword', keyword);
                         session.set('type', ((saleRent=='sale')?1:2));
                         session.commit();
