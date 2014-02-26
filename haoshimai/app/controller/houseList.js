@@ -3,6 +3,9 @@ sumeru.router.add({
 	action: 'App.houseList'
 });
 
+//hl_type~~~~在售房屋，成交历史~~~~sale,sold
+//hl_pageSize 
+//hl_orderType
 App.houseList = sumeru.controller.create(function(env, session, param) {
 	var view = 'houseList';
 	var residenceId = param['residenceId']; //小区id
@@ -16,6 +19,17 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
     var rentCount = param['rentCount'];
     var soldHistory = false;
     var scrollOffset = 0;
+
+    //-----------------记录数据
+    if (sessionStorage.getItem('hl_type') == 'sold'){
+        soldHistory = true;
+    }
+    if (sessionStorage.getItem('hl_pageSize')){
+        pageSize = sessionStorage.getItem('hl_pageSize');
+    }
+    if(sessionStorage.getItem('hl_orderType')){
+        orderType = sessionStorage.getItem('hl_orderType');
+    }
 
     var subWay = function(way){
         var args = new Array();
@@ -37,14 +51,6 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 			    });
 		    });
         }else if(way == 'sale'){
-            /*session.houseListCollection = env.subscribe('pubresidenceOnSell', args, function(houseListCollection) {
-			    session.bind('residence-container', {
-				    houseList: houseListCollection.find(),
-                    saleRentType: 'sale',
-                    soldHistory: soldHistory,
-                    loadNum: loadNum
-			    });
-		    });*/
             args[5] = 'Sale';
             session.houseListCollection = env.subscribe('pubhouseInfo', args, function(houseListCollection) {
                 session.bind('residence-container', {
@@ -67,6 +73,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
     }
 
 	var getDetails = function() {
+
         var args = [];
         args[0] = residenceId;
         args[1] = clientUId;
@@ -115,6 +122,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 
 		session.event('residence-name', function() {
             $('#residenceOnSell #onSale').click(function(){
+                sessionStorage.setItem('hl_type', 'sale');
                 $('#residenceOnSell .sub li.active').removeClass('active');
                 $('#residenceOnSell #onSale').parent().addClass('active');
                 addLoading($('#residenceOnSell .loadingDiv')); 
@@ -133,6 +141,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 
             });
             $('#residenceOnSell #onSold').click(function(){
+                sessionStorage.setItem('hl_type', 'sold');
                 $('#residenceOnSell .sub li.active').removeClass('active');
                 $('#residenceOnSell #onSold').parent().addClass('active');
                 addLoading($('#residenceOnSell .loadingDiv'));
@@ -141,18 +150,8 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
                 subWay('sold');
 
             });
-
-            $('#residenceOnSell #sold').click(function(){
-                $('#sale_sold_bg').animate({left:'38px'},'fast',function(){
-                    $('.header #sale_sold li.active').removeClass("active");
-                    $('#sold').parent().addClass("active");
-                });
-                addLoading($('#residenceOnSell .loadingDiv'));
-                soldHistory = true;
-                scrollOffset = 0;
-                subWay('sold');
-            });
-            $('#residenceOnSell #sale').click(function(){
+            if (sessionStorage.getItem('hl_type') == 'sale'){//--------------------记录数据
+                sessionStorage.setItem('hl_type', 'sale');
                 $('#sale_sold_bg').animate({left:'-38px'},'fast',function(){
                     $('.header #sale_sold li.active').removeClass("active");
                     $('#sale').parent().addClass("active");
@@ -161,6 +160,41 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
                 soldHistory = false;
                 scrollOffset = 0;
                 subWay('sale');
+            }else if (sessionStorage.getItem('hl_type') == 'sold'){
+                $('#sale_sold_bg').animate({left:'38px'},'fast',function(){
+                    $('.header #sale_sold li.active').removeClass("active");
+                    $('#sold').parent().addClass("active");
+                });
+                addLoading($('#residenceOnSell .loadingDiv'));
+                soldHistory = true;
+                scrollOffset = 0;
+                subWay('sold');
+            }else{
+            }
+
+            $('#residenceOnSell #sold').click(function(){
+                sessionStorage.setItem('hl_type', 'sold');
+                $('#sale_sold_bg').animate({left:'38px'},'fast',function(){
+                    $('.header #sale_sold li.active').removeClass("active");
+                    $('#sold').parent().addClass("active");
+                });
+                addLoading($('#residenceOnSell .loadingDiv'));
+                soldHistory = true;
+                scrollOffset = 0;
+                subWay('sold');
+                $('#residenceOnSell .sub span').css('display','none');
+            });
+            $('#residenceOnSell #sale').click(function(){
+                sessionStorage.setItem('hl_type', 'sale');
+                $('#sale_sold_bg').animate({left:'-38px'},'fast',function(){
+                    $('.header #sale_sold li.active').removeClass("active");
+                    $('#sale').parent().addClass("active");
+                });
+                addLoading($('#residenceOnSell .loadingDiv')); 
+                soldHistory = false;
+                scrollOffset = 0;
+                subWay('sale');
+                $('#residenceOnSell .sub span').css('display','inline-block');
             });
 
 			$('.back').click(function() {
@@ -233,6 +267,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
             //加载更多
             $('#residenceOnSell #load-more').click(function() {
                 pageSize = pageSize + pageSize;
+                sessionStorage.setItem('hl_pageSize', pageSize);
                 $(this).text('加载中...');
                 scrollOffset = $('#residenceOnSell #onsell-content').scrollTop();
                 sort();
@@ -257,6 +292,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 				$(".modal-backdrop").toggle();
 				orderType = 2;
 				session.set('orderType', orderType);
+                sessionStorage.setItem('hl_orderType', orderType);
 				//session.commit();
                 sort();
 			});
@@ -267,6 +303,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 				$(".modal-backdrop").toggle();
 				orderType = 3;
 				session.set('orderType', orderType);
+                sessionStorage.setItem('hl_orderType', orderType);
                 sort();
 			});
 
@@ -276,6 +313,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 				$(".modal-backdrop").toggle();
 				orderType = 4;
 				session.set('orderType', orderType);
+                sessionStorage.setItem('hl_orderType', orderType);
 				sort();
 			});
 
@@ -285,6 +323,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 				$(".modal-backdrop").toggle();
 				orderType = '1';
 				session.set('orderType', orderType);
+                sessionStorage.setItem('hl_orderType', orderType);
 				sort();
 			});
 
@@ -294,6 +333,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 				$(".modal-backdrop").toggle();
 				orderType = '2';
 				session.set('orderType', orderType);
+                sessionStorage.setItem('hl_orderType', orderType);
 				sort();
 			});
 		});

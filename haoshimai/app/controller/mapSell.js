@@ -9,6 +9,10 @@ sumeru.router.setDefault('App.mapSell');
 //定义几个全局变量
 host = sumeru.config.get("dataServerHost"); //host地址
 appCode = 'app_test_code';
+//说明几点：sessionStorage中map_type~出租房还是出售房~rent, sale
+//map_location 地图中心点
+//map_residenceId 点击的小区
+//map_tabFlag 出售房中的四个选项
 
 App.mapSell = sumeru.controller.create(function(env, session) {
     var clientUId = sumeru.clientId;
@@ -24,6 +28,14 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 	};
 
 	env.onready = function() {
+		var mapObj, toolBar, myLocation, marker, centerPosition, previousFlag, nowFlag; //高德地图、地图工具、我的位置、标记、中心点、上一个标记，现在的标记，出售房或者出租房
+       
+		var markerContents = []; //为了不重复加载点坐标
+
+		var markers = new Array(); //marker数组
+
+		var tabFlag = "annualPriceIncreasement"; //初始的tab选项,这里虽然数据接口不同，但是接口获取的数据相同，所以把出租房选项当一个tab来看待,tabFlag='rentPrice'
+
         //轮询取未读信息数
         var getUnCounts = function(){
             var url = host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=1';
@@ -36,14 +48,6 @@ App.mapSell = sumeru.controller.create(function(env, session) {
             sumeru.external.get(url, getCallback);
         }
         var timeID = setInterval(getUnCounts, 5000);
-
-		var mapObj, toolBar, myLocation, marker, centerPosition, previousFlag, nowFlag; //高德地图、地图工具、我的位置、标记、中心点、上一个标记，现在的标记，出售房或者出租房
-       
-		var markerContents = []; //为了不重复加载点坐标
-
-		var markers = new Array(); //marker数组
-
-		var tabFlag = "annualPriceIncreasement"; //初始的tab选项,这里虽然数据接口不同，但是接口获取的数据相同，所以把出租房选项当一个tab来看待,tabFlag='rentPrice'
 
         var clearFlags = function(markerContents, oriData, markers){//清楚地图上保存的数据(4公里以外的数据)
             for (var i = 0; i < markers.length; i++) {
@@ -123,6 +127,8 @@ App.mapSell = sumeru.controller.create(function(env, session) {
                 onRentCount = simple[6];
 			}
 
+            sessionStorage.setItem('map_residenceId', residenceId);
+
 			var el = _contentTemplate({
 				name: residenceName,
 				range: (tabFlag=='rentPrice')?rentRange:priceRange,
@@ -133,6 +139,9 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 			var $el = $(el).click(function() {
                 var saleRent = (tabFlag=='rentPrice')?'rent':'sale'; 
                 clearInterval(timeID);
+                sessionStorage.removeItem('hl_orderType');
+                sessionStorage.removeItem('hl_pageSize');
+                sessionStorage.removeItem('hl_type');
 				env.redirect("/houseList", {
 					'residenceId': residenceId,
                     'clientUId': clientUId,
@@ -178,6 +187,33 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 						flagObj.data = oriData[i];
 
 						markers.push(flagObj); //添加到数组
+
+                        if (sessionStorage.getItem('map_residenceId')){//--------------记录数据大图标
+                            if (sessionStorage.getItem('map_residenceId') == oriData[i]['residenceId']){
+
+                                mapObj.panTo(marker.getPosition());
+                                marker.hide();
+                                var lng = marker.getPosition().getLng();
+                                var lat = marker.getPosition().getLat();
+                                var bigMarker = new AMap.Marker({
+                                    content: createMarkerContent(marker.getPosition()),
+                                    position: new AMap.LngLat(lng, lat),
+                                    offset: new AMap.Pixel(-150, -140),
+                                    zIndex: 999
+                                });
+                                bigMarker.setMap(mapObj);
+                                if (previousFlag == null) {
+                                    previousFlag = marker;
+                                    nowFlag = bigMarker;
+                                } else {
+                                    previousFlag.show();
+                                    previousFlag = marker;
+                                    nowFlag.setMap(null);
+                                    nowFlag = bigMarker;
+                                }
+                            }
+                        }
+                        
 						AMap.event.addListener(marker, 'click', function callback(e) {
 							mapObj.panTo(this.getPosition());
 							this.hide();
@@ -225,8 +261,15 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 			var getCallback = function(data) {
 				var oriData = JSON.parse(data);
 				var position = oriData['data'];
-				lng = position['lng'];
-				lat = position['lat'];
+
+                if (sessionStorage.getItem('map_location')){//------------记录数据地图中心点
+                    var pointArray = sessionStorage.getItem('map_location').split(',');
+                    lng = pointArray[0];
+                    lat = pointArray[1];
+                }else{   
+				    lng = position['lng'];
+				    lat = position['lat'];
+                }
 				centerPosition = new AMap.LngLat(lng, lat); //创建中心坐标
 				mapObj = new AMap.Map("gaodeMap", {
 					center: centerPosition,
@@ -243,6 +286,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 					//地区名称
 					var lng = this.getCenter().getLng();
 					var lat = this.getCenter().getLat();
+                    sessionStorage.setItem('map_location', lng + ',' + lat);
 					loadFlag(lat, lng);
 				});
 
@@ -266,7 +310,9 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 		});
         
         //出售房和出租房切换
-        $('#on-rent').click(function(){
+
+        var changeToRent = function(){
+            sessionStorage.setItem('map_type','rent');
             tabFlag = 'rentPrice'
             $('#map-sell-banner .sub').css('display','none');
             updateFlag();
@@ -274,9 +320,9 @@ App.mapSell = sumeru.controller.create(function(env, session) {
                 $('.header #sale_rent li.active').removeClass("active");
                 $('#on-rent').parent().addClass("active");
             });
-        });
-        
-        $('#on-sale').click(function(){
+        }
+        var changeToSale = function(){
+            sessionStorage.setItem('map_type','sale');
             tabFlag = 'annualPriceIncreasement';
             $('#map-sell-banner .sub').css('display','block');
             updateFlag();
@@ -284,6 +330,31 @@ App.mapSell = sumeru.controller.create(function(env, session) {
                 $('.header #sale_rent li.active').removeClass("active");
                 $('#on-sale').parent().addClass("active");
             });
+        }
+
+		var tabSwitch = function(tab) { //切换tab的操作
+            sessionStorage.setItem('map_tabFlag', tab);
+			$(".sub li.active").removeClass("active");
+			$("#" + tab).parent().addClass("active");
+			tabFlag = tab;
+			updateFlag();
+		};
+
+        //改变bar上出售房和出租房状态-------记录数据
+        if (sessionStorage.getItem('map_type') == 'rent'){
+            changeToRent();
+        }else{
+            if (sessionStorage.getItem('map_tabFlag')){
+                tabSwitch(sessionStorage.getItem('map_tabFlag'));
+            }
+        }
+        
+        $('#on-rent').click(function(){
+            changeToRent();
+        });
+        
+        $('#on-sale').click(function(){
+            changeToSale();
         });
 
 		session.eventMap('#nearbyButton', { //定位我的位置
@@ -297,6 +368,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 		});
 		session.eventMap("#searchButton", {
 			'click': function(e) {
+                sessionStorage.removeItem('rSearch_keyword');
                 $('#searchButton img').attr('src', '../assets/img/bt_search_selected.png');
                 var saleRent = (tabFlag=='rentPrice')?'rent':'sale';
                 clearInterval(timeID);
@@ -313,13 +385,6 @@ App.mapSell = sumeru.controller.create(function(env, session) {
                 setTimeout("$('#enquiry-history-button img').attr('src', '../assets/img/bt_dialogue.png');", 500);
             }
         });
-
-		var tabSwitch = function(tab) { //切换tab的操作
-			$(".sub li.active").removeClass("active");
-			$("#" + tab).parent().addClass("active");
-			tabFlag = tab;
-			updateFlag();
-		};
 
 		session.eventMap("#price", { //price tab
 			'click': function(e) {
