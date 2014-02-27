@@ -40,183 +40,6 @@
 .affix {
   position: fixed;
 }
-.banner {
-  left: 0px;
-  right: 0px;
-  top: 0px;
-  box-sizing: border-box;
-  position: fixed;
-  z-index: 1000;
-}
-.banner .header {
-  height: 50px;
-  padding: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  line-height: 30px;
-  z-index: 1002;
-  position: relative;
-  text-align: center;
-  background: url('../img/title.png') 100% 100%;
-  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
-}
-.banner .header .info {
-  width: 30px;
-  height: 30px;
-  top: 10px;
-  position: absolute;
-  right: 10px;
-}
-.banner .header .info img {
-  max-width: 100%;
-  max-height: 100%;
-}
-.banner .header .back {
-  width: 30px;
-  height: 30px;
-  top: 10px;
-  position: absolute;
-  left: 10px;
-}
-.banner .header .back img {
-  max-width: 100%;
-  max-height: 100%;
-}
-.banner .sub {
-  z-index: 1001;
-  position: relative;
-  color: #fff;
-  background-color: #494c56;
-}
-.haoshimai-overlay {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-}
-.residence-wrap {
-  box-shadow: 0px 0px 8px #000;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  background-image: -webkit-linear-gradient(top, #ffffff 0%, #e9e9e9 100%);
-  background-image: linear-gradient(to bottom, #ffffff 0%, #e9e9e9 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe9e9e9', GradientType=0);
-}
-.residence-wrap .residence {
-  border-radius: 5px;
-  box-shadow: inset 0px 0px 3px #fff;
-  position: relative;
-  padding: 5px;
-  overflow: hidden;
-}
-.residence-wrap .residence img:not(.sold_pic) {
-  position: absolute;
-  border-radius: 5px;
-  width: 70px;
-  height: 70px;
-  left: 5px;
-  top: 5px;
-  background: url('../img/default_cover_small.png') no-repeat top left;
-  background-size: 100% 100%;
-}
-.residence-wrap .residence .sold_pic {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  left: 45px;
-  top: 15px;
-  z-index: 100;
-}
-.residence-wrap .residence .highlight {
-  font-size: 15px;
-  color: #08c;
-}
-.residence-wrap .residence .info {
-  margin-left: 80px;
-}
-.residence-wrap .residence .info .details {
-  margin-bottom: 2px;
-  overflow: hidden;
-}
-.residence-wrap .residence .info .details .detail {
-  display: block;
-  float: left;
-  width: 45%;
-}
-.residence-wrap .residence .info .details.last {
-  font-size: 13px;
-  margin-bottom: 0px;
-}
-.resident-wrap:last-child {
-  margin-bottom: 0px;
-}
-.empty {
-  color: #2b2d30;
-  position: absolute;
-  width: 100%;
-  font-size: 20px;
-  text-align: center;
-  margin-top: -12.5px;
-  top: 50%;
-}
-.empty.rent,
-.empty.sale {
-  margin-top: 62.5px;
-}
-.details {
-  padding: 0px 12px;
-  overflow: hidden;
-}
-.details .detail {
-  font-size: 13px;
-  float: left;
-  width: 45%;
-}
-.details .detail .prop {
-  color: #555555;
-}
-.details .detail .prop::after {
-  content: ':\00a0';
-}
-.details .detail:first-child {
-  width: 55%;
-}
-.hl {
-  color: #428bca;
-}
-.loadingDiv {
-  width: 100%;
-  height: 100%;
-  z-index: 9999;
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-.loadingDiv img {
-  width: 60px;
-  height: 60px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -30px;
-  margin-top: -30px;
-}
-.carousel-indicators {
-  bottom: -10px;
-}
-.carousel-indicators li {
-  width: 5px;
-  height: 5px;
-}
-.carousel-indicators .active {
-  margin-bottom: 1px;
-  width: 5px;
-  height: 5px;
-}
 #map-sell-banner .header img {
   display: block;
   float: left;
@@ -322,7 +145,7 @@
 }
 .content-marker {
   padding: 12px;
-  background: url(../img/openning_detail_back.png);
+  background: url('/assets/img/openning_detail_back.png');
   background-size: 100% 100%;
   width: 300px;
   height: 150px;
@@ -338,7 +161,7 @@
   height: 60px;
   margin-right: 10px;
   border-radius: 7px;
-  background: url('../img/nopic_default.png') no-repeat top left;
+  background: url('/assets/img/nopic_default.png') no-repeat top left;
   background-size: 100% 100%;
 }
 .content-marker .info p {
@@ -353,7 +176,7 @@
   width: 8px;
   height: 12px;
   display: block;
-  background: url(../img/flag_arrow.png) top center transparent;
+  background: url(/assets/img/flag_arrow.png) top center transparent;
   position: relative;
   left: 25px;
   margin-top: -14px;
@@ -377,18 +200,18 @@
   width: 9px;
 }
 .marker-wrap .marker::before {
-  background: url(../img/flag_left.png) top center transparent;
+  background: url(/assets/img/flag_left.png) top center transparent;
   background-size: 100% 100%;
 }
 .marker-wrap .marker::after {
-  background: url(../img/flag_right.png) top center transparent;
+  background: url(/assets/img/flag_right.png) top center transparent;
   background-size: 100% 100%;
 }
 .marker-wrap .marker .content {
   padding: 5px 3px;
   font-size: 12px;
   white-space: nowrap;
-  background: url(../img/flag_middle.png) top center transparent;
+  background: url(/assets/img/flag_middle.png) top center transparent;
   background-size: 100% 100%;
 }
 .marker-wrap .marker .content .name,
@@ -451,6 +274,183 @@
   right: 0px;
   background-color: red;
 }
+.banner {
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 1000;
+}
+.banner .header {
+  height: 50px;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 30px;
+  z-index: 1002;
+  position: relative;
+  text-align: center;
+  background: url('/assets/img/title.png') 100% 100%;
+  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+}
+.banner .header .info {
+  width: 30px;
+  height: 30px;
+  top: 10px;
+  position: absolute;
+  right: 10px;
+}
+.banner .header .info img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.banner .header .back {
+  width: 30px;
+  height: 30px;
+  top: 10px;
+  position: absolute;
+  left: 10px;
+}
+.banner .header .back img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.banner .sub {
+  z-index: 1001;
+  position: relative;
+  color: #fff;
+  background-color: #494c56;
+}
+.haoshimai-overlay {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+.residence-wrap {
+  box-shadow: 0px 0px 8px #000;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #e9e9e9 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0%, #e9e9e9 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe9e9e9', GradientType=0);
+}
+.residence-wrap .residence {
+  border-radius: 5px;
+  box-shadow: inset 0px 0px 3px #fff;
+  position: relative;
+  padding: 5px;
+  overflow: hidden;
+}
+.residence-wrap .residence img:not(.sold_pic) {
+  position: absolute;
+  border-radius: 5px;
+  width: 70px;
+  height: 70px;
+  left: 5px;
+  top: 5px;
+  background: url('/assets/img/default_cover_small.png') no-repeat top left;
+  background-size: 100% 100%;
+}
+.residence-wrap .residence .sold_pic {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 45px;
+  top: 15px;
+  z-index: 100;
+}
+.residence-wrap .residence .highlight {
+  font-size: 15px;
+  color: #08c;
+}
+.residence-wrap .residence .info {
+  margin-left: 80px;
+}
+.residence-wrap .residence .info .details {
+  margin-bottom: 2px;
+  overflow: hidden;
+}
+.residence-wrap .residence .info .details .detail {
+  display: block;
+  float: left;
+  width: 45%;
+}
+.residence-wrap .residence .info .details.last {
+  font-size: 13px;
+  margin-bottom: 0px;
+}
+.resident-wrap:last-child {
+  margin-bottom: 0px;
+}
+.empty {
+  color: #2b2d30;
+  position: absolute;
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
+  margin-top: -12.5px;
+  top: 50%;
+}
+.empty.rent,
+.empty.sale {
+  margin-top: 62.5px;
+}
+.details {
+  padding: 0px 12px;
+  overflow: hidden;
+}
+.details .detail {
+  font-size: 13px;
+  float: left;
+  width: 45%;
+}
+.details .detail .prop {
+  color: #555555;
+}
+.details .detail .prop::after {
+  content: ':\00a0';
+}
+.details .detail:first-child {
+  width: 55%;
+}
+.hl {
+  color: #428bca;
+}
+.loadingDiv {
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.loadingDiv img {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -30px;
+  margin-top: -30px;
+}
+.carousel-indicators {
+  bottom: -10px;
+}
+.carousel-indicators li {
+  width: 5px;
+  height: 5px;
+}
+.carousel-indicators .active {
+  margin-bottom: 1px;
+  width: 5px;
+  height: 5px;
+}
 #residenceSearch {
   background-color: #4b4e59;
   min-height: 100%;
@@ -481,7 +481,7 @@
   margin-right: 60px;
 }
 #residenceSearch .banner .header .input-wrap input[type=text] {
-  background: url(../img/searchbox_icon.png) 7px center no-repeat #ffffff;
+  background: url(/assets/img/searchbox_icon.png) 7px center no-repeat #ffffff;
   padding: 8px 12px 8px 32px;
   outline: none;
   line-height: 20px;
@@ -652,7 +652,7 @@ fieldset[disabled] #residenceSearch .banner .header button.active {
   display: block;
   width: 100%;
   height: 150px;
-  background: url('../img/default_cover_large.png') no-repeat top left;
+  background: url('/assets/img/default_cover_large.png') no-repeat top left;
   background-size: 100% 100%;
 }
 #residenceOnSell #onsell-content .houses {
@@ -706,7 +706,7 @@ fieldset[disabled] #residenceSearch .banner .header button.active {
 #residenceOnSell .sortbar span {
   font-size: 20px;
   color: #fff;
-  background: url(../img/order_icon.png) left center no-repeat transparent;
+  background: url(/assets/img/order_icon.png) left center no-repeat transparent;
   background-size: 40px 40px;
   padding-left: 40px;
 }
@@ -799,7 +799,7 @@ fieldset[disabled] #residenceOnSell #allsorts button.active {
   display: block;
   height: 150px;
   width: 100%;
-  background: url('../img/default_cover_large.png') no-repeat top left;
+  background: url('/assets/img/default_cover_large.png') no-repeat top left;
   background-size: 100% 100%;
 }
 #houseDetail #content .title {
@@ -828,7 +828,7 @@ fieldset[disabled] #residenceOnSell #allsorts button.active {
 #houseDetail #content .details a.detail {
   display: block;
   text-decoration: none;
-  background: url(../img/arrow_right.png) right center no-repeat transparent;
+  background: url(/assets/img/arrow_right.png) right center no-repeat transparent;
   background-size: 9.33333333px 14px;
 }
 #houseDetail #content .details a.detail .value {
@@ -892,7 +892,7 @@ fieldset[disabled] #houseDetail #askButton.active {
   background-color: #ffffff;
 }
 #houseDetail #askButton .inner {
-  background: url(../img/answer_icon_normal.png) left center no-repeat transparent;
+  background: url(/assets/img/answer_icon_normal.png) left center no-repeat transparent;
   background-size: 40px 40px;
   display: block;
   margin-left: auto;
@@ -916,7 +916,7 @@ fieldset[disabled] #houseDetail #askButton.active {
   display: block;
   height: 150px;
   width: 100%;
-  background: url('../img/default_cover_large.png') no-repeat top left;
+  background: url('/assets/img/default_cover_large.png') no-repeat top left;
   background-size: 100% 100%;
 }
 #residence-onsell-detail .content .details {
@@ -1040,14 +1040,14 @@ fieldset[disabled] #houseDetail #askButton.active {
   content: '';
   width: 10px;
   height: 15px;
-  background-image: url('../img/small_sanjiao_white.png');
+  background-image: url('/assets/img/small_sanjiao_white.png');
   background-size: 100% 100%;
   position: absolute;
   top: 10px;
   right: -10px;
 }
 #chat .messages .message.agent::after {
-  background-image: url('../img/small_sanjiao_blue.png');
+  background-image: url('/assets/img/small_sanjiao_blue.png');
   background-size: 100% 100%;
   content: '';
   width: 10px;
@@ -1066,7 +1066,7 @@ fieldset[disabled] #houseDetail #askButton.active {
   position: absolute;
   top: 0px;
   left: -45px;
-  background: url('../img/default_people.png') no-repeat top left;
+  background: url('/assets/img/default_people.png') no-repeat top left;
   background-size: 100% 100%;
 }
 #chat .bar {
@@ -1151,6 +1151,6 @@ fieldset[disabled] #chat .bar .bar-inner button.active {
   background-color: #4b4e59;
 }
 #picShow img {
-  background: url('../img/default_cover_large.png') no-repeat top left;
+  background: url('/assets/img/default_cover_large.png') no-repeat top left;
   background-size: 100% 100%;
 }

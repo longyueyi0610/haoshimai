@@ -8,6 +8,10 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
     var residenceId = param['residenceId'];
     var clientUId = param['clientUId'];
     var monthTrend = [];
+    var hasToast = false;
+    
+    //初始化toast
+    Library.utils.toastrInit();
 
     var getDetails = function() {
         var args = [];
@@ -15,7 +19,8 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
         args[1] = clientUId;
 
         session.residenceDetailCollection = env.subscribe('pubresidenceDetail', args, function(residenceDetailCollection) {
-            var data = residenceDetailCollection.find()[0];
+            var data = residenceDetailCollection.find()[0]['data'];
+            hasToast = Library.utils.toast(residenceDetailCollection.find()[0]['code'], residenceDetailCollection.find()[0]['msg'], hasToast);
             monthTrend = data['monthTrend'];
             data.picURLWithSize = _.map(data.picURLWithSize, function(item, index) {
                 return {
@@ -57,7 +62,7 @@ App.residenceDetail = sumeru.controller.create(function(env, session, param) {
                     }
                 });
                 touch.on($focuses[0], 'click', function(e) {
-                    var picStr = JSON.stringify(session.residenceDetailCollection[0]['picURL']);
+                    var picStr = JSON.stringify(session.residenceDetailCollection[0]['data']['picURL']);
                     var activeUrl = $('#residence-detail-images .active img').attr('src');
                     sessionStorage.setItem('picStr', picStr);
                     sessionStorage.setItem('activeUrl', activeUrl);

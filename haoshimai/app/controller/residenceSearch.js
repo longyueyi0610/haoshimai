@@ -9,7 +9,10 @@ App.residenceSearch = sumeru.controller.create(function(env, session, param) {
     var keyword = ''; //输入内容
     var clientUId = param['clientUId'];
     var saleRent = param['saleRent'];
+    var hasToast = false;
 
+    //初始化toast
+    Library.utils.toastrInit();
     var getDetails = function() {
         /*if (!session.get('keyword')) {
             session.set('keyword', 'none');
@@ -23,8 +26,9 @@ App.residenceSearch = sumeru.controller.create(function(env, session, param) {
             args[0] = session.get('keyword');
             args[1] = session.get('type');
             env.subscribe('pubresidenceSearch', args, function(residenceSearchCollection) {
+                hasToast = Library.utils.toast(residenceSearchCollection.find()[0]['code'], residenceSearchCollection.find()[0]['msg'], hasToast);
                 session.bind('list', {
-                    data: residenceSearchCollection.find(),
+                    data: residenceSearchCollection.find()[0]['data'],
                     saleRent: saleRent
                 });
             });

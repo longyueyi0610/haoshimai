@@ -17,6 +17,7 @@ appCode = 'baiduClient';
 
 App.mapSell = sumeru.controller.create(function(env, session) {
     var clientUId = sumeru.clientId;
+    var hasToast = false;//每个页面都需要一个toast
 
 	var _markerTemplate = null;
 	var _contentTemplate = null;
@@ -24,11 +25,15 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 	var view = 'mapSell';
     var count = 0;
 
+    //初始化toast
+    Library.utils.toastrInit();
+
     if(sessionStorage.getItem('map_register') == null){
         var url = host + '/server/client/clientRegister.controller?appCode=' + appCode + '&clientUId=' + clientUId +'&version=1.0&device=baidu&clientToken=';
         var getCallback = function(data){
+            var resolved = JSON.parse(data);
             sessionStorage.setItem('map_register', 'ok');
-            alert('x');
+            hasToast = Library.utils.toast(resolved['code'], resolved['msg'], hasToast);
         }
         sumeru.external.get(url, getCallback);
     }
@@ -50,10 +55,12 @@ App.mapSell = sumeru.controller.create(function(env, session) {
         var getUnCounts = function(){
             var url = host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=1';
             var getCallback = function(data){
-                count = JSON.parse(data)['data']['count'];
+                var resolved = JSON.parse(data);
+                count = resolved['data']['count'];
                 if (count != 0){
                     $('#count-badge').html(count);
                 }
+                hasToast = Library.utils.toast(resolved['code'], resolved['msg'], hasToast);
             }
             sumeru.external.get(url, getCallback);
         }
@@ -169,6 +176,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 			var getCallback = function(data) {
 				var oriData = JSON.parse(data);
 				$('#locationPlate').html(oriData["data"]["name"]);
+                hasToast = Library.utils.toast(oriData['code'], oriData['msg'], hasToast);
 			};
 			sumeru.external.get(url, getCallback);
 
@@ -177,6 +185,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 				var myData = JSON.parse(data);
 				oriData = myData['data'];
                 
+                hasToast = Library.utils.toast(oriData['code'], oriData['msg'], hasToast);
                 //加一步操作，进行删除flag操作
                 clearFlags(markerContents, oriData, markers);
 
@@ -271,6 +280,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 			var getCallback = function(data) {
 				var oriData = JSON.parse(data);
 				var position = oriData['data'];
+                hasToast = Library.utils.toast(oriData['code'], oriData['msg'], hasToast);
 
                 if (sessionStorage.getItem('map_location')){//------------记录数据地图中心点
                     var pointArray = sessionStorage.getItem('map_location').split(',');

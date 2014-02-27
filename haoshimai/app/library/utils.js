@@ -1,29 +1,8 @@
-/* 
-* 用来遍历指定对象所有的属性名称和值 
-* obj 需要遍历的对象 
-* author: Jet Mah 
-*/ 
-
 Library.utils = sumeru.Library.create(function(exports){
-    exports.allProps = function(obj){
-		var props = "" ;
-		// 开始遍历 
-		for ( var p in obj ){
-		// 方法 
-			if ( typeof ( obj [ p ]) == " function " ){
-				obj [ p ]() ;
-			} else {
-		// p 为属性名称，obj[p]为对应属性的值 
-		props += p + " = " + obj [ p ] + " \t " ;
-		}
-		}
-		// 最后显示所有的属性 
-		alert ( props ) ;
-    };
 
     exports.changeElClass = function(obj){
         obj.css('display','none');
-        return '';
+            return '';
     };
 
 	exports.getresidenceSimple = function(residenceContents, position){
@@ -54,6 +33,48 @@ Library.utils = sumeru.Library.create(function(exports){
 
 		return simple;
 	};
+
+    exports.toastrInit = function(){//生成toast
+        toastr.options = {
+              "closeButton": false,
+              "debug": false,
+              "positionClass": "toast-bottom-full-width",
+              "onclick": null,
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": "2000",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut"
+        }
+    };
+
+    exports.toast = function(code, msg, hasToast){
+        if (!typeof(code)=='undefined' && !typeof(msg)=='undefined'){
+            if (!hasToast){
+                var defaultStr = "网路连接错误";
+                if (code == '100'){
+                    return false;
+                    //正确的，什么都不做
+                }else if (code == '200'){//房源已下架
+                    toastr.info('房源已下架');
+                }else if (code == '201'){
+                    toastr.info('房源不存在');
+                }else{//其他情况
+                    if (msg != ''&& msg != null && msg!='null'){
+                        toastr.info(msg);
+                    }else{//msg为空
+                        toastr.error(defaultStr);
+                    }
+                }
+                return true;
+            }else{
+                return true;
+            }
+        }
+    };
 
     exports.createLineChart = function(monthTrend){//生成折线图
         var months = [];

@@ -12,6 +12,10 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
 	var houseId = param['houseId'];
     var clientUId = param['clientUId'];
     var saleRent = param['saleRent'];
+    var hasToast = false;
+
+    //初始化toast
+    Library.utils.toastrInit();
 
 	var getDetails = function() {
         var args = [];
@@ -19,7 +23,9 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
         args[1] = clientUId;
 
 		session.houseDetailCollection = env.subscribe('pubhouseDetail', args, function(houseDetailCollection) {
-			var data = houseDetailCollection.find()[0];
+			var data = houseDetailCollection.find()[0]['data'];
+            hasToast = Library.utils.toast(houseDetailCollection.find()[0]['code'], houseDetailCollection.find()[0]['msg'], hasToast);  
+    
 			data.picURLWithSize = _.map(data.picURLWithSize, function(item, index) {
 				return {
 					url: item,
@@ -59,7 +65,7 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
 					}
 				});
                 touch.on($slides[0], 'click', function(e) {
-                    var picStr = JSON.stringify(session.houseDetailCollection[0]['picURL']);
+                    var picStr = JSON.stringify(session.houseDetailCollection[0]['data']['picURL']);
                     var activeUrl = $('#house-detail-images .active img').attr('src');
                     sessionStorage.clear();
                     sessionStorage.setItem('picStr', picStr);
@@ -91,8 +97,8 @@ App.houseDetail = sumeru.controller.create(function(env, session, param) {
 			});
 		});
 		$('#askButton').click(function() {
-            var brokerName = session.houseDetailCollection[0]['brokerName'];
-            var brokerId = session.houseDetailCollection[0]['brokerId'];
+            var brokerName = session.houseDetailCollection[0]['data']['brokerName'];
+            var brokerId = session.houseDetailCollection[0]['data']['brokerId'];
             $(this).css('background-image','url(../assets/img/bt_selected.png)');
             setTimeout("$('#askButton').css('background-image', 'none')", 500);
 			env.redirect('/chat', {

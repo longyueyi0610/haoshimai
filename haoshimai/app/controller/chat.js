@@ -15,6 +15,10 @@ App.chat = sumeru.controller.create(function(env, session, param) {
     var type = (param['saleRent']=='sale')?1:2;
     var messageCount = 0;//记录message条数，为了不重复加载
     var _markerTemplate = null;
+    var hasToast = false;
+
+    //初始化toast
+    Library.utils.toastrInit();
 
     env.onrender = function(doRender) {
         doRender(view, ['none', 'z']);
@@ -73,6 +77,7 @@ App.chat = sumeru.controller.create(function(env, session, param) {
             var getCallback = function(data){
                 var resolved = JSON.parse(data)['data'];
                 var length =resolved.length;
+                hasToast = Library.utils.toast(JSON.parse(data)['code'], JSON.parse(data)['msg'], hasToast);
                 var args = [];
                 if (length > messageCount){//有新的消息
                     for (var i=messageCount; i<length; i++){
@@ -118,6 +123,7 @@ App.chat = sumeru.controller.create(function(env, session, param) {
                 var getCallback = function(data){
                     //做点什么吧
                     $('#chat-input').val('');
+                    hasToast = Library.utils.toast(JSON.parse(data)['code'], JSON.parse(data)['msg'], hasToast);
                 }
                 sumeru.external.get(url,getCallback);
             }
@@ -135,7 +141,9 @@ App.chat = sumeru.controller.create(function(env, session, param) {
                         var url = host + '/server/house/chat/send.controller?appCode='+ appCode + '&clientUId=' + clientUId + '&houseId=' + houseId + '&brokerId=' + brokerId + '&content=' + messageContent + '&type=' + type;
                         var getCallback = function(data){
                              //做点什么吧
+                           
                             $('#chat-input').val('');
+                            hasToast = Library.utils.toast(JSON.parse(data)['code'], JSON.parse(data)['msg'], hasToast);
                         }
                         sumeru.external.get(url,getCallback);
                     }   

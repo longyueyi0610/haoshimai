@@ -11,6 +11,10 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
     var host = sumeru.config.get("dataServerHost"); //host地址
     var appCode = 'baiduClient';
     var _contentTemplate = null;
+    var hasToast = false;
+    
+    //初始化toast
+    Library.utils.toastrInit();
 
     env.onrender = function(doRender){
         doRender("enquiryHistory", ['none','z']);
@@ -23,6 +27,7 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
             var getCallback = function(oriData){
                 var resolved = JSON.parse(oriData)['data'];
                 var length = resolved.length;
+                hasToast = Library.utils.toast(JSON.parse(oriData)['code'], JSON.parse(oriData)['msg'], hasToast);
                 $('#enquiry-history .messages .residence-wrap .count').css('display','none');
                 if (length != 0){
                     for (var i=0; i<length; i++){
@@ -104,6 +109,8 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
             var getCallback =  function(oriData){
                 var resolved = JSON.parse(oriData)['data'];
                 var length = resolved.length;
+
+                hasToast = Library.utils.toast(JSON.parse(oriData)['code'], JSON.parse(oriData)['msg'], hasToast);
                 for (var i=0; i<length; i++){
                     var args = [];
                     args[0] = resolved[i]['type'];

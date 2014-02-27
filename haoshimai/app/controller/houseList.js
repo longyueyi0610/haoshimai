@@ -19,6 +19,10 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
     var rentCount = param['rentCount'];
     var soldHistory = false;
     var scrollOffset = 0;
+    var hasToast = false;
+
+    //初始化toast
+    Library.utils.toastrInit();
 
     //-----------------记录数据
     if (sessionStorage.getItem('hl_type') == 'sold'){
@@ -43,6 +47,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
         if(way == 'rent'){
             args[5] = 'Rent';
 		    session.houseListCollection = env.subscribe('pubhouseInfo', args, function(houseListCollection) {
+                hasToast = Library.utils.toast(houseListCollection.find()[0]['code'], houseListCollection.find()[0]['msg'], hasToast);
 			    session.bind('residence-container', {
 				    houseList: houseListCollection.find()[0]['data'],
                     saleRentType: 'rent',
@@ -53,6 +58,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
         }else if(way == 'sale'){
             args[5] = 'Sale';
             session.houseListCollection = env.subscribe('pubhouseInfo', args, function(houseListCollection) {
+                hasToast = Library.utils.toast(houseListCollection.find()[0]['code'], houseListCollection.find()[0]['msg'], hasToast);
                 session.bind('residence-container', {
                     houseList: houseListCollection.find()[0]['data'],
                     saleRentType: 'sale',
@@ -63,6 +69,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
         }else{//way='sold'
             args[5] = 'Sold';
             session.houseListCollection = env.subscribe('pubhouseInfo', args, function(houseListCollection) {
+                hasToast = Library.utils.toast(houseListCollection.find()[0]['code'], houseListCollection.find()[0]['msg'], hasToast);
 			    session.bind('residence-container', {
 				    houseList: houseListCollection.find()[0]['data'],
                     soldHistory: soldHistory,
@@ -78,7 +85,8 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
         args[0] = residenceId;
         args[1] = clientUId;
 		session.residenceDetailCollection = env.subscribe('pubresidenceDetail', args, function(residenceDetailCollection) {
-			var data = residenceDetailCollection.find()[0]
+			var data = residenceDetailCollection.find()[0]['data'];
+            hasToast = Library.utils.toast(residenceDetailCollection.find()[0]['code'], residenceDetailCollection.find()[0]['msg'], hasToast);
 			var array = [];
 			for (var i = 0; i < data.picURLWithSize.length; i++) {
 				array[i] = {
@@ -96,7 +104,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
                 rentCount: rentCount,
 			});
 			session.bind('residence-container', {
-				data: residenceDetailCollection.find()[0],
+				data: residenceDetailCollection.find()[0]['data'],
 			});
 		});
 
@@ -244,7 +252,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 					}
 				});
                 touch.on($focuses[0], 'click', function(e) {
-                    var picStr = JSON.stringify(session.residenceDetailCollection[0]['picURL']);
+                    var picStr = JSON.stringify(session.residenceDetailCollection[0]['data']['picURL']);
                     var activeUrl = $('#residence-onsell-houses .active img').attr('src');
                     sessionStorage.clear();
                     sessionStorage.setItem('picStr', picStr);
