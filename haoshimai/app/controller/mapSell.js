@@ -27,6 +27,7 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 
     //初始化toast
     Library.utils.toastrInit();
+    //Library.utils.clearBaiduIcon();
 
     if(sessionStorage.getItem('map_register') == null){
         var url = host + '/server/client/clientRegister.controller?appCode=' + appCode + '&clientUId=' + clientUId +'&version=1.0&device=baidu&clientToken=';
@@ -362,7 +363,14 @@ App.mapSell = sumeru.controller.create(function(env, session) {
 
         //改变bar上出售房和出租房状态-------记录数据
         if (sessionStorage.getItem('map_type') == 'rent'){
-            changeToRent();
+            //changeToRent();
+            $('.header #sale_rent li.active').removeClass("active");
+            $('#on-rent').parent().addClass("active");
+            $('#sale_rent_bg').css('left','28px');
+            sessionStorage.setItem('map_type','rent');
+            tabFlag = 'rentPrice'
+            $('#map-sell-banner .sub').css('display','none');
+            updateFlag();
         }else{
             if (sessionStorage.getItem('map_tabFlag')){
                 tabSwitch(sessionStorage.getItem('map_tabFlag'));

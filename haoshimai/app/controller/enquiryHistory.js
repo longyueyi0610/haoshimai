@@ -104,11 +104,18 @@ App.enquiryHistory = sumeru.controller.create(function(env, session, param){
             return $el[0]; 
         };
 
+        function sortTime(a,b){
+            var time1 = new Date(Date.parse(b['lastUpdateTime'].replace(/-/g,"/")));
+            var time2 = new Date(Date.parse(a['lastUpdateTime'].replace(/-/g,"/")))
+            return time1>time2;
+        }
+
         var getAllDatas = function(){//获取所有数据
             var url = host + '/server/house/chatSummary.controller?appCode=' + appCode + '&clientUId=' + clientUId + '&totalOnly=0&showAll=1&withPic=1';
             var getCallback =  function(oriData){
                 var resolved = JSON.parse(oriData)['data'];
                 var length = resolved.length;
+                resolved = resolved.sort(sortTime);
 
                 hasToast = Library.utils.toast(JSON.parse(oriData)['code'], JSON.parse(oriData)['msg'], hasToast);
                 for (var i=0; i<length; i++){

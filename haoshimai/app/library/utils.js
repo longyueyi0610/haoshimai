@@ -50,6 +50,10 @@ Library.utils = sumeru.Library.create(function(exports){
               "hideMethod": "fadeOut"
         }
     };
+    
+    exports.clearBaiduIcon = function(){
+        $('a[href="http://tongji.baidu.com/hm-web/welcome/ico?s=8219f44b51d2c77305d20385ea4962ba"]').css('display', 'none'); 
+    };
 
     exports.toast = function(code, msg, hasToast){
         if (!typeof(code)=='undefined' && !typeof(msg)=='undefined'){

@@ -10,7 +10,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
 	var view = 'houseList';
 	var residenceId = param['residenceId']; //小区id
 	var orderType = 1; //默认1
-	var pageSize = 5;
+	var pageSize = 35;
 	var pageIndex = 1;
 	var clientUId = param['clientUId'];
     var saleRent = param['saleRent'];
@@ -160,19 +160,17 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
             });
             if (sessionStorage.getItem('hl_type') == 'sale'){//--------------------记录数据
                 sessionStorage.setItem('hl_type', 'sale');
-                $('#sale_sold_bg').animate({left:'-38px'},'fast',function(){
-                    $('.header #sale_sold li.active').removeClass("active");
-                    $('#sale').parent().addClass("active");
-                });
+                $('#sale_sold_bg').css('left','-38px');
+                $('.header #sale_sold li.active').removeClass("active");
+                $('#sale').parent().addClass("active");
                 addLoading($('#residenceOnSell .loadingDiv')); 
                 soldHistory = false;
                 scrollOffset = 0;
                 subWay('sale');
             }else if (sessionStorage.getItem('hl_type') == 'sold'){
-                $('#sale_sold_bg').animate({left:'38px'},'fast',function(){
-                    $('.header #sale_sold li.active').removeClass("active");
-                    $('#sold').parent().addClass("active");
-                });
+                $('#sale_sold_bg').css('left','38px');
+                $('.header #sale_sold li.active').removeClass("active");
+                $('#sold').parent().addClass("active");
                 addLoading($('#residenceOnSell .loadingDiv'));
                 soldHistory = true;
                 scrollOffset = 0;
@@ -319,7 +317,7 @@ App.houseList = sumeru.controller.create(function(env, session, param) {
                 $(this).css('background-color', '#f47c00');
 				$('#allsorts').slideToggle();
 				$(".modal-backdrop").toggle();
-				orderType = 4;
+				orderType = (saleRent == 'sale')?4:3;
 				session.set('orderType', orderType);
                 sessionStorage.setItem('hl_orderType', orderType);
 				sort();
